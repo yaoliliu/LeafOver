@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1440" height="520" viewBox="0 0 1440 520" role="img" aria-labelledby="title desc">
-  <title id="title">LeafOver — Write the paper. See the whole picture.</title>
-  <desc id="desc">A hollow inverted apple logo beside a LaTeX source pane and a paper preview, echoing the LeafOver interactive demo.</desc>
+  <title id="title">LeafOver — Work with your agent. See the paper live.</title>
+  <desc id="desc">A hollow inverted apple logo beside a coding agent terminal, LaTeX source, and live paper preview.</desc>
   <defs>
     <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0d1a13"/>
@@ -47,9 +47,9 @@
       <path d="M32 45.8C31.8 50.4 33.1 54.5 35.2 58" fill="none" stroke="#79d9a6" stroke-width="2.2" stroke-linecap="round"/>
     </g>
     <text x="164" y="169" fill="#f1f6ef" font-family="Inter,Arial,sans-serif" font-size="46" font-weight="760" letter-spacing="-2.5">LeafOver</text>
-    <text x="76" y="265" fill="#f1f6ef" font-family="Inter,Arial,sans-serif" font-size="60" font-weight="760" letter-spacing="-3.4">Write the paper.</text>
-    <text x="76" y="333" fill="#78d8a3" font-family="Inter,Arial,sans-serif" font-size="60" font-weight="760" letter-spacing="-3.4">See the whole picture.</text>
-    <text x="79" y="377" fill="#b4c6b6" font-family="Inter,Arial,sans-serif" font-size="20">Source, structure, and the finished page in one place.</text>
+    <text x="76" y="265" fill="#f1f6ef" font-family="Inter,Arial,sans-serif" font-size="57" font-weight="760" letter-spacing="-3.4">Work with your agent.</text>
+    <text x="76" y="333" fill="#78d8a3" font-family="Inter,Arial,sans-serif" font-size="60" font-weight="760" letter-spacing="-3.4">See the paper live.</text>
+    <text x="79" y="377" fill="#b4c6b6" font-family="Inter,Arial,sans-serif" font-size="20">Terminal, LaTeX source, and live PDF in one place.</text>
     <g transform="translate(78 413)">
       <rect width="267" height="58" rx="9" fill="#188e59"/>
       <text x="22" y="37" fill="#fff" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700">Try the live demo</text>
@@ -97,6 +97,12 @@
         <rect x="35" y="360" width="299" height="5" rx="2.5"/>
         <rect x="35" y="374" width="266" height="5" rx="2.5"/>
       </g>
+    </g>
+    <g transform="translate(677 402)" filter="url(#shadow)">
+      <rect width="370" height="79" rx="9" fill="#0f1d15" stroke="#4b8660" stroke-width="1.5"/>
+      <circle cx="21" cy="20" r="4" fill="#65c78d"/>
+      <text x="35" y="25" fill="#b4d8be" font-family="monospace" font-size="13">agent · intro.tex</text>
+      <text x="20" y="56" fill="#80dca4" font-family="monospace" font-size="15" font-weight="700">&gt; PDF updated · 18 pages</text>
     </g>
     <g transform="translate(1131 441)">
       <rect width="186" height="45" rx="7" fill="#1b3926" stroke="#45875a" filter="url(#shadow)"/>

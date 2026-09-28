@@ -11,25 +11,25 @@ const figures = [
 ];
 const zh = {
   tryDemo:'体验展示',features:'功能',install:'安装',openWorkspace:'探索工作台 ↗',installLocally:'本地安装 ↓',
-  noBuild:'无需前端构建',threeEngines:'三种 TeX 引擎',ownFiles:'文件由你掌控',
+  agentTerminal:'与 agent 协作的终端',livePreview:'实时 PDF 预览',localFiles:'本地 LaTeX 文件',
   interactivePreview:'交互式预览',workspaceHeading:'亲手探索工作台',
-  workspaceIntro:'浏览 JiT 的真实 TeX 源码与 18 页论文，并试用日常操作。',
+  workspaceIntro:'浏览 JiT 的真实 TeX 源码，连续翻看 18 页论文。安装后即可在终端与 agent 协作。',
   staticNotice:'这是静态展示页。编辑内容只保存在当前浏览器；编译、写入项目文件、安装编译器与运行终端命令需要本地安装。',
   getFullApp:'获取完整应用 →',outline:'大纲',files:'文件',search:'搜索',
   documentOutline:'论文目录',projectFiles:'项目文件',searchPrompt:'搜索示例中的 TeX 文件。',
   browserOnly:'仅浏览器内编辑',fitWidth:'适合宽度',find:'查找',loadingPaper:'正在载入论文…',
   clickToSource:'点击页面跳转到相关源码',pdfSource:'PDF↔源码',source:'源码',preview:'预览',
   terminal:'终端',recompile:'重新编译',
-  terminalPlaceholder:'终端命令和 sudo 权限仅在本地安装的工作台中可用。这个展示页不会执行任何命令。',
+  terminalPlaceholder:'安装后可在这里与 coding agent 协作；它修改的 LaTeX 会自动编译成旁边的 PDF。静态展示页不会执行命令。',
   installForTerminal:'安装 LeafOver 后使用终端 →',
   showcaseCaption:'放心探索。原始项目文件不会被修改。',
-  capabilities:'功能一览',flowHeading:'写作流程中的每一步',
+  capabilities:'功能一览',flowHeading:'与 agent 一起写论文',
   flowIntro:'展示页呈现操作体验；安装后可使用完整工作流。',
   featureEditor:'真正的源码编辑器',featureEditorText:'多标签、自动保存、文件导航和源码搜索，让论文内容触手可及。',
-  featurePreview:'并排实时 PDF',featurePreviewText:'写作时预览版式、切换页面；本地安装后可通过 SyncTeX 在 PDF 和源码间跳转。',
+  featurePreview:'并排实时 PDF',featurePreviewText:'连续滚动查看 PDF；本地安装后，源码修改会自动重编译，还能通过 SyncTeX 在 PDF 和源码间跳转。',
   featureSearch:'全项目搜索',featureSearchText:'搜索当前文件、项目源码或生成的 PDF。',
   featureSettings:'按你的习惯设置',featureSettingsText:'选择论文标题、编译器、明暗主题、主题色和语言。本地可从设置中安装缺失的编译器。',
-  featureTerminal:'随手可用的终端',featureTerminalText:'本地应用提供项目根目录终端；远程绑定默认关闭终端。',
+  featureTerminal:'与 coding agent 并肩写作',featureTerminalText:'在本地应用的项目终端与 agent 协作；它修改 LaTeX 后，PDF 自动重编译并更新。',
   featureExport:'带走你的成果',featureExportText:'导出 LaTeX 源码和 PDF。论文保存在普通的本地文件中。',
   getStarted:'开始使用',installHeading:'你的论文，你的机器。',
   installText:'克隆仓库，运行一个脚本。必要时 LeafOver 会安装 JiT 示例所需的 TeX 包，然后启动完整的本地工作台。',
@@ -54,8 +54,9 @@ let activeFile = '';
 let pdfDoc = null;
 let pageNumber = 1;
 let zoomFactor = 1;
-let renderTask = null;
+let pdfPages = [];
 let renderToken = 0;
+let visibleRenderFrame = 0;
 let toastTimer;
 let searchTimer;
 
@@ -82,6 +83,12 @@ function applyPreferences() {
     element.textContent = text(element.dataset.i18n);
   });
   $('#workspace-title').textContent = settings.autoTitle || !settings.title ? defaultTitle : settings.title;
+  $('#hero-headline').innerHTML = settings.language === 'zh'
+    ? 'Agent 正在写。<br><em>论文实时呈现。</em>'
+    : 'Your agent writes.<br><em>See the paper live.</em>';
+  $('#hero-description').textContent = settings.language === 'zh'
+    ? '在项目终端与 coding agent 对话，随手查看它修改的 LaTeX 和旁边实时更新的 PDF。'
+    : 'Talk to your coding agent in the project terminal, then watch its LaTeX edits become a live PDF beside your source.';
   saveSettings();
 }
 function makeButton(className, label, callback) {
@@ -289,42 +296,117 @@ function renderQuickResults() {
   }
 }
 function fitWidth() { zoomFactor = 1; renderPdfPage(); }
-async function renderPdfPage() {
-  if (!pdfDoc) return;
-  const token = ++renderToken;
-  if (renderTask) { renderTask.cancel(); renderTask = null; }
-  try {
-    const page = await pdfDoc.getPage(pageNumber);
-    if (token !== renderToken) return;
-    const stage = $('#pdf-stage');
-    const base = page.getViewport({scale:1});
-    const fit = Math.min(1.55, Math.max(.4, (stage.clientWidth - 38) / base.width));
-    const viewport = page.getViewport({scale:fit * zoomFactor});
-    const canvas = $('#pdf-canvas');
-    const ratio = window.devicePixelRatio || 1;
-    canvas.width = Math.round(viewport.width * ratio);
-    canvas.height = Math.round(viewport.height * ratio);
-    canvas.style.width = viewport.width + 'px';
-    canvas.style.height = viewport.height + 'px';
-    const context = canvas.getContext('2d');
-    context.setTransform(ratio,0,0,ratio,0,0);
-    renderTask = page.render({canvasContext:context, viewport});
-    await renderTask.promise;
-    if (token !== renderToken) return;
-    $('#pdf-loading').hidden = true;
-    $('#page-input').value = pageNumber;
-    $('#pdf-stage').scrollTop = 0;
-  } catch (error) {
-    if (error.name !== 'RenderingCancelledException') {
-      $('#pdf-loading').hidden = false;
-      $('#pdf-loading').textContent = settings.language === 'zh' ? 'PDF 加载失败。' : 'PDF could not be loaded.';
-    }
+function createPdfPages() {
+  const container = $('#pdf-pages');
+  container.replaceChildren();
+  pdfPages = [];
+  for (let number = 1; number <= pdfDoc.numPages; number++) {
+    const node = document.createElement('div');
+    node.className = 'pdf-page';
+    node.dataset.page = number;
+    const canvas = document.createElement('canvas');
+    canvas.hidden = true;
+    canvas.setAttribute('aria-label', `JiT paper PDF page ${number}`);
+    const placeholder = document.createElement('div');
+    placeholder.className = 'pdf-page-placeholder';
+    placeholder.setAttribute('aria-hidden', 'true');
+    placeholder.textContent = String(number).padStart(2, '0');
+    const badge = document.createElement('span');
+    badge.className = 'pdf-page-number';
+    badge.textContent = `${number} / ${pdfDoc.numPages}`;
+    node.append(canvas, placeholder, badge);
+    container.append(node);
+    pdfPages.push({node, canvas, placeholder, task:null, promise:null, pendingVersion:-1, renderedVersion:-1});
   }
 }
-function goToPage(number) {
+async function paintPdfPage(index) {
+  const entry = pdfPages[index];
+  if (!entry || !pdfDoc) return;
+  const version = renderToken;
+  if (entry.renderedVersion === version) return;
+  if (entry.pendingVersion === version) return entry.promise;
+  const previousTask = entry.task;
+  entry.pendingVersion = version;
+  entry.promise = (async () => {
+    try {
+      if (previousTask) {
+        previousTask.cancel();
+        await previousTask.promise.catch(() => {});
+      }
+      if (version !== renderToken) return;
+      const page = await pdfDoc.getPage(index + 1);
+      if (version !== renderToken) return;
+      const viewport = page.getViewport({scale:entry.scale});
+      const ratio = window.devicePixelRatio || 1;
+      const canvas = entry.canvas;
+      canvas.width = Math.round(viewport.width * ratio);
+      canvas.height = Math.round(viewport.height * ratio);
+      canvas.style.width = viewport.width + 'px';
+      canvas.style.height = viewport.height + 'px';
+      const context = canvas.getContext('2d');
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      entry.task = page.render({canvasContext:context, viewport});
+      await entry.task.promise;
+      if (version !== renderToken) return;
+      canvas.hidden = false;
+      entry.placeholder.hidden = true;
+      entry.renderedVersion = version;
+      if (index === 0) $('#pdf-loading').hidden = true;
+    } catch (error) {
+      if (version === renderToken && error.name !== 'RenderingCancelledException') {
+        entry.placeholder.textContent = settings.language === 'zh' ? '页面加载失败' : 'Page unavailable';
+        if (index === 0) $('#pdf-loading-text').textContent = settings.language === 'zh' ? 'PDF 加载失败。' : 'PDF could not be loaded.';
+      }
+    } finally {
+      if (entry.pendingVersion === version) entry.pendingVersion = -1;
+    }
+  })();
+  return entry.promise;
+}
+function renderVisiblePdfPages() {
+  if (visibleRenderFrame) return;
+  visibleRenderFrame = requestAnimationFrame(() => {
+    visibleRenderFrame = 0;
+    const stage = $('#pdf-stage');
+    const bounds = stage.getBoundingClientRect();
+    pdfPages.forEach((entry, index) => {
+      const pageBounds = entry.node.getBoundingClientRect();
+      if (pageBounds.bottom >= bounds.top - stage.clientHeight && pageBounds.top <= bounds.bottom + stage.clientHeight) {
+        void paintPdfPage(index);
+      }
+    });
+  });
+}
+async function renderPdfPage() {
+  if (!pdfDoc || !pdfPages.length) return;
+  const stage = $('#pdf-stage');
+  const base = await pdfDoc.getPage(1);
+  const dimensions = base.getViewport({scale:1});
+  const fit = Math.min(1.55, Math.max(.4, (stage.clientWidth - 38) / dimensions.width));
+  const scale = fit * zoomFactor;
+  renderToken++;
+  pdfPages.forEach((entry) => {
+    entry.scale = scale;
+    entry.node.style.width = `${dimensions.width * scale}px`;
+    entry.node.style.height = `${dimensions.height * scale}px`;
+    entry.canvas.hidden = true;
+    entry.placeholder.hidden = false;
+    entry.renderedVersion = -1;
+  });
+  goToPage(pageNumber, false);
+  renderVisiblePdfPages();
+  await paintPdfPage(pageNumber - 1);
+}
+function goToPage(number, smooth = true) {
   if (!pdfDoc) return;
   pageNumber = Math.max(1, Math.min(pdfDoc.numPages, Math.round(Number(number) || 1)));
-  renderPdfPage();
+  $('#page-input').value = pageNumber;
+  const stage = $('#pdf-stage');
+  const entry = pdfPages[pageNumber - 1];
+  if (!entry) return;
+  const top = stage.scrollTop + entry.node.getBoundingClientRect().top - stage.getBoundingClientRect().top - 13;
+  stage.scrollTo({top:Math.max(0, top), behavior:smooth ? 'smooth' : 'auto'});
+  renderVisiblePdfPages();
 }
 async function searchPdf() {
   if (!pdfDoc) return;
@@ -430,8 +512,21 @@ function bindControls() {
   $('#pdf-find-close').addEventListener('click', () => { $('#pdf-find-bar').hidden = true; });
   $('#pdf-find-next').addEventListener('click', searchPdf);
   $('#pdf-find').addEventListener('keydown', (event) => { if (event.key === 'Enter') { event.preventDefault(); searchPdf(); } });
-  $('#pdf-canvas').addEventListener('click', () => {
-    const name = pageNumber <= 3 ? 'intro.tex' : pageNumber <= 7 ? 'method.tex' : 'experiments.tex';
+  $('#pdf-stage').addEventListener('scroll', () => {
+    renderVisiblePdfPages();
+    const stage = $('#pdf-stage');
+    const midpoint = stage.getBoundingClientRect().top + stage.clientHeight * .45;
+    const visible = pdfPages.findIndex((entry) => entry.node.getBoundingClientRect().bottom >= midpoint);
+    if (visible >= 0) {
+      pageNumber = visible + 1;
+      if (document.activeElement !== $('#page-input')) $('#page-input').value = pageNumber;
+    }
+  }, {passive:true});
+  $('#pdf-pages').addEventListener('click', (event) => {
+    const page = event.target.closest('.pdf-page');
+    if (!page) return;
+    const selectedPage = Number(page.dataset.page);
+    const name = selectedPage <= 3 ? 'intro.tex' : selectedPage <= 7 ? 'method.tex' : 'experiments.tex';
     openFile(name);
     toast(settings.language === 'zh' ? '已打开相关源码；精确 SyncTeX 跳转需要本地应用。' : 'Opened related source. Exact SyncTeX navigation needs the local app.');
   });
@@ -469,9 +564,10 @@ async function boot() {
     pdfDoc = await pdfjsLib.getDocument({url:'./assets/jit-preview.pdf'}).promise;
     $('#page-total').textContent = '/ ' + pdfDoc.numPages;
     $('#page-input').max = pdfDoc.numPages;
+    createPdfPages();
     await renderPdfPage();
   } catch (error) {
-    $('#pdf-loading').textContent = error.message;
+    $('#pdf-loading-text').textContent = error.message;
     toast(error.message);
   }
 }

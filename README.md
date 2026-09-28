@@ -1,19 +1,21 @@
 <p align="center"><img src="docs/assets/mark.svg" width="68" alt="LeafOver hollow inverted apple logo"></p>
 <h1 align="center">LeafOver</h1>
-<p align="center">A calmer place to write LaTeX, with your source and finished paper side by side.</p>
+<p align="center">Work with your coding agent in the terminal. See its LaTeX edits become a live PDF.</p>
 <p align="center">
   <a href="https://yaoliliu.github.io/LeafOver/"><strong>▶ Try the interactive demo</strong></a>
   &nbsp;·&nbsp; <a href="#quick-start">Quick start</a>
   &nbsp;·&nbsp; <a href="#features">Features</a>
 </p>
 
-<p align="center"><a href="https://yaoliliu.github.io/LeafOver/"><img src="docs/assets/readme-banner.svg" width="100%" alt="LeafOver: write the paper, see the whole picture — open the live demo"></a></p>
+<p align="center"><a href="https://yaoliliu.github.io/LeafOver/"><img src="docs/assets/readme-banner.svg" width="100%" alt="LeafOver: work with your coding agent and see the paper live — open the demo"></a></p>
 
-The [live demo](https://yaoliliu.github.io/LeafOver/) lets you explore JiT's real
-LaTeX source and all 18 PDF pages. Browser edits stay in that browser; install
-LeafOver locally to compile, write project files, install TeX engines and run
-terminal commands. The app uses Python's standard library and bundled browser
-assets, so there is no frontend build or CDN to set up.
+LeafOver puts a project terminal, LaTeX source, and live PDF preview in one
+workspace. Work with your coding agent in the terminal while its edits compile
+and appear beside you. The [live demo](https://yaoliliu.github.io/LeafOver/)
+lets you explore JiT's real LaTeX source and all 18 PDF pages. Browser edits
+stay in that browser; install LeafOver locally to run terminal commands, compile,
+and write project files. The app uses Python's standard library and bundled
+browser assets, with no frontend build or CDN required.
 
 ## Quick start
 
@@ -60,12 +62,13 @@ PAPER_PREVIEW_TERMINAL_ALLOW_REMOTE=1 python3 run.py --host 0.0.0.0 --port 8878
 
 ## Features
 
+- Project terminal for coding agents, with live PDF updates as they edit
 - Source editor, multiple tabs, autosave and conflict detection
 - Live PDF preview, clickable references and PDF-to-source navigation
 - Project, source and PDF search
 - Persistent project settings and three LaTeX engines
 - Dark/light themes, accent colors and Chinese/English interface
-- Embedded terminal and source/PDF export
+- Source/PDF export
 
 ## Layout
 
