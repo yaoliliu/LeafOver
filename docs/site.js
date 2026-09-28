@@ -83,10 +83,10 @@ function applyPreferences() {
     element.textContent = text(element.dataset.i18n);
   });
   $('#workspace-title').textContent = settings.autoTitle || !settings.title ? defaultTitle : settings.title;
-  $('#hero-headline').innerHTML = settings.language === 'zh'
+  if ($('#hero-headline')) $('#hero-headline').innerHTML = settings.language === 'zh'
     ? 'Agent 正在写。<br><em>论文实时呈现。</em>'
     : 'Your agent writes.<br><em>See the paper live.</em>';
-  $('#hero-description').textContent = settings.language === 'zh'
+  if ($('#hero-description')) $('#hero-description').textContent = settings.language === 'zh'
     ? '在项目终端与 coding agent 对话，随手查看它修改的 LaTeX 和旁边实时更新的 PDF。'
     : 'Talk to your coding agent in the project terminal, then watch its LaTeX edits become a live PDF beside your source.';
   saveSettings();
@@ -296,8 +296,22 @@ function renderQuickResults() {
   }
 }
 function fitWidth() { zoomFactor = 1; renderPdfPage(); }
+function ensurePdfPagesContainer() {
+  let container = $('#pdf-pages');
+  if (!container) {
+    container = document.createElement('div');
+    container.id = 'pdf-pages';
+    container.className = 'pdf-pages';
+    const legacyCanvas = $('#pdf-canvas');
+    if (legacyCanvas) legacyCanvas.before(container);
+    else $('#pdf-stage').append(container);
+  }
+  return container;
+}
 function createPdfPages() {
-  const container = $('#pdf-pages');
+  // A previously cached single-page script still expects this canvas.
+  const container = ensurePdfPagesContainer();
+  $('#pdf-canvas')?.remove();
   container.replaceChildren();
   pdfPages = [];
   for (let number = 1; number <= pdfDoc.numPages; number++) {
@@ -355,7 +369,7 @@ async function paintPdfPage(index) {
     } catch (error) {
       if (version === renderToken && error.name !== 'RenderingCancelledException') {
         entry.placeholder.textContent = settings.language === 'zh' ? '页面加载失败' : 'Page unavailable';
-        if (index === 0) $('#pdf-loading-text').textContent = settings.language === 'zh' ? 'PDF 加载失败。' : 'PDF could not be loaded.';
+        if (index === 0) ($('#pdf-loading-text') || $('#pdf-loading')).textContent = settings.language === 'zh' ? 'PDF 加载失败。' : 'PDF could not be loaded.';
       }
     } finally {
       if (entry.pendingVersion === version) entry.pendingVersion = -1;
@@ -438,6 +452,7 @@ function openSettings() {
   $('#settings-dialog').showModal();
 }
 function bindControls() {
+  ensurePdfPagesContainer();
   $$('.rail-tab').forEach((button) => button.addEventListener('click', () => switchRail(button.dataset.panel)));
   $('#project-search').addEventListener('input', () => { clearTimeout(searchTimer); searchTimer = setTimeout(searchProject, 180); });
   $('#source-editor').addEventListener('input', () => {
@@ -567,7 +582,7 @@ async function boot() {
     createPdfPages();
     await renderPdfPage();
   } catch (error) {
-    $('#pdf-loading-text').textContent = error.message;
+    ($('#pdf-loading-text') || $('#pdf-loading')).textContent = error.message;
     toast(error.message);
   }
 }

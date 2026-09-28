@@ -1,5 +1,6 @@
 import importlib.util
 import io
+import os
 import tempfile
 import threading
 import time
@@ -7,6 +8,7 @@ import unittest
 import zipfile
 from email.message import Message
 from pathlib import Path
+from unittest.mock import patch
 
 
 SERVER_PATH = Path(__file__).resolve().parents[1] / "tools" / "preview_server.py"
@@ -283,8 +285,17 @@ SyncTeX result end
             preview_server.search_project("[", regex=True)
 
     def test_terminal_starts_in_paper_root(self):
-        terminal = preview_server.TerminalSession(columns=80, rows=24)
+        with patch.dict(os.environ, {"SHELL": "/bin/bash"}):
+            terminal = preview_server.TerminalSession(columns=80, rows=24)
         try:
+            # Commands sent during interactive shell startup can be swallowed.
+            startup = b""
+            deadline = time.monotonic() + 8
+            while "❯".encode() not in startup:
+                if time.monotonic() >= deadline:
+                    self.fail(f"terminal prompt did not appear: {startup!r}")
+                time.sleep(0.05)
+                startup, _, _ = terminal.read(0)
             terminal.write(b"printf '__PAPER_CWD__%s\\n' \"$PWD\"\n")
             terminal.write(
                 b"printf '__COLOR_ENV__%s:%s:%s:%s\\n' "
@@ -292,7 +303,7 @@ SyncTeX result end
                 b"\"$CLICOLOR_FORCE\" \"$TERM\"\n"
             )
             output = b""
-            deadline = time.monotonic() + 3
+            deadline = time.monotonic() + 8
             while (
                 b"__PAPER_CWD__" not in output
                 or str(self.root).encode() not in output

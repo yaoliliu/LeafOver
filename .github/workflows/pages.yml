@@ -23,6 +23,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
+      - name: Version browser assets
+        run: sed -i "s/?v=local/?v=${GITHUB_SHA}/g" docs/index.html
       - uses: actions/upload-pages-artifact@v4
         with:
           path: docs
