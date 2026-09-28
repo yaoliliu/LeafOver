@@ -45,6 +45,8 @@ const translations = {
   '终端已连接': 'Terminal connected', '终端已断开': 'Terminal disconnected',
   '正在连接': 'Connecting', '论文目录': 'Paper directory', 'xterm.js 载入失败': 'Failed to load xterm.js',
   '终端组件载入失败': 'Failed to load terminal component',
+  '解锁远程终端': 'Unlock remote terminal', '输入此工作台的终端访问密钥。': 'Enter the terminal access key for this workspace.',
+  '终端访问密钥': 'Terminal access key', '解锁终端': 'Unlock terminal',
   '较早的终端输出已被截断': 'Earlier terminal output was truncated',
   '终端进程已退出': 'Terminal process exited', '终端连接波动，正在自动重试': 'Terminal connection interrupted; retrying',
   '暂无终端会话': 'No terminal session', '文件列表已更新': 'File list updated',
@@ -135,6 +137,7 @@ let renderTimer;
 let toastTimer;
 let lineNumberFrame;
 let terminal = null;
+let terminalAccessKey = sessionStorage.getItem('leafover-terminal-access-key') || '';
 let terminalSessions = [];
 try {
   const storedSessions = JSON.parse(sessionStorage.getItem('paper-preview-terminal-sessions') || '[]');
@@ -1586,7 +1589,7 @@ function terminalDimensions() {
 async function terminalRequest(action, payload) {
   const response = await fetch(`api/terminal/${action}`, {
     method: 'POST',
-    headers: {'Content-Type': 'application/json'},
+    headers: {'Content-Type': 'application/json', 'X-LeafOver-Terminal-Token': terminalAccessKey},
     body: JSON.stringify(payload),
   });
   const data = await response.json();
@@ -1731,6 +1734,7 @@ async function pollTerminal() {
   try {
     const response = await fetch(`api/terminal/output?session=${encodeURIComponent(sessionId)}&offset=${terminalOffset}&wait=20`, {
       signal: controller.signal,
+      headers: {'X-LeafOver-Terminal-Token': terminalAccessKey},
     });
     if (sessionId !== activeTerminalId) return;
     if (response.status === 404) {
@@ -1739,7 +1743,11 @@ async function pollTerminal() {
       return;
     }
     const data = await response.json();
-    if (!response.ok) throw new Error(data.error || `HTTP ${response.status}`);
+    if (!response.ok) {
+      const error = new Error(data.error || `HTTP ${response.status}`);
+      error.status = response.status;
+      throw error;
+    }
     terminalPollFailures = 0;
     if (data.truncated) await writeTerminal(`\r\n\x1b[33m[${tr('较早的终端输出已被截断')}]\x1b[0m\r\n`);
     if (data.data) await writeTerminal(decodeTerminalData(data.data));
@@ -1752,6 +1760,10 @@ async function pollTerminal() {
   } catch (error) {
     if (error.name === 'AbortError') return;
     if (sessionId !== activeTerminalId) return;
+    if (error.status === 401) {
+      showTerminalUnlock(error.message);
+      return;
+    }
     terminalPollFailures += 1;
     setTerminalStatus(terminalPollFailures >= 3 ? 'dead' : '', localized(`连接波动，正在重试：${error.message}`, `Connection interrupted; retrying: ${error.message}`));
     if (terminalPollFailures === 3) showToast(tr('终端连接波动，正在自动重试'));
@@ -1808,6 +1820,11 @@ async function openTerminal() {
   $('#terminal-drawer').classList.add('open');
   $('#terminal-drawer').setAttribute('aria-hidden', 'false');
   $('#terminal-toggle').classList.add('active');
+  if (projectData.terminal_auth_required && !terminalAccessKey) {
+    showTerminalUnlock();
+    return;
+  }
+  $('#terminal-unlock').hidden = true;
   if (!ensureTerminalRenderer()) return;
   requestAnimationFrame(async () => {
     renderTerminalTabs();
@@ -1816,6 +1833,10 @@ async function openTerminal() {
       try {
         await createTerminalSession();
       } catch (error) {
+        if (error.status === 401) {
+          showTerminalUnlock(error.message);
+          return;
+        }
         setTerminalStatus('dead', error.message);
         showToast(localized(`终端启动失败：${error.message}`, `Terminal failed to start: ${error.message}`));
         void writeTerminal(`\x1b[31m${localized(`终端启动失败：${error.message}`, `Terminal failed to start: ${error.message}`)}\x1b[0m\r\n`);
@@ -1826,6 +1847,16 @@ async function openTerminal() {
     }
     terminal.focus();
   });
+}
+
+function showTerminalUnlock(message = '') {
+  terminalAccessKey = '';
+  sessionStorage.removeItem('leafover-terminal-access-key');
+  clearTimeout(terminalPollTimer);
+  terminalPollController?.abort();
+  $('#terminal-unlock-error').textContent = message;
+  $('#terminal-unlock').hidden = false;
+  $('#terminal-access-key').focus();
 }
 
 function closeTerminalDrawer() {
@@ -1864,10 +1895,15 @@ async function stopTerminal(sessionId = activeTerminalId, notifyServer = true) {
 }
 
 async function newTerminal() {
+  if (!$('#terminal-unlock').hidden) return;
   try {
     await createTerminalSession();
     terminal.focus();
   } catch (error) {
+    if (error.status === 401) {
+      showTerminalUnlock(error.message);
+      return;
+    }
     setTerminalStatus('dead', error.message);
     showToast(localized(`终端启动失败：${error.message}`, `Terminal failed to start: ${error.message}`));
   }
@@ -2126,6 +2162,14 @@ $('#terminal-toggle').addEventListener('click', () => {
 $('#terminal-close').addEventListener('click', closeTerminalDrawer);
 $('#terminal-stop').addEventListener('click', () => stopTerminal());
 $('#terminal-new').addEventListener('click', newTerminal);
+$('#terminal-unlock').addEventListener('submit', (event) => {
+  event.preventDefault();
+  terminalAccessKey = $('#terminal-access-key').value.trim();
+  if (!terminalAccessKey) return;
+  sessionStorage.setItem('leafover-terminal-access-key', terminalAccessKey);
+  $('#terminal-access-key').value = '';
+  openTerminal();
+});
 bindCommittedInput('#quick-open-input', () => { quickOpenIndex = 0; renderQuickOpen(); });
 $('#quick-open-input').addEventListener('keydown', (event) => {
   if (isComposingKey(event)) return;

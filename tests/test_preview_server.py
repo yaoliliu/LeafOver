@@ -5,6 +5,7 @@ import threading
 import time
 import unittest
 import zipfile
+from email.message import Message
 from pathlib import Path
 
 
@@ -12,6 +13,31 @@ SERVER_PATH = Path(__file__).resolve().parents[1] / "tools" / "preview_server.py
 SPEC = importlib.util.spec_from_file_location("paper_preview_server", SERVER_PATH)
 preview_server = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(preview_server)
+
+
+class TerminalAccessTest(unittest.TestCase):
+    def test_terminal_key_is_optional_and_restricts_requests_when_set(self):
+        old_values = (preview_server.TERMINAL_ENABLED, preview_server.TERMINAL_AUTH_REQUIRED,
+                      preview_server.TERMINAL_TOKEN)
+        preview_server.TERMINAL_ENABLED = True
+        preview_server.TERMINAL_TOKEN = "a-test-terminal-token"
+        try:
+            for required, supplied, allowed in (
+                (False, None, True), (True, None, False),
+                (True, "wrong-token", False), (True, "a-test-terminal-token", True),
+            ):
+                preview_server.TERMINAL_AUTH_REQUIRED = required
+                handler = preview_server.Handler.__new__(preview_server.Handler)
+                handler.headers = Message()
+                if supplied:
+                    handler.headers["X-LeafOver-Terminal-Token"] = supplied
+                replies = []
+                handler._send_json = lambda payload, status=200: replies.append((status, payload))
+                self.assertIs(handler._require_terminal(), allowed)
+                self.assertEqual(replies, [] if allowed else [(401, {"error": "terminal access key required"})])
+        finally:
+            (preview_server.TERMINAL_ENABLED, preview_server.TERMINAL_AUTH_REQUIRED,
+             preview_server.TERMINAL_TOKEN) = old_values
 
 
 class SourceEditingTest(unittest.TestCase):

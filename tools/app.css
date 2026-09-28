@@ -308,6 +308,16 @@ button { color: inherit; }
 .terminal-tab-close { width: 20px; height: 20px; flex: none; margin-right: 3px; padding: 0; border: 0; outline: 0; border-radius: 4px; color: var(--faint); background: transparent; cursor: pointer; font-size: 13px; line-height: 20px; }
 .terminal-header .terminal-tab-close:hover { color: #f0c3c0; background: rgba(193,83,75,.17); }
 .terminal-host { flex: 1; min-height: 0; padding: 5px 8px 4px; overflow: hidden; background: var(--terminal-bg); }
+.terminal-unlock { position: absolute; z-index: 3; inset: 34px 0 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 9px; padding: 20px; background: var(--terminal-bg); color: var(--text); text-align: center; }
+.terminal-unlock[hidden] { display: none; }
+.terminal-unlock-icon { color: var(--accent); font: 700 25px/1 ui-monospace, monospace; }
+.terminal-unlock strong { font-size: 15px; }
+.terminal-unlock p { margin: 0 0 4px; color: var(--muted); font-size: 12px; }
+.terminal-unlock-fields { display: flex; gap: 8px; width: min(100%, 380px); }
+.terminal-unlock-fields input { min-width: 0; flex: 1; padding: 9px 11px; border: 1px solid var(--border); border-radius: 7px; outline: none; background: var(--surface); color: var(--text); }
+.terminal-unlock-fields input:focus { border-color: var(--accent); }
+.terminal-unlock-fields button { padding: 9px 13px; border: 0; border-radius: 7px; background: var(--accent); color: white; cursor: pointer; white-space: nowrap; }
+.terminal-unlock small { min-height: 16px; color: var(--danger); font-size: 11px; }
 .terminal-host .xterm { height: 100%; }
 .terminal-host .xterm-viewport { overflow-x: hidden; background-color: var(--terminal-bg) !important; scrollbar-width: thin; scrollbar-color: var(--border) var(--terminal-bg); }
 .toast { position: fixed; z-index: 60; left: 50%; bottom: 22px; transform: translate(-50%, 15px); opacity: 0; pointer-events: none; padding: 8px 12px; border-radius: 6px; background: #121713; color: white; box-shadow: var(--shadow); font-size: 10px; transition: .2s ease; }

@@ -48,6 +48,8 @@ FIGURES_DIR = ROOT / "figures"
 PORT = int(os.environ.get("PAPER_PREVIEW_PORT", "8877"))
 BIND = os.environ.get("PAPER_PREVIEW_HOST", "127.0.0.1")
 TERMINAL_ENABLED = BIND in {"127.0.0.1", "localhost", "::1"} or os.environ.get("PAPER_PREVIEW_TERMINAL_ALLOW_REMOTE") == "1"
+TERMINAL_TOKEN = os.environ.get("PAPER_PREVIEW_TERMINAL_TOKEN", "")
+TERMINAL_AUTH_REQUIRED = TERMINAL_ENABLED and bool(TERMINAL_TOKEN)
 
 COMPILE_CMD = ["latexmk", "-xelatex", "-synctex=1", "-interaction=nonstopmode", "-halt-on-error", "-file-line-error", "main.tex"]
 ENV = dict(os.environ)
@@ -763,6 +765,7 @@ def project_metadata():
         "detected_title": detected_title,
         "settings": settings,
         "terminal_enabled": TERMINAL_ENABLED,
+        "terminal_auth_required": TERMINAL_AUTH_REQUIRED,
         "outline": outline,
         "files": files,
         "figures": figures,
@@ -886,10 +889,15 @@ class Handler(BaseHTTPRequestHandler):
         return json.loads(self.rfile.read(length))
 
     def _require_terminal(self):
-        if TERMINAL_ENABLED:
-            return True
-        self._send_json({"error": "terminal is available only on a loopback-bound preview server"}, 403)
-        return False
+        if not TERMINAL_ENABLED:
+            self._send_json({"error": "terminal is available only on a loopback-bound preview server"}, 403)
+            return False
+        if TERMINAL_AUTH_REQUIRED and not secrets.compare_digest(
+            self.headers.get("X-LeafOver-Terminal-Token", ""), TERMINAL_TOKEN
+        ):
+            self._send_json({"error": "terminal access key required"}, 401)
+            return False
+        return True
 
     def do_GET(self):
         parsed = urlparse(self.path)

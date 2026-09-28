@@ -48,6 +48,7 @@
     <section class="terminal-drawer" id="terminal-drawer" aria-hidden="true">
       <div class="terminal-resizer" id="terminal-resizer" title="拖动调整终端高度"></div>
       <div class="terminal-header"><div class="terminal-identity"><span class="terminal-status-dot" id="terminal-status-dot"></span><span id="terminal-cwd">paper/</span></div><div class="terminal-tabs" id="terminal-tabs" role="tablist"></div><div class="terminal-actions"><button id="terminal-new" title="新建终端" aria-label="新建终端">＋</button><button id="terminal-stop" title="终止当前终端" aria-label="终止当前终端">■</button><button id="terminal-close" title="收起终端" aria-label="收起终端">×</button></div></div>
+      <form class="terminal-unlock" id="terminal-unlock" hidden><span class="terminal-unlock-icon">&gt;_</span><strong>解锁远程终端</strong><p>输入此工作台的终端访问密钥。</p><div class="terminal-unlock-fields"><input id="terminal-access-key" type="password" autocomplete="off" aria-label="终端访问密钥" placeholder="终端访问密钥" required><button type="submit">解锁终端</button></div><small id="terminal-unlock-error" role="alert"></small></form>
       <div class="terminal-host" id="terminal-host"></div>
     </section>
     <section class="pdf-pane">

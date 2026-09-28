@@ -1,0 +1,106 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1440" height="520" viewBox="0 0 1440 520" role="img" aria-labelledby="title desc">
+  <title id="title">LeafOver — Write the paper. See the whole picture.</title>
+  <desc id="desc">A hollow inverted apple logo beside a LaTeX source pane and a paper preview, echoing the LeafOver interactive demo.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0d1a13"/>
+      <stop offset=".54" stop-color="#10251a"/>
+      <stop offset="1" stop-color="#133421"/>
+    </linearGradient>
+    <radialGradient id="glow">
+      <stop offset="0" stop-color="#20985e" stop-opacity=".4"/>
+      <stop offset="1" stop-color="#20985e" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="code" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#243c2d"/>
+      <stop offset="1" stop-color="#14291e"/>
+    </linearGradient>
+    <linearGradient id="paper" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fffef9"/>
+      <stop offset="1" stop-color="#e9eee7"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#8bb49a" stroke-opacity=".055"/>
+    </pattern>
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="18" stdDeviation="18" flood-color="#030c06" flood-opacity=".56"/>
+    </filter>
+    <clipPath id="rounded"><rect width="1440" height="520" rx="28"/></clipPath>
+  </defs>
+  <g clip-path="url(#rounded)">
+    <rect width="1440" height="520" fill="url(#background)"/>
+    <rect width="1440" height="520" fill="url(#grid)"/>
+    <circle cx="1126" cy="258" r="380" fill="url(#glow)"/>
+    <circle cx="144" cy="-78" r="225" fill="url(#glow)" opacity=".35"/>
+    <path d="M0 482C371 425 674 477 954 401S1282 387 1440 340" fill="none" stroke="#51b47d" stroke-opacity=".13" stroke-width="2"/>
+    <path d="M0 500C343 455 656 499 964 438S1278 417 1440 383" fill="none" stroke="#51b47d" stroke-opacity=".08" stroke-width="2"/>
+
+    <g transform="translate(76 61)">
+      <rect width="196" height="29" rx="14.5" fill="#17442b" stroke="#32754c"/>
+      <circle cx="15" cy="14.5" r="4" fill="#6ad39b"/>
+      <text x="27" y="19.2" fill="#b0e5c4" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="700" letter-spacing="1.4">OPEN SOURCE · LATEX</text>
+    </g>
+
+    <g transform="translate(76 107) scale(1.19)" fill="#79d9a6">
+      <path d="M32 10C28.8 10 27.3 8.5 24 8.5C17 8.5 12 15 9.5 23C8 27.8 8 30 8 34C8 42.5 14.2 49 22 49C27 49 28.9 45 32 45C35.1 45 37 49 42 49C49.8 49 56 42.5 56 34C56 30 56 27.8 54.5 23C52 15 47 8.5 40 8.5C36.7 8.5 35.2 10 32 10ZM32 14.44C29.568 14.44 28.428 13.3 25.92 13.3C20.6 13.3 16.8 18.24 14.9 24.32C13.76 27.968 13.76 29.64 13.76 32.68C13.76 39.14 18.472 44.08 24.4 44.08C28.2 44.08 29.644 41.04 32 41.04C34.356 41.04 35.8 44.08 39.6 44.08C45.528 44.08 50.24 39.14 50.24 32.68C50.24 29.64 50.24 27.968 49.1 24.32C47.2 18.24 43.4 13.3 38.08 13.3C35.572 13.3 34.432 14.44 32 14.44Z" fill-rule="evenodd"/>
+      <path d="M31 52C25.2 49.7 18.1 52.3 12.666 57.5C20 60 27.4 57.7 31 52Z"/>
+      <path d="M32 45.8C31.8 50.4 33.1 54.5 35.2 58" fill="none" stroke="#79d9a6" stroke-width="2.2" stroke-linecap="round"/>
+    </g>
+    <text x="164" y="169" fill="#f1f6ef" font-family="Inter,Arial,sans-serif" font-size="46" font-weight="760" letter-spacing="-2.5">LeafOver</text>
+    <text x="76" y="265" fill="#f1f6ef" font-family="Inter,Arial,sans-serif" font-size="60" font-weight="760" letter-spacing="-3.4">Write the paper.</text>
+    <text x="76" y="333" fill="#78d8a3" font-family="Inter,Arial,sans-serif" font-size="60" font-weight="760" letter-spacing="-3.4">See the whole picture.</text>
+    <text x="79" y="377" fill="#b4c6b6" font-family="Inter,Arial,sans-serif" font-size="20">Source, structure, and the finished page in one place.</text>
+    <g transform="translate(78 413)">
+      <rect width="267" height="58" rx="9" fill="#188e59"/>
+      <text x="22" y="37" fill="#fff" font-family="Inter,Arial,sans-serif" font-size="17" font-weight="700">Try the live demo</text>
+      <path d="M224 29h22m-8-8 8 8-8 8" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <g transform="translate(780 99) rotate(-7 174 184)" filter="url(#shadow)">
+      <rect width="349" height="366" rx="12" fill="url(#code)" stroke="#4b8660" stroke-width="2"/>
+      <rect x="0" y="0" width="349" height="47" rx="12" fill="#1c3324"/>
+      <path d="M0 47h349" stroke="#375d43"/>
+      <circle cx="24" cy="23.5" r="5" fill="#598d68"/>
+      <circle cx="44" cy="23.5" r="5" fill="#4c7457"/>
+      <circle cx="64" cy="23.5" r="5" fill="#42694d"/>
+      <text x="115" y="29" fill="#a6cdb0" font-family="monospace" font-size="14">intro.tex</text>
+      <g font-family="monospace" font-size="15">
+        <text x="22" y="88" fill="#6e987a">01</text><text x="60" y="88" fill="#9de4b5">\section{Introduction}</text>
+        <text x="22" y="124" fill="#6e987a">02</text><text x="60" y="124" fill="#c8d8c5">When diffusion models</text>
+        <text x="22" y="155" fill="#6e987a">03</text><text x="60" y="155" fill="#c8d8c5">were first developed,</text>
+        <text x="22" y="186" fill="#6e987a">04</text><text x="60" y="186" fill="#c8d8c5">the core idea was</text>
+        <text x="22" y="217" fill="#6e987a">05</text><text x="60" y="217" fill="#93dbaa">denoising.</text>
+        <text x="22" y="259" fill="#6e987a">06</text><text x="60" y="259" fill="#9de4b5">\begin{figure}</text>
+        <text x="22" y="290" fill="#6e987a">07</text><text x="60" y="290" fill="#c8d8c5">\includegraphics{...}</text>
+      </g>
+      <rect x="22" y="327" width="305" height="4" rx="2" fill="#64b17c" opacity=".3"/>
+    </g>
+
+    <g transform="translate(1003 75) rotate(7 190 210)" filter="url(#shadow)">
+      <rect width="377" height="416" rx="6" fill="url(#paper)"/>
+      <path d="M35 37h307" stroke="#b9c9ba"/>
+      <text x="188" y="94" text-anchor="middle" fill="#203324" font-family="Georgia,serif" font-size="26" font-weight="700">Back to Basics</text>
+      <text x="188" y="118" text-anchor="middle" fill="#5f6d61" font-family="Georgia,serif" font-size="12">Tianhong Li  ·  Kaiming He</text>
+      <g fill="#d1dbd0">
+        <rect x="35" y="153" width="307" height="5" rx="2.5"/>
+        <rect x="35" y="167" width="289" height="5" rx="2.5"/>
+        <rect x="35" y="181" width="300" height="5" rx="2.5"/>
+        <rect x="35" y="195" width="270" height="5" rx="2.5"/>
+      </g>
+      <rect x="35" y="224" width="307" height="98" rx="4" fill="#e4eee2"/>
+      <circle cx="104" cy="273" r="30" fill="none" stroke="#85bd91" stroke-width="3"/>
+      <circle cx="188" cy="273" r="30" fill="#8abd96"/>
+      <circle cx="272" cy="273" r="30" fill="none" stroke="#85bd91" stroke-width="3"/>
+      <path d="M134 273h24m60 0h24" stroke="#7aac83" stroke-width="3" stroke-linecap="round"/>
+      <g fill="#d1dbd0">
+        <rect x="35" y="346" width="307" height="5" rx="2.5"/>
+        <rect x="35" y="360" width="299" height="5" rx="2.5"/>
+        <rect x="35" y="374" width="266" height="5" rx="2.5"/>
+      </g>
+    </g>
+    <g transform="translate(1131 441)">
+      <rect width="186" height="45" rx="7" fill="#1b3926" stroke="#45875a" filter="url(#shadow)"/>
+      <text x="18" y="28" fill="#b6e4c4" font-family="monospace" font-size="14" font-weight="700" letter-spacing="1.1">SOURCE  ↔  PDF</text>
+    </g>
+  </g>
+</svg>

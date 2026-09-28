@@ -1,10 +1,21 @@
-# LeafOver
+<p align="center"><img src="docs/assets/mark.svg" width="68" alt="LeafOver hollow inverted apple logo"></p>
+<h1 align="center">LeafOver</h1>
+<p align="center">A calmer place to write LaTeX, with your source and finished paper side by side.</p>
+<p align="center">
+  <a href="https://yaoliliu.github.io/LeafOver/"><strong>▶ Try the interactive demo</strong></a>
+  &nbsp;·&nbsp; <a href="#quick-start">Quick start</a>
+  &nbsp;·&nbsp; <a href="#features">Features</a>
+</p>
 
-A local LaTeX workspace with a live PDF preview, source editing, search, SyncTeX
-navigation and an embedded terminal. Python standard library only; browser assets
-are bundled, with no frontend build or CDN required.
+<p align="center"><a href="https://yaoliliu.github.io/LeafOver/"><img src="docs/assets/readme-banner.svg" width="100%" alt="LeafOver: write the paper, see the whole picture — open the live demo"></a></p>
 
-## Run
+The [live demo](https://yaoliliu.github.io/LeafOver/) lets you explore JiT's real
+LaTeX source and all 18 PDF pages. Browser edits stay in that browser; install
+LeafOver locally to compile, write project files, install TeX engines and run
+terminal commands. The app uses Python's standard library and bundled browser
+assets, so there is no frontend build or CDN to set up.
+
+## Quick start
 
 Requirements: Python 3.10+ and Debian/Ubuntu or macOS. The installer adds the TeX
 packages needed by the bundled paper if they are missing; this may require sudo
@@ -37,15 +48,15 @@ python3 run.py /path/to/latex-project --port 8878
 The first PDF builds automatically. Later source changes also compile automatically.
 The default bind address is localhost. The app edits files and can run terminal
 commands; keep it local, or place it behind authenticated access. Remote binding
-disables the terminal unless explicitly enabled through the existing
-`PAPER_PREVIEW_TERMINAL_ALLOW_REMOTE=1` option.
+disables the terminal by default. To enable it through a remote proxy, set
+`PAPER_PREVIEW_TERMINAL_ALLOW_REMOTE=1`. An access key is optional, but recommended
+when others can reach the proxy: without one, anyone with the URL can run commands.
 
-## Online showcase
-
-[Explore the GitHub Pages showcase](https://yaoliliu.github.io/LeafOver/). It
-uses the real JiT TeX source and an optimized copy of all 18 PDF pages. Browser
-edits stay in that browser. Compilation, project-file writes, compiler installation
-and terminal commands require the locally installed app.
+```bash
+export PAPER_PREVIEW_TERMINAL_TOKEN="$(python3 -c 'import secrets; print(secrets.token_urlsafe(32))')"
+printf 'Terminal key: %s\n' "$PAPER_PREVIEW_TERMINAL_TOKEN"
+PAPER_PREVIEW_TERMINAL_ALLOW_REMOTE=1 python3 run.py --host 0.0.0.0 --port 8878
+```
 
 ## Features
 
