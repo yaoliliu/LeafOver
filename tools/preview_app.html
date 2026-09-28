@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
+  <title>LeafOver · Paper workspace</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%20role%3D%22img%22%20aria-labelledby%3D%22title%22%3E%0A%20%20%3Ctitle%20id%3D%22title%22%3ELeafOver%20%E2%80%94%20hollow%20inverted%20Fuji%20apple%3C%2Ftitle%3E%0A%20%20%3C%21--%20Cubic%20Bezier%20apple%20with%20broad%20lower%20shoulders%2C%20a%20tapered%20blossom%20end%20and%20a%20lower%20stem%20cavity%3B%20leaf%20span%20%3D%20body%20width%20%2F%20phi%5E2%20%2848%20%2F%202.618%20%E2%89%88%2018.334%29.%20--%3E%0A%20%20%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2215%22%20fill%3D%22%23138a55%22%2F%3E%0A%20%20%3Cg%20color%3D%22%23fff%22%3E%3Cpath%20d%3D%22M32%2010C28.8%2010%2027.3%208.5%2024%208.5C17%208.5%2012%2015%209.5%2023C8%2027.8%208%2030%208%2034C8%2042.5%2014.2%2049%2022%2049C27%2049%2028.9%2045%2032%2045C35.1%2045%2037%2049%2042%2049C49.8%2049%2056%2042.5%2056%2034C56%2030%2056%2027.8%2054.5%2023C52%2015%2047%208.5%2040%208.5C36.7%208.5%2035.2%2010%2032%2010ZM32%2014.44C29.568%2014.44%2028.428%2013.3%2025.92%2013.3C20.6%2013.3%2016.8%2018.24%2014.9%2024.32C13.76%2027.968%2013.76%2029.64%2013.76%2032.68C13.76%2039.14%2018.472%2044.08%2024.4%2044.08C28.2%2044.08%2029.644%2041.04%2032%2041.04C34.356%2041.04%2035.8%2044.08%2039.6%2044.08C45.528%2044.08%2050.24%2039.14%2050.24%2032.68C50.24%2029.64%2050.24%2027.968%2049.1%2024.32C47.2%2018.24%2043.4%2013.3%2038.08%2013.3C35.572%2013.3%2034.432%2014.44%2032%2014.44Z%22%20fill%3D%22currentColor%22%20fill-rule%3D%22evenodd%22%2F%3E%3Cpath%20d%3D%22M31%2052C25.2%2049.7%2018.1%2052.3%2012.666%2057.5C20%2060%2027.4%2057.7%2031%2052Z%22%20fill%3D%22currentColor%22%2F%3E%3Cpath%20d%3D%22M32%2045.8C31.8%2050.4%2033.1%2054.5%2035.2%2058%22%20fill%3D%22none%22%20stroke%3D%22currentColor%22%20stroke-width%3D%222.2%22%20stroke-linecap%3D%22round%22%2F%3E%3C%2Fg%3E%0A%3C%2Fsvg%3E%0A">
+  <script>document.documentElement.dataset.theme = localStorage.getItem('paper-preview-theme') || 'dark';</script>
+  <link rel="stylesheet" href="xterm/xterm.css">
+  <link rel="stylesheet" href="app.css">
+  <script src="pdfjs/pdf.min.js"></script>
+  <script src="xterm/xterm.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <button class="brand" id="sidebar-toggle" aria-label="切换项目侧栏"><span class="brand-mark"><svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 10C28.8 10 27.3 8.5 24 8.5C17 8.5 12 15 9.5 23C8 27.8 8 30 8 34C8 42.5 14.2 49 22 49C27 49 28.9 45 32 45C35.1 45 37 49 42 49C49.8 49 56 42.5 56 34C56 30 56 27.8 54.5 23C52 15 47 8.5 40 8.5C36.7 8.5 35.2 10 32 10ZM32 14.44C29.568 14.44 28.428 13.3 25.92 13.3C20.6 13.3 16.8 18.24 14.9 24.32C13.76 27.968 13.76 29.64 13.76 32.68C13.76 39.14 18.472 44.08 24.4 44.08C28.2 44.08 29.644 41.04 32 41.04C34.356 41.04 35.8 44.08 39.6 44.08C45.528 44.08 50.24 39.14 50.24 32.68C50.24 29.64 50.24 27.968 49.1 24.32C47.2 18.24 43.4 13.3 38.08 13.3C35.572 13.3 34.432 14.44 32 14.44Z" fill="currentColor" fill-rule="evenodd"/><path d="M31 52C25.2 49.7 18.1 52.3 12.666 57.5C20 60 27.4 57.7 31 52Z" fill="currentColor"/><path d="M32 45.8C31.8 50.4 33.1 54.5 35.2 58" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></span><span class="brand-name">LeafOver</span></button>
+    <div class="document-heading"><span id="document-title">Paper workspace</span></div>
+    <div class="topbar-actions">
+      <button class="icon-button" id="settings-toggle" type="button" title="项目设置" aria-label="项目设置" aria-haspopup="dialog"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><path d="m9 3-.6 2.3-2 .9-2.1-.7-2 3.5 1.6 1.6v2.8L2.3 15l2 3.5 2.1-.7 2 .9L9 21h4l.6-2.3 2-.9 2.1.7 2-3.5-1.6-1.6v-2.8L19.7 9l-2-3.5-2.1.7-2-.9L13 3Z"/><circle cx="11" cy="12" r="3"/></svg></button>
+      <button class="icon-button mobile-source" id="source-toggle" title="切换源码面板" aria-label="切换源码面板">&lt;/&gt;</button>
+      <button class="terminal-button" id="terminal-toggle" title="打开终端 (Ctrl+`)"><span>&gt;_</span><span class="terminal-label">终端</span></button>
+      <button class="compile-button" id="compile-button" aria-label="重新编译"><span class="status-dot" id="status-dot"></span><span id="compile-label">重新编译</span><kbd>R</kbd></button>
+      <button class="language-button" id="language-toggle" type="button" title="切换到英文" aria-label="切换到英文">EN</button>
+      <div class="accent-control"><button class="icon-button accent-toggle" id="accent-toggle" type="button" title="主题色" aria-label="主题色" aria-expanded="false"><span class="accent-swatch"></span></button><div class="accent-popover" id="accent-popover" hidden><strong>主题色</strong><div class="accent-presets" id="accent-presets"><button type="button" class="accent-preset" data-accent="#138a55" style="--swatch:#138a55" title="经典绿" aria-label="经典绿"></button><button type="button" class="accent-preset" data-accent="#3294d3" style="--swatch:#3294d3" title="天空蓝" aria-label="天空蓝"></button><button type="button" class="accent-preset" data-accent="#7c62be" style="--swatch:#7c62be" title="紫罗兰" aria-label="紫罗兰"></button><button type="button" class="accent-preset" data-accent="#d07a31" style="--swatch:#d07a31" title="暖橙" aria-label="暖橙"></button><button type="button" class="accent-preset" data-accent="#c35872" style="--swatch:#c35872" title="玫瑰红" aria-label="玫瑰红"></button></div><label class="accent-custom"><span>自定义颜色</span><input id="accent-picker" type="color" value="#138a55" aria-label="自定义颜色"></label><button class="accent-reset" id="accent-reset" type="button">恢复默认绿色</button></div></div>
+      <button class="icon-button" id="theme-toggle" title="切换主题" aria-label="切换主题">◐</button>
+      <button class="icon-button" id="download-source" title="打包下载 LaTeX 源码" aria-label="打包下载 LaTeX 源码">T↓</button>
+      <a class="icon-button" href="pdf" download="leafover-paper.pdf" title="下载 PDF" aria-label="下载 PDF">⇩</a>
+    </div>
+  </header>
+  <div class="workspace" id="workspace">
+    <aside class="project-rail" id="project-rail">
+      <div class="rail-tabs" role="tablist"><button class="rail-tab active" data-tab="outline">大纲</button><button class="rail-tab" data-tab="files">文件</button><button class="rail-tab" data-tab="search">搜索</button></div>
+      <div class="rail-panel active" id="outline-panel"><div class="rail-label">DOCUMENT OUTLINE</div><nav id="outline" class="outline-list"><div class="skeleton-line"></div><div class="skeleton-line short"></div></nav></div>
+      <div class="rail-panel" id="files-panel"><div class="rail-label" title="论文根目录文本文件、tables/research/notes 及 figures 图片和 PDF">PROJECT FILES</div><button class="folder-row" id="figure-folder"><span class="chevron">›</span><span class="folder-icon">▰</span><span>figures</span><span class="count" id="figure-count">—</span></button><div class="figure-files" id="figure-files" hidden></div><div id="files" class="file-list"></div></div>
+      <div class="rail-panel search-panel" id="search-panel">
+        <div class="project-search-box"><input id="project-search-input" type="search" autocomplete="off" spellcheck="false" placeholder="在项目中搜索" aria-label="在项目中搜索"><div class="search-options"><button id="project-search-case" title="区分大小写">Aa</button><button id="project-search-word" title="全词匹配">W</button><button id="project-search-regex" title="正则表达式">.*</button></div></div>
+        <div class="search-summary" id="project-search-summary">输入关键词搜索论文源码</div>
+        <div class="project-search-results" id="project-search-results"></div>
+      </div>
+    </aside>
+    <section class="source-pane" id="source-pane">
+      <div class="pane-header"><div class="editor-tabs" id="editor-tabs" role="tablist" aria-label="已打开的文件"></div><button class="save-state" id="save-source" title="保存 (Ctrl/Cmd+S)">载入中</button><button class="pane-action" id="source-search-button" title="搜索当前文件 (Ctrl/Cmd+F)" aria-label="搜索当前文件">⌕</button><button class="pane-close" id="source-close" title="隐藏源码">×</button></div>
+      <div class="source-wrap" id="source-wrap"><div class="inline-find" id="source-find" hidden><input id="source-find-input" type="search" autocomplete="off" spellcheck="false" placeholder="搜索当前文件"><span id="source-find-count">0 / 0</span><button class="find-option" id="source-find-case" title="区分大小写">Aa</button><button class="find-option" id="source-find-word" title="全词匹配">W</button><button class="find-option" id="source-find-regex" title="正则表达式">.*</button><button id="source-find-prev" title="上一个匹配">↑</button><button id="source-find-next" title="下一个匹配">↓</button><button id="source-find-close" title="关闭搜索">×</button></div><div class="line-numbers" id="line-numbers"></div><pre class="source-highlights" id="source-highlights" aria-hidden="true" hidden></pre><textarea class="source-editor" id="source-editor" aria-label="论文源码编辑器" spellcheck="false" wrap="soft">正在载入源码…</textarea><div class="citation-autocomplete" id="citation-autocomplete" role="listbox" aria-label="引用补全" hidden></div><div class="figure-preview" id="figure-preview" hidden></div></div>
+      <div class="source-status"><span id="source-lines">—</span><span>UTF-8</span><span id="editor-mode">自动保存</span></div>
+    </section>
+    <div class="splitter" id="splitter" title="拖动调整宽度"></div>
+    <section class="terminal-drawer" id="terminal-drawer" aria-hidden="true">
+      <div class="terminal-resizer" id="terminal-resizer" title="拖动调整终端高度"></div>
+      <div class="terminal-header"><div class="terminal-identity"><span class="terminal-status-dot" id="terminal-status-dot"></span><span id="terminal-cwd">paper/</span></div><div class="terminal-tabs" id="terminal-tabs" role="tablist"></div><div class="terminal-actions"><button id="terminal-new" title="新建终端" aria-label="新建终端">＋</button><button id="terminal-stop" title="终止当前终端" aria-label="终止当前终端">■</button><button id="terminal-close" title="收起终端" aria-label="收起终端">×</button></div></div>
+      <div class="terminal-host" id="terminal-host"></div>
+    </section>
+    <section class="pdf-pane">
+      <div class="pdf-toolbar">
+        <div class="toolbar-group"><button class="tool-button" id="previous-page" title="上一页 (←)">‹</button><label class="page-control"><input id="page-input" inputmode="numeric" value="1" aria-label="当前页"><span>/</span><span id="page-total">—</span></label><button class="tool-button" id="next-page" title="下一页 (→)">›</button></div>
+        <div class="toolbar-group zoom-group"><button class="tool-button" id="zoom-out" title="缩小 (-)">−</button><button class="zoom-value" id="zoom-value">适合宽度</button><button class="tool-button" id="zoom-in" title="放大 (+)">＋</button></div>
+        <div class="toolbar-group right-tools"><button class="tool-button" id="pdf-search-button" title="搜索 PDF (Ctrl/Cmd+F)" aria-label="搜索 PDF">⌕</button><button class="tool-button label-button" id="fit-page">整页</button><button class="tool-button label-button sync-button" id="sync-indicator" title="双击 PDF 正文可定位到对应源码"><span class="sync-dot"></span>PDF→源码</button><button class="tool-button label-button" id="logs-button"><span class="log-dot"></span>日志</button><a class="tool-button external-link" href="pdf" target="_blank" title="在新标签页打开原始 PDF">↗</a></div>
+      </div>
+      <div class="inline-find pdf-find" id="pdf-find" hidden><input id="pdf-find-input" type="search" autocomplete="off" spellcheck="false" placeholder="搜索 PDF"><span id="pdf-find-count">0 / 0</span><button id="pdf-find-prev" title="上一个匹配">↑</button><button id="pdf-find-next" title="下一个匹配">↓</button><button id="pdf-find-close" title="关闭搜索">×</button></div>
+      <main class="pdf-scroller" id="pdf-scroller"><div class="pdf-strip" id="pdf-strip"><div class="empty-state" id="pdf-hint"><div class="loader"></div><strong>正在载入论文</strong><span>首次编译可能需要一点时间</span></div></div></main>
+    </section>
+  </div>
+  <section class="log-drawer" id="log-drawer" aria-hidden="true"><div class="log-header"><div><strong>编译日志</strong><span id="log-summary">等待编译</span></div><div><button id="copy-log">复制日志</button><button id="close-logs">×</button></div></div><pre id="log-content">暂无编译日志。</pre></section>
+  <div class="quick-open-backdrop" id="quick-open" hidden><section class="quick-open-dialog" role="dialog" aria-modal="true" aria-label="快速打开"><div class="quick-open-input-row"><span>›</span><input id="quick-open-input" autocomplete="off" spellcheck="false" placeholder="输入文件名，@ 搜索章节，: 跳转行号"></div><div class="quick-open-results" id="quick-open-results"></div><div class="quick-open-hint"><span>↑↓ 选择</span><span>Enter 打开</span><span>Esc 关闭</span></div></section></div>
+  <dialog id="project-settings" class="settings-dialog" aria-labelledby="settings-heading">
+    <form id="settings-form">
+      <div class="settings-header"><div><span class="settings-eyebrow">LeafOver</span><h2 id="settings-heading">项目设置</h2></div><button class="icon-button" id="settings-close" type="button" aria-label="关闭">×</button></div>
+      <label class="settings-field" for="settings-main"><span>LaTeX 主文件</span><select id="settings-main" required></select></label>
+      <label class="settings-field" for="settings-compiler"><span>编译器</span><select id="settings-compiler"><option value="xelatex">XeLaTeX</option><option value="pdflatex">pdfLaTeX</option><option value="lualatex">LuaLaTeX</option></select></label>
+      <div class="compiler-status-row"><span id="compiler-status" role="status">检测中…</span><button id="compiler-install" class="icon-button" type="button" hidden>一键安装</button></div>
+      <details id="compiler-log-panel" hidden><summary>安装日志</summary><pre id="compiler-log"></pre></details>
+      <label class="settings-auto"><input id="settings-auto-title" type="checkbox" checked><span>从论文自动读取标题</span></label>
+      <label class="settings-field" for="settings-title"><span>显示标题</span><input id="settings-title" maxlength="200" autocomplete="off" placeholder="输入自定义标题"></label>
+      <p id="settings-error" class="settings-error" role="alert" hidden></p>
+      <div class="settings-footer"><button class="icon-button" id="settings-cancel" type="button">取消</button><button class="compile-button" id="settings-save" type="submit">保存设置</button></div>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
