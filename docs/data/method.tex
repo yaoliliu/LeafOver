@@ -1,0 +1,224 @@
+
+\definecolor{bad}{RGB}{255,235,235}    % lighter apricot
+\definecolor{good}{RGB}{235,255,235}    % lighter green
+
+% generic math highlighter: \mathhl{<color>}{<math stuff>}
+\newcommand{\exphl}[2]{%
+  \tikz[baseline=(X.base)] \node[fill=#1, rounded corners=1pt, inner sep=3pt] (X)
+  {$\displaystyle #2$};%
+}
+
+% convenience wrappers
+\newcommand{\hlbad}[1]{\exphl{bad}{#1}}
+\newcommand{\hlgood}[1]{\exphl{good}{#1}}
+
+\section{``Just Image Transformers'' for Diffusion}
+
+
+Driven by the above analysis, we show that \textit{plain} Vision Transformers (ViT) \cite{Dosovitskiy2021} operating on pixels can work surprisingly well, simply using $\x$-prediction.
+
+\subsection{Just Image Transformers}
+
+The core idea of ViT \cite{Dosovitskiy2021} is ``\textit{Transformer on Patches} (ToP)''\footnotemark.
+Our architecture design follows this philosophy.
+
+\footnotetext{Quoting Lucas Beyer.}
+
+Formally, consider $H{\times}W{\times}C$-dim image data ($C{=}3$). All $\x$, $\e$, $\v$ and $\z_t$ share this same dimensionality. 
+Given an image, we divide it into non-overlapping patches of size $p{\times}p$, resulting in a sequence of a length $\frac{H}{p}{\times}\frac{W}{p}$. Each patch is a $p{\times}p{\times}3$-dim vector. This sequence is processed by a linear embedding projection, added with positional embedding \cite{vaswani2017attention}, and mapped by a stack of Transformer blocks \cite{vaswani2017attention}. 
+The output layer is a linear predictor that projects each token back to a $p{\times}p{\times}3$-dim patch.
+See \cref{fig:arch}.
+
+As standard practice, the architecture is conditioned on time $t$ and a given class label. We use adaLN-Zero \cite{Peebles2023} for conditioning and will discuss other options later.
+Conceptually, this architecture amounts to the Diffusion Transformer (DiT) \cite{Peebles2023} directly applied to patches of pixels.
+
+The overall architecture is nothing more than ``Just image Transformers'', which we refer to as \textbf{JiT}. For example, we investigate \textbf{JiT/16} (\ie, patch size $p{=}16$, \cite{Dosovitskiy2021}) on $256{\times}256$ images, and \textbf{JiT/32} ($p{=}32$)  on $512{\times}512$ images. These settings respectively result in a dimensionality of 768 ($16{\times}16{\times}3$) and 3072 ($32{\times}32{\times}3$) per patch. 
+Such high-dimensional patches can be handled by $\x$-prediction.
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.6\linewidth]{figures/framework}
+\vspace{-.3em}
+\caption{\textbf{The ``Just image Transformer'' (JiT) architecture}:
+simply a plain ViT \cite{Dosovitskiy2021} on patches of pixels for $\x$-prediction.
+}
+\vspace{-.8em}
+\label{fig:arch}
+\end{figure}
+
+\subsection{What to Predict by the Network?}
+
+We have summarized the nine possible combinations of loss space and prediction space in \cref{tab:xev}.
+For each of these combinations, we train a ``Base'' \cite{Dosovitskiy2021} model (JiT-B), which has a hidden size of 768-dim per token.
+We study JiT-B/16 at 256$\times$256 resolution in \cref{tab:3x3s}(a). As a reference, we examine \mbox{JiT-B/4} (\ie, 
+$p{=}4$) at 64$\times$64 in \cref{tab:3x3s}(b). 
+In both settings, the sequence length is the same (16${\times}$16).
+
+We draw the following observations:
+
+\DeclareRobustCommand{\bggood}[1]{%
+  \begingroup
+  \setlength{\fboxsep}{1pt}%
+  \raisebox{0pt}[\height][0pt]{\colorbox{good}{#1}}%
+  \endgroup
+}
+\DeclareRobustCommand{\bgbad}[1]{%
+  \begingroup
+  \setlength{\fboxsep}{1pt}%
+  \raisebox{0pt}[\height][0pt]{\colorbox{bad}{#1}}%
+  \endgroup
+}
+
+
+
+\paragraph{$\x$-prediction is critical.}
+In \cref{tab:3x3s}(a) with JiT-B/16, {\textit{only $\x$-prediction performs well}}, and it works across all three losses. 
+Here, a patch is 768-d ($16{\times}16{\times}3$), which coincides with the hidden size of 768 in \mbox{JiT-B}. While this may seem ``about enough'', in practice the models may require additional capacity, \eg, to handle positional embeddings.
+For $\e$-/$\v$-prediction, the model does not have enough capacity to separate and retain the noised quantities. 
+These observations are similar to those in the toy case (\cref{fig:toy}).
+
+As a comparison, we examine JiT-B/4 at 64$\times$64 resolution (\cref{tab:3x3s}(b)). Here, all cases perform reasonably well: the accuracy gaps among the nine combinations are marginal, not decisive. The dimensionality is 48 ($4{\times}4{\times}3$) per patch, well below the hidden size of 768 in \mbox{JiT-B}, which explains why all combinations work reasonably well. We note that many previous \textit{latent} diffusion models have a similarly small input dimensionality and therefore were not exposed to the issue we discuss here.
+
+\begin{table}[t]
+\vspace{-1em}
+\centering
+\tablestyle{2.5pt}{1.2}
+\begin{tabular}{x{45} | x{45} |  x{45} |  x{45} } 
+ & \textbf{$\x$-pred}  & \textbf{$\e$-pred} & \textbf{$\v$-pred} \\
+\shline
+\textbf{$\x$-loss} & \cellcolor{good} 10.14 & \cellcolor{bad} 379.21 & \cellcolor{bad} 107.55 \\
+\midline
+\textbf{$\e$-loss} & \cellcolor{good} 10.45 & \cellcolor{bad} 394.58 & \cellcolor{bad} 126.88 \\
+\midline
+\textbf{$\v$-loss} & \cellcolor{good} \hspace{2pt} {8.62} & \cellcolor{bad} 372.38 & \cellcolor{bad} \hspace{2pt} 96.53 \\
+\multicolumn{4}{c}{\textbf{(a)} ImageNet 256$\times$256, \textbf{JiT-B/16}} \\
+\end{tabular}
+\\
+\vspace{.5em}
+\tablestyle{2.5pt}{1.2}
+\begin{tabular}{x{45} | x{45} | x{45} | x{45} } 
+ & \textbf{$\x$-pred}  & \textbf{$\e$-pred} & \textbf{$\v$-pred} \\
+\shline
+\textbf{$\x$-loss} & \cellcolor{good} 5.76 & \cellcolor{good} 6.20 & \cellcolor{good} 6.12 \\
+\midline
+\textbf{$\e$-loss} & \cellcolor{good} 3.56 & \cellcolor{good} 4.02 & \cellcolor{good} 3.76 \\
+\midline
+\textbf{$\v$-loss} & \cellcolor{good} 3.55 & \cellcolor{good} 3.63 & \cellcolor{good} 3.46 \\
+ \multicolumn{4}{c}{\textbf{(b)} ImageNet 64$\times$64, \textbf{JiT-B/4}}
+\end{tabular}
+\vspace{-.5em}
+\caption{\textbf{Results of all combinations} of loss space and network space (see \cref{tab:xev}), evaluated by FID-50K on ImageNet:
+\textbf{(a)} JiT-B/16 at 256 resolution, 768-d per patch;
+\textbf{(b)} JiT-B/4 at 64 resolution, 48-d per patch.
+We annotate {\bgbad{catastrophic failures}} in red and \bggood{reasonable results} by green.
+Settings: 200 epochs, with CFG \cite{ho2022classifier}.
+}
+\label{tab:3x3s}
+\vspace{-.2em}
+\end{table}
+
+\paragraph{Loss weighting is not sufficient.} Our work is not the first to enumerate the combinations of relevant factors. In \cite{salimans2022progressive}, it has explored the combinations of loss \textit{weighting} and network predictions. Their experiments were done on the low-dimensional CIFAR-10 dataset, using a U-net. Their observations were closer to ours on ImageNet 64$\times$64.\footnotemark{}
+
+\footnotetext{In the CIFAR-10 experiments in \cite{salimans2022progressive}, they enumerated three types of loss weighting and three types of network outputs. In 8 out of these 9 combinations, their models work reasonably well (see their Tab.~1).
+}
+
+However, \cref{tab:3x3s}(a) on ImageNet 256$\times$256 suggests that \textit{loss weighting is not the whole story}.
+On one hand, both $\e$- and $\v$-prediction fail catastrophically in \cref{tab:3x3s}(a), regardless of the loss space, which corresponds to different effective weightings in different loss spaces (as discussed).
+On the other hand, $\x$-prediction works across \textit{all} three loss spaces: the loss weighting induced by the $\v$-loss is preferable, but not critical.\footnotemark{}
+
+\footnotetext{From \cref{tab:xev}(a), we see that with $\x$-prediction, the coefficients of $\x_\theta$ are $1$, ${t}{/}{(1{-}t)}$, and $-{1}{/}(1{-}t)$ in the three rows. 
+When converting to $\x$-loss, the weights of $\x$-loss are $1$, ${t^2}{/}{(1{-}t)^2}$, and ${1}{/}{(1{-}t)^2}$, respectively.}
+
+
+
+\paragraph{Noise-level shift is not sufficient.} Prior works \cite{chen2023importance,hoogeboom2023simple,hoogeboom2024simpler} have suggested that increasing the noise level is useful for high-resolution pixel-based diffusion. We examine this in \cref{tab:mu} with JiT-B/16. 
+As we use the logit-normal distribution \cite{esser2024scaling} for sampling $t$ (see appendix), the noise level can be shifted by changing the parameter $\mu$ of this distribution: intuitively, shifting $\mu$ towards the negative side results in smaller $t$ and thus increases the noise level (\cref{eq:z}).
+
+\cref{tab:mu} shows that when the model already performs decently (here, \textbf{$\x$-pred}), appropriately high noise is beneficial, which is consistent with prior observations \cite{chen2023importance,hoogeboom2023simple,hoogeboom2024simpler}.
+However, adjusting the noise level \textit{alone} cannot remedy $\e$- or $\v$-prediction: their failure stems inherently from the inability to propagate high-dimensional information.
+
+As a side note, according to \cref{tab:mu}, we set $\mu$ {=} --0.8 in other experiments on ImageNet 256$\times$256.
+
+\paragraph{Increasing hidden units is not necessary.} Since the capacity can be limited by the network width (\ie, numbers of hidden units), a natural idea is to increase it. 
+However, this remedy is neither principled nor feasible when the observed dimension is very high. We show that this is not necessary in the case of $\x$-prediction.
+
+In \cref{tab:in1024} and \cref{tab:scale} in the next section, we show results of \textbf{JiT/32} at resolution 512 and \textbf{JiT/64} at resolution 1024, 
+using a \textit{proportionally large} patch size of $p{=}32$ or $p{=}64$.
+This amounts to 3072-dim (\ie, $32{\times}32{\times}3$) or 12288-dim
+per patch, substantially larger than the hidden size of B, L, and H models (defined in \cite{Dosovitskiy2021}).
+Nevertheless, $\x$-prediction works well; in fact, it works \textit{without} any modification other than scaling the noise proportionally (\eg, by 2$\times$ and 4$\times$ at resolution 512 and 1024; see appendix).
+
+This evidence suggests that the network design can be largely \textit{decoupled} from the observed dimensionality, as is the case in many other neural network applications. Increasing the number of hidden units can be beneficial (as widely observed in deep learning), but it is not decisive.
+
+\begin{table}[t]
+\vspace{-1em}
+\centering
+\tablestyle{4pt}{1.2}
+\begin{tabular}{z{40} x{16} | x{45} | x{45} | x{45}}
+\multicolumn{2}{r|}{$t$-shift ($\mu$)}   & $\x$\textbf{-pred} & $\e$\textbf{-pred} & $\v$\textbf{-pred} \\
+\shline
+{\scriptsize(lower noise)} & \textcolor{black!0}{--}0.0   & \cellcolor{good} \hspace{2pt} 14.44 & \cellcolor{bad} 464.25 & \cellcolor{bad} 120.03 \\
+& --0.4 & \cellcolor{good} \hspace{6pt} 9.79  & \cellcolor{bad} 372.91 & \cellcolor{bad} 109.93 \\
+& --0.8 & \cellcolor{good} \hspace{6pt} \textbf{8.62} & \cellcolor{bad} 372.36 & \cellcolor{bad} \hspace{2pt} 96.53 \\
+{\scriptsize(higher noise)} & --1.2 & \cellcolor{good} \hspace{6pt} 8.99  & \cellcolor{bad} 355.25 & \cellcolor{bad} 106.85 \\
+\end{tabular}
+\vspace{-.5em}
+\caption{
+\textbf{Noise-level shift} (JiT-B/16, ImageNet 256$\times$256, FID-50K).
+We shift the noise level by adjusting $\mu$ in the logit-normal $t$-sampler \cite{esser2024scaling}.
+An appropriate noise level is useful, but is not sufficient for addressing the catastrophic failure in $\e$-/$\v$-prediction.
+Settings (the same as \cref{tab:3x3s}): 200 epochs, with CFG.
+}
+\label{tab:mu}
+\vspace{-.5em}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\linewidth]{figures/bottleneck}
+\vspace{-.7em}
+\caption{\textbf{Bottleneck linear embedding.}
+Results are for \textbf{JiT-B/16} on ImageNet 256$\times$256. A raw patch is 768-dim ($16{\times}16{\times}3$) and is embedded by two sequential linear layers with an intermediate bottleneck dimension $d'$ ($d' < 768$).  Here, \textbf{\textit{bottleneck embedding is generally beneficial}}, and our $\x$-prediction model can work decently even with aggressive bottlenecks as small as 32 or 16.
+Settings (the same as \cref{tab:mu}): 200 epochs, with CFG. 
+}
+\label{fig:bottleneck}
+\vspace{-1em}
+\end{figure}
+
+\paragraph{Bottleneck can be beneficial.} Even more surprisingly, we find that, conversely, introducing a bottleneck that \textit{reduces} dimensionality in the network can be beneficial.
+
+Specifically, we turn the linear patch embedding layer into a \textit{low-rank} linear layer, by replacing it with a pair of bottleneck (yet still linear) layers. The first layer reduces the dimension to $d'$, and the second layer expands it to the hidden size of the Transformer. Both layers are linear and serve as a low-rank reparameterization.
+
+\cref{fig:bottleneck} plots the FID \vs the bottleneck dimension $d'$, using JiT-B/16 (768-d per raw patch). Reducing the bottleneck dimension, even to as small as 16-d, does not cause catastrophic failure. In fact, a bottleneck dimension across a wide range (32 to 512) can improve the quality, by a decent margin of up to $\app$1.3 FID. 
+
+From a broader perspective of representation learning, this observation is not entirely unexpected. 
+Bottleneck designs are often introduced to encourage the learning of inherently low-dimensional representations \cite{tishby2000information,rifai2011contractive,makhzani2013k,alemi2016deep}.
+
+\input{code}
+
+
+\subsection{Our Algorithm}
+
+Our final algorithm adopts $\x$-prediction and $\v$-loss, which corresponds to \cref{tab:xev}\textbf{(3)(a)}. Formally, we optimize:
+\begin{gather}
+\mathcal{L} = \mathbb{E}_{t,\x,\e} \Big\|  \v_\theta(\z_t, t) - \v \Big\|^2,
+\label{eq:objective}
+ \\
+\text{where:}\quad \v_\theta(\z_t, t) =  (\net_\theta(\z_t, t)-\bm{z}_t) / (1 - t).
+\nonumber
+\end{gather}
+Alg.\,\ref{alg:code_train} shows the pseudo-code of a training step, and Alg.\,\ref{alg:code_sample} is that of a sampling step (Euler solver; can be extended to Heun or other solvers).
+For brevity, class conditioning and CFG \cite{ho2022classifier} are omitted, but both follow standard practice.
+To prevent zero division in $1{/}(1{-}t)$ , we clip its denominator (by default, 0.05) whenever computing this division.
+
+\subsection{``Just Advanced'' Transformers}
+
+The strength of a general-purpose Transformer \cite{vaswani2017attention} is partly in that, when its design is decoupled from the specific task, it can benefit from architectural advances developed in other applications. This property underpins the advantage of formulating diffusion with a task-agnostic Transformer.
+
+
+Following \cite{yao2025reconstruction},
+we incorporate popular general-purpose improvements\footnotemark: SwiGLU \cite{shazeer2020glu}, RMSNorm \cite{zhang2019root}, RoPE \cite{su2024roformer}, qk-norm \cite{henry2020query}, all of which were originally developed for language models. 
+We also explore in-context class conditioning: but unlike original ViT \cite{Dosovitskiy2021} that appends one class token to the sequence, we appends multiple such tokens (by default, 32; see appendix), following \cite{li2024autoregressive}.
+\cref{tab:jat} reports the effects of these components. 
+
+\footnotetext{Our baselines in previous sections all use SwiGLU\,+\,RMSNorm. Removing them has a slight degradation: FID goes from 7.48 to 7.89.}

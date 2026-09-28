@@ -14,12 +14,15 @@ record contains the SHA-256 of the arXiv archive used for import; the archive ca
 be obtained from arXiv for comparison. Paper and figure rights
 are separate from the LeafOver code license. This project is not endorsed by the
 paper authors. Embedded template files retain their own notices.
+The GitHub Pages showcase includes an optimized derivative of the JiT PDF, figure
+previews, and selected example sources under the same paper attribution.
 
 ## PDF.js
 
 `tools/pdfjs/` — Copyright 2023 Mozilla Foundation, Apache License 2.0.
 The upstream license notice is retained in each bundled JavaScript file.
-Full license is bundled in `tools/pdfjs/LICENSE`.
+Full license is bundled in `tools/pdfjs/LICENSE`; the Pages copy is in
+`docs/assets/LICENSE`.
 
 ## xterm.js
 

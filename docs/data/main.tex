@@ -1,0 +1,212 @@
+% CVPR 2026 Paper Template; see https://github.com/cvpr-org/author-kit
+
+\PassOptionsToPackage{table}{xcolor}
+\documentclass[10pt,twocolumn,letterpaper]{article}
+
+%%%%%%%%% PAPER TYPE  - PLEASE UPDATE FOR FINAL VERSION
+% \usepackage{cvpr}              % To produce the CAMERA-READY version
+\usepackage[pagenumbers]{configs/cvpr}      % To produce the REVIEW version
+% \usepackage[pagenumbers]{cvpr} % To force page numbers, e.g. for an arXiv version
+
+% Import additional packages in the preamble file, before hyperref
+\input{configs/preamble}
+
+% Optional math commands from https://github.com/goodfeli/dlbook_notation.
+\input{configs/math_commands.tex}
+
+
+\usepackage{xcolor}
+\definecolor{citecolor}{HTML}{0071BC}
+\definecolor{linkcolor}{HTML}{ED1C24}
+\usepackage[pagebackref=false, breaklinks=true, letterpaper=true, colorlinks, bookmarks=false,  citecolor=citecolor, linkcolor=linkcolor, urlcolor=gray]{hyperref}
+\usepackage{orcidlink}
+\usepackage{natbib}
+\usepackage{amsfonts}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{tabularx}
+\usepackage{color, colortbl}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{footnote}
+\usepackage{tabularx}
+\usepackage{float}
+\usepackage{lipsum}
+\usepackage{multicol}
+\usepackage{tabularx,booktabs}
+\usepackage{etoolbox}
+\usepackage{algorithm}
+\usepackage{listings}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage{adjustbox}
+\usepackage{textpos}  % for superposing a text box
+\usepackage{bm} % bold italic for math symbols, incl. Greek
+\usepackage{pgffor}  % for \foreach loops
+
+
+\usepackage[british,english,american]{babel}
+
+%----------------------------------------------------------
+% this is for adding footnote after algorithm
+\usepackage{etoolbox}
+\makeatletter
+\AfterEndEnvironment{algorithm}{\let\@algcomment\relax}
+\AtEndEnvironment{algorithm}{\kern2pt\hrule\relax\vskip3pt\@algcomment}
+\let\@algcomment\relax
+\newcommand\algcomment[1]{\def\@algcomment{\footnotesize#1}}
+\renewcommand\fs@ruled{\def\@fs@cfont{\bfseries}\let\@fs@capt\floatc@ruled
+  \def\@fs@pre{\hrule height.8pt depth0pt \kern2pt}%
+  \def\@fs@post{}%
+  \def\@fs@mid{\kern2pt\hrule\kern2pt}%
+  \let\@fs@iftopcapt\iftrue}
+\makeatother
+%----------------------------------------------------------
+
+%----------------------------------------------------------
+% define pseudo-code style
+\lstset{
+  backgroundcolor=\color{white},
+  basicstyle=\fontsize{8.5pt}{8.5pt}\ttfamily\selectfont,
+  columns=fullflexible,
+  breaklines=true,
+  captionpos=b,
+  commentstyle=\fontsize{8.5pt}{8.5pt}\color{codeblue},
+  keywordstyle=\fontsize{8.5pt}{8.5pt}\color{codekw},
+}
+
+\newcommand{\name} {JiT}
+\definecolor{deemph}{gray}{0.6}
+\newcommand{\gc}[1]{\textcolor{deemph}{#1}}
+
+\definecolor{LightCyan}{rgb}{0.88,1,1}
+\definecolor{LightRed}{rgb}{1,0.5,0.5}
+\definecolor{LightYellow}{rgb}{1,1,0.88}
+\definecolor{Grey}{rgb}{0.75,0.75,0.75}
+\definecolor{DarkGrey}{rgb}{0.55,0.55,0.55}
+\definecolor{DarkGreen}{rgb}{0,0.65,0}
+
+%%%%%%%%% PAPER ID  - PLEASE UPDATE
+\def\paperID{xxxx} % *** Enter the Paper ID here
+\def\confName{xxxx}
+\def\confYear{xxxx}
+
+\newlength\savewidth\newcommand\shline{\noalign{\global\savewidth\arrayrulewidth
+  \global\arrayrulewidth 1pt}\hline\noalign{\global\arrayrulewidth\savewidth}}
+
+\newcommand\midline{\noalign{\global\savewidth\arrayrulewidth
+  \global\arrayrulewidth 0.5pt}\hline\noalign{\global\arrayrulewidth\savewidth}}
+
+\newcommand{\tablestyle}[2]{\setlength{\tabcolsep}{#1}\renewcommand{\arraystretch}{#2}\centering\footnotesize}
+\definecolor{baselinecolor}{gray}{.9}
+\newcommand{\baseline}[1]{\cellcolor{baselinecolor}{#1}}
+
+\newcolumntype{x}[1]{>{\centering\arraybackslash}p{#1pt}}
+\newcolumntype{y}[1]{>{\raggedright\arraybackslash}p{#1pt}}
+\newcolumntype{z}[1]{>{\raggedleft\arraybackslash}p{#1pt}}
+
+\usepackage{xspace}
+\makeatletter
+\DeclareRobustCommand\onedot{\futurelet\@let@token\@onedot}
+\def\@onedot{\ifx\@let@token.\else.\null\fi\xspace}
+\def\eg{\emph{e.g}\onedot} \def\Eg{\emph{E.g}\onedot}
+\def\ie{\emph{i.e}\onedot} \def\Ie{\emph{I.e}\onedot}
+\def\cf{\emph{cf}\onedot} \def\Cf{\emph{Cf}\onedot}
+\def\etc{\emph{etc}\onedot} \def\vs{\emph{vs}\onedot}
+\def\wrt{w.r.t\onedot} \def\dof{d.o.f\onedot}
+\def\iid{i.i.d\onedot} \def\wolog{w.l.o.g\onedot}
+\def\etal{\emph{et al}\onedot}
+\makeatother
+
+% \newcommand{\red}[1]{\textcolor{red}{ #1}}
+\newcommand{\grey}[1]{\textcolor{DarkGrey}{ #1}}
+
+\colorlet{darkgreen}{green!65!black}
+\colorlet{darkblue}{blue!75!black}
+\colorlet{darkred}{red!80!black}
+\definecolor{lightblue}{HTML}{0071bc}
+\definecolor{lightgreen}{HTML}{39b54a}
+
+\newcommand{\km}[1]{{\color{orange}[km: #1]}}
+\newcommand{\tl}[1]{{\color{blue}[tl: #1]}}
+
+\newcommand{\x}{\bm{x}}
+\newcommand{\e}{\bm{\epsilon}}
+\renewcommand{\v}{\bm{v}}
+\newcommand{\z}{\bm{z}}
+\newcommand{\net}{\text{\texttt{net}}}
+
+
+% \renewcommand{\paragraph}[1]{\vspace{0.0em}\noindent\textbf{#1}}
+\renewcommand{\paragraph}[1]{\vspace{1.25mm}\noindent\textbf{#1}}
+
+
+\newcommand{\app}{\raise.17ex\hbox{$\scriptstyle\sim$}}
+\newcommand{\fix}{\marginpar{FIX}}
+\newcommand{\new}{\marginpar{NEW}}
+\newcommand{\authorskip}{\hspace{4mm}}
+
+\newenvironment{Itemize}%
+{
+\setlength{\leftmargini}{9pt}%
+\begin{itemize}%
+\setlength{\itemsep}{0pt}%
+\setlength{\topsep}{0pt}%
+\setlength{\partopsep}{0pt}%
+\setlength{\parskip}{0pt}}%
+{\end{itemize}}
+
+\newcommand{\hhs}{\hspace{-0.001em}}
+\newcommand{\vvs}{\vspace{-.1em}}
+
+\graphicspath{{./figures/}}
+
+
+\begin{document}
+
+\title{
+Back to Basics: Let Denoising Generative Models Denoise
+}
+
+\author{
+Tianhong Li \qquad Kaiming He \vspace{.5em} \\
+MIT
+\vspace{1.em}
+}
+
+
+\maketitle
+
+\begin{abstract}
+\input{abstract}
+\end{abstract}
+
+\input{intro}
+
+\input{related}
+
+\input{analysis}
+
+\input{method}
+
+\input{experiments}
+
+\input{discussion}
+
+\appendix
+\input{appendix}
+
+{\small
+\bibliographystyle{configs/ieeenat_fullname}
+\bibliography{jit.bib}
+}
+
+\clearpage
+
+\input{visual}
+\end{document}

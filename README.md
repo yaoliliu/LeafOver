@@ -40,6 +40,13 @@ commands; keep it local, or place it behind authenticated access. Remote binding
 disables the terminal unless explicitly enabled through the existing
 `PAPER_PREVIEW_TERMINAL_ALLOW_REMOTE=1` option.
 
+## Online showcase
+
+[Explore the GitHub Pages showcase](https://yaoliliu.github.io/LeafOver/). It
+uses the real JiT TeX source and an optimized copy of all 18 PDF pages. Browser
+edits stay in that browser. Compilation, project-file writes, compiler installation
+and terminal commands require the locally installed app.
+
 ## Features
 
 - Source editor, multiple tabs, autosave and conflict detection
@@ -57,6 +64,7 @@ install.sh             Checks dependencies, installs missing TeX tools and start
 tools/                Server, interface and bundled browser libraries
 tests/                Backend and interaction regression checks
 examples/jit/         JiT example project, separate from application code
+docs/                 Static GitHub Pages showcase
 ```
 
 ## Development

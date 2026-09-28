@@ -1,0 +1,172 @@
+{
+  "title": "Back to Basics: Let Denoising Generative Models Denoise",
+  "outline": [
+    {
+      "title": "Introduction",
+      "number": "1",
+      "level": 1,
+      "file": "intro.tex",
+      "line": 1
+    },
+    {
+      "title": "Related Work",
+      "number": "2",
+      "level": 1,
+      "file": "related.tex",
+      "line": 2
+    },
+    {
+      "title": "On Prediction Outputs of Diffusion Models",
+      "number": "3",
+      "level": 1,
+      "file": "analysis.tex",
+      "line": 54
+    },
+    {
+      "title": "Background: Diffusion and Flows",
+      "number": "3.1",
+      "level": 2,
+      "file": "analysis.tex",
+      "line": 60
+    },
+    {
+      "title": "Prediction Space and Loss Space",
+      "number": "3.2",
+      "level": 2,
+      "file": "analysis.tex",
+      "line": 94
+    },
+    {
+      "title": "Toy Experiment",
+      "number": "3.3",
+      "level": 2,
+      "file": "analysis.tex",
+      "line": 193
+    },
+    {
+      "title": "``Just Image Transformers'' for Diffusion",
+      "number": "4",
+      "level": 1,
+      "file": "method.tex",
+      "line": 15
+    },
+    {
+      "title": "Just Image Transformers",
+      "number": "4.1",
+      "level": 2,
+      "file": "method.tex",
+      "line": 20
+    },
+    {
+      "title": "What to Predict by the Network?",
+      "number": "4.2",
+      "level": 2,
+      "file": "method.tex",
+      "line": 49
+    },
+    {
+      "title": "Our Algorithm",
+      "number": "4.3",
+      "level": 2,
+      "file": "method.tex",
+      "line": 200
+    },
+    {
+      "title": "``Just Advanced'' Transformers",
+      "number": "4.4",
+      "level": 2,
+      "file": "method.tex",
+      "line": 214
+    },
+    {
+      "title": "Comparisons",
+      "number": "5",
+      "level": 1,
+      "file": "experiments.tex",
+      "line": 1
+    },
+    {
+      "title": "Discussion and Conclusion",
+      "number": "6",
+      "level": 1,
+      "file": "discussion.tex",
+      "line": 1
+    },
+    {
+      "title": "Implementation Details",
+      "number": "A",
+      "level": 1,
+      "file": "appendix.tex",
+      "line": 1
+    },
+    {
+      "title": "Additional Experiments",
+      "number": "B",
+      "level": 1,
+      "file": "appendix.tex",
+      "line": 100
+    },
+    {
+      "title": "Training Loss and Denoised Images",
+      "number": "B.1",
+      "level": 2,
+      "file": "appendix.tex",
+      "line": 149
+    },
+    {
+      "title": "Pre-conditioner",
+      "number": "B.2",
+      "level": 2,
+      "file": "appendix.tex",
+      "line": 161
+    },
+    {
+      "title": "Exploration: Classification Loss",
+      "number": "B.3",
+      "level": 2,
+      "file": "appendix.tex",
+      "line": 232
+    },
+    {
+      "title": "Cross-resolution Generation",
+      "number": "B.4",
+      "level": 2,
+      "file": "appendix.tex",
+      "line": 259
+    },
+    {
+      "title": "Additional Metrics",
+      "number": "B.5",
+      "level": 2,
+      "file": "appendix.tex",
+      "line": 295
+    },
+    {
+      "title": "Qualitative Results",
+      "number": "C",
+      "level": 1,
+      "file": "appendix.tex",
+      "line": 320
+    }
+  ],
+  "files": [
+    "main.tex",
+    "abstract.tex",
+    "algorithm.sty",
+    "analysis.tex",
+    "appendix.tex",
+    "code.tex",
+    "discussion.tex",
+    "experiments.tex",
+    "intro.tex",
+    "jit.bib",
+    "method.tex",
+    "related.tex",
+    "visual.tex",
+    "configs/cvpr.sty",
+    "configs/fancyhdr.sty",
+    "configs/math_commands.tex",
+    "configs/natbib.sty",
+    "configs/preamble.tex"
+  ]
+}
