@@ -1,0 +1,52 @@
+
+\section{Related Work}
+
+\paragraph{Diffusion Models and Their Predictions.} The pioneering work on diffusion models \cite{SohlDickstein2015} proposed to learn a reversed stochastic process, in which the network predicts the parameters of a normal distribution (\eg, mean and standard deviation). Five years after its introduction, this method was revitalized and popularized by Denoising Diffusion Probabilistic Models (DDPM) \cite{Ho2020}: a \textit{pivotal} discovery was to make noise the prediction target (\ie, $\e$-prediction). 
+
+The relationships among different prediction targets were then investigated in \cite{salimans2022progressive} (originally in the context of model distillation), where the notion of $\v$-prediction was also introduced. Their work focused on the weighting effects introduced by reparameterization.
+
+Meanwhile, EDM \cite{Karras2022edm} reformulated the diffusion problem around a \textit{denoiser function}, which constitutes a major milestone in the evolution of diffusion models. However, EDM adopted a \textit{pre-conditioned} formulation, where the direct output of the network is \textit{not} the denoised image. While this formulation is preferable in low-dimensional scenarios, it still inherently requires the network to output a quantity that mixes data and noise (more comparisons in appendix).
+
+Flow Matching models \cite{lipman2022flow,liu2022flow,albergo2023building} can be interpreted as a form of $\v$-prediction \cite{salimans2022progressive} within the diffusion modeling framework. 
+Unlike pure noise, $\v$ is a combination of data and noise.
+The connections between flow-based models and previous diffusion models have been established \cite{esser2024scaling}.
+Today, diffusion models and their flow-based counterparts are often studied under a unified framework.
+
+\paragraph{Denoising Models.} Over the past decades, the concept of denoising has been closely related to representation learning.
+Classical methods, exemplified by BM3D \cite{dabov2007image} and others \cite{portilla2003image,elad2006image,zoran2011learning}, leveraged the assumptions of sparsity and low dimensionality to perform image denoising.
+
+Denoising Autoencoders (DAEs) \cite{vincent2008extracting,vincent2010stacked} were developed as an unsupervised representation learning method, using denoising as their training objective. They leveraged the manifold assumption \cite{Chapelle2006SemiSupervised} (\cref{fig:teaser}) to learn meaningful representations that approximate the low-dimensional data manifold. DAEs can be viewed as a form of Denoising Score Matching \cite{vincent2011connection}, which in turn is closely related to modern score-based diffusion models \cite{Song2019,Song2021}. Nevertheless, while it is natural for DAEs to predict clean data for manifold learning, in score matching, predicting the score function effectively amounts to predicting the noise (up to a scaling factor), \ie, $\e$-prediction.
+
+\paragraph{Manifold Learning.} Manifold learning has been a classical field \cite{roweis2000nonlinear,tenenbaum2000global} focused on learning low-dimensional, nonlinear representations from observed data. In general, manifold learning methods leverage \textit{bottleneck} structures \cite{tishby2000information,rifai2011contractive,makhzani2013k,alemi2016deep} that encourage only useful information to pass through. Several studies have explored the connections between manifold learning and generative models \cite{loaiza2024deep,humayun2024secrets,chen2024deconstructing}. Latent Diffusion Models (LDMs) \cite{Rombach2022} can be viewed as manifold learning in the first stage via an autoencoder, followed by diffusion in the second stage.
+
+\paragraph{Pixel-space Diffusion.} 
+While latent diffusion \cite{Rombach2022} has become the default choice in the field today, the development of diffusion models originally began with pixel-space formulations \cite{Song2019,Ho2020,nichol2021improved,dhariwal2021diffusion}.
+Early pixel-space diffusion models were typically based on dense convolutional networks, most often a U-Net \cite{ronneberger2015u}. These models often use over-complete channel representations (\eg, transforming $H{\times}W{\times}3$ into $H{\times}W{\times}128$ in the first layer), accompanied by long-range skip connections. While these models work well for $\epsilon$- and $v$-prediction, their dense convolutional structures are typically computationally expensive.
+Applying these convolutional models to high-resolution images does not lead to catastrophic degradation, and as such, research in this direction has commonly focused on noise schedules and/or weighting schemes \cite{chen2023importance,hoogeboom2023simple,hoogeboom2024simpler,Kingma2023} to further improve generation quality.
+
+In contrast, applying a Vision Transformer (ViT) \cite{Dosovitskiy2021} directly to pixels presents a more challenging task. \mbox{\textit{Standard}} ViT architectures adopt an aggressive patch size (\eg, 16$\times$16 pixels), resulting in a high-dimensional token space that can be comparable to, or larger than, the Transformer's hidden dimension. 
+SiD2 \cite{hoogeboom2024simpler} and PixelFlow \cite{chen2025pixelflow} adopt hierarchical designs that start from smaller patches; however, these models are ``FLOP-heavy'' \cite{hoogeboom2024simpler} and lose the inherent generality and simplicity of standard Transformers. \mbox{PixNerd} \cite{wang2025pixnerd} adopts a NeRF head \cite{mildenhall2021nerf} that integrates information from the Transformer output, noisy input, and spatial coordinates, with training further assisted by representation alignment \cite{repa}.
+
+Even with these special-purpose designs, the architectures in these works typically start from the ``L'' (Large) or ``XL'' size.
+In fact, a latest work \cite{yao2025reconstruction} suggests that a large hidden size appears necessary for high dimensionality.
+
+\paragraph{High-dimensional Diffusion.} 
+When using ViT-style architectures, modern diffusion models are still challenged by high-dimensional input spaces, whether in pixels or latents.
+In the literature \cite{chen2024deconstructing,yao2025reconstruction,shi2025latent}, it has been \textit{repeatedly} reported that ViT-style diffusion models degrade rapidly and \textit{catastrophically} when the per-token dimensionality increases, regardless of the use of pixels or latents.
+
+Concurrently with our work, a line of research 
+\cite{zheng2025diffusion,lei2025advancing,shi2025latent} resorts to \textit{self-supervised pre-training} to address high-dimensional diffusion.
+In contrast to these efforts, we show that high-dimensional diffusion is achievable \textit{without} any pre-training, and using \textit{just} Transformers.
+
+\paragraph{$\x$-prediction.} 
+The formulation of $\x$-prediction is natural and not new; it can be traced back at least to the original DDPM \cite{Ho2020} (see their code \cite{ho2020diffusion_code}). However, DDPM observed that $\e$-prediction was substantially better, which later became the go-to solution.
+In later works (\eg, \cite{hoogeboom2024simpler}), although the analysis was sometimes preferably conducted in the $\x$-space, the actual prediction was often made in other spaces, likely for legacy reasons.
+
+When it comes to the image restoration application addressed by diffusion \cite{delbracio2023inversion,xie2023diffusion,milanfar2025denoising}, it is natural for the network to predict the clean data, as this is the ultimate goal of image restoration. 
+Concurrent with our work, \cite{hafner2025training} also advocates the use of $\x$-prediction, for generative world models that are conditional on previous frames.
+
+Our work does not aim to reinvent this fundamental concept; rather, we aim to draw attention to a largely overlooked yet critical issue in the context of high-dimensional data with underlying low-dimensional manifolds.
+
+
+
+

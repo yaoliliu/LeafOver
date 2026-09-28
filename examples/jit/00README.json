@@ -1,0 +1,3385 @@
+{
+   "sources" : [
+      {
+         "usage" : "toplevel",
+         "filename" : "main.tex"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "configs/fancyhdr.sty"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "configs/ieeenat_fullname.bst"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "configs/natbib.sty"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls012/000012.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls012/001012.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls012/002012.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls012/003012.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls012/004012.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls012/005012.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls012/006012.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls012/007012.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls012/008012.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls012/009012.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls012/010012.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls012/011012.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls012/012012.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls012/013012.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls012/014012.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls012/015012.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls012/016012.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls012/017012.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls012/018012.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls012/019012.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls012/020012.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls014/000014.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls014/001014.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls014/002014.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls014/003014.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls014/004014.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls014/005014.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls014/006014.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls014/007014.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls014/008014.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls014/009014.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls014/010014.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls014/011014.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls014/012014.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls014/013014.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls014/014014.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls014/015014.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls014/016014.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls014/017014.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls014/018014.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls014/019014.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls014/020014.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls042/000042.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls042/001042.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls042/002042.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls042/003042.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls042/004042.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls042/005042.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls042/006042.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls042/007042.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls042/008042.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls042/009042.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls042/010042.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls042/011042.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls042/012042.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls042/013042.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls042/014042.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls042/015042.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls042/016042.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls042/017042.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls042/018042.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls042/019042.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls042/020042.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls081/000081.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls081/001081.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls081/002081.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls081/003081.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls081/004081.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls081/005081.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls081/006081.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls081/007081.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls081/008081.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls081/009081.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls081/010081.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls081/011081.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls081/012081.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls081/013081.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls081/014081.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls081/015081.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls081/016081.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls081/017081.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls081/018081.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls081/019081.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls081/020081.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls107/000107.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls107/001107.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls107/002107.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls107/003107.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls107/004107.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls107/005107.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls107/006107.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls107/007107.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls107/008107.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls107/009107.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls107/010107.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls107/011107.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls107/012107.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls107/013107.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls107/014107.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls107/015107.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls107/016107.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls107/017107.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls107/018107.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls107/019107.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls107/020107.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls108/000108.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls108/001108.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls108/002108.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls108/003108.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls108/004108.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls108/005108.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls108/006108.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls108/007108.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls108/008108.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls108/009108.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls108/010108.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls108/011108.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls108/012108.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls108/013108.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls108/014108.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls108/015108.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls108/016108.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls108/017108.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls108/018108.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls108/019108.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls108/020108.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls110/000110.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls110/001110.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls110/002110.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls110/003110.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls110/004110.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls110/005110.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls110/006110.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls110/007110.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls110/008110.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls110/009110.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls110/010110.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls110/011110.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls110/012110.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls110/013110.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls110/014110.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls110/015110.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls110/016110.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls110/017110.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls110/018110.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls110/019110.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls110/020110.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls117/000117.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls117/001117.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls117/002117.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls117/003117.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls117/004117.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls117/005117.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls117/006117.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls117/007117.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls117/008117.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls117/009117.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls117/010117.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls117/011117.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls117/012117.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls117/013117.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls117/014117.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls117/015117.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls117/016117.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls117/017117.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls117/018117.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls117/019117.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls117/020117.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls130/000130.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls130/001130.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls130/002130.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls130/003130.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls130/004130.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls130/005130.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls130/006130.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls130/007130.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls130/008130.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls130/009130.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls130/010130.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls130/011130.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls130/012130.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls130/013130.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls130/014130.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls130/015130.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls130/016130.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls130/017130.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls130/018130.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls130/019130.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls130/020130.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls279/000279.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls279/001279.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls279/002279.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls279/003279.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls279/004279.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls279/005279.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls279/006279.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls279/007279.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls279/008279.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls279/009279.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls279/010279.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls279/011279.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls279/012279.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls279/013279.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls279/014279.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls279/015279.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls279/016279.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls279/017279.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls279/018279.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls279/019279.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls279/020279.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls288/000288.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls288/001288.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls288/002288.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls288/003288.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls288/004288.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls288/005288.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls288/006288.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls288/007288.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls288/008288.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls288/009288.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls288/010288.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls288/011288.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls288/012288.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls288/013288.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls288/014288.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls288/015288.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls288/016288.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls288/017288.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls288/018288.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls288/019288.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls288/020288.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls309/000309.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls309/001309.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls309/002309.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls309/003309.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls309/004309.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls309/005309.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls309/006309.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls309/007309.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls309/008309.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls309/009309.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls309/010309.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls309/011309.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls309/012309.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls309/013309.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls309/014309.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls309/015309.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls309/016309.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls309/017309.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls309/018309.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls309/019309.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls309/020309.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls349/000349.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls349/001349.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls349/002349.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls349/003349.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls349/004349.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls349/005349.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls349/006349.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls349/007349.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls349/008349.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls349/009349.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls349/010349.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls349/011349.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls349/012349.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls349/013349.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls349/014349.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls349/015349.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls349/016349.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls349/017349.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls349/018349.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls349/019349.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls349/020349.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls397/000397.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls397/001397.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls397/002397.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls397/003397.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls397/004397.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls397/005397.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls397/006397.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls397/007397.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls397/008397.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls397/009397.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls397/010397.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls397/011397.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls397/012397.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls397/013397.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls397/014397.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls397/015397.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls397/016397.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls397/017397.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls397/018397.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls397/019397.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls397/020397.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls425/000425.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls425/001425.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls425/002425.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls425/003425.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls425/004425.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls425/005425.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls425/006425.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls425/007425.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls425/008425.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls425/009425.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls425/010425.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls425/011425.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls425/012425.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls425/013425.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls425/014425.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls425/015425.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls425/016425.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls425/017425.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls425/018425.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls425/019425.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls425/020425.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls448/000448.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls448/001448.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls448/002448.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls448/003448.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls448/004448.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls448/005448.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls448/006448.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls448/007448.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls448/008448.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls448/009448.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls448/010448.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls448/011448.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls448/012448.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls448/013448.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls448/014448.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls448/015448.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls448/016448.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls448/017448.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls448/018448.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls448/019448.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls448/020448.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls453/000453.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls453/001453.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls453/002453.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls453/003453.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls453/004453.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls453/005453.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls453/006453.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls453/007453.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls453/008453.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls453/009453.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls453/010453.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls453/011453.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls453/012453.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls453/013453.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls453/014453.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls453/015453.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls453/016453.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls453/017453.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls453/018453.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls453/019453.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls453/020453.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls458/000458.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls458/001458.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls458/002458.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls458/003458.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls458/004458.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls458/005458.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls458/006458.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls458/007458.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls458/008458.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls458/009458.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls458/010458.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls458/011458.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls458/012458.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls458/013458.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls458/014458.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls458/015458.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls458/016458.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls458/017458.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls458/018458.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls458/019458.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls458/020458.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls495/000495.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls495/001495.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls495/002495.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls495/003495.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls495/004495.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls495/005495.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls495/006495.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls495/007495.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls495/008495.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls495/009495.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls495/010495.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls495/011495.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls495/012495.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls495/013495.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls495/014495.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls495/015495.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls495/016495.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls495/017495.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls495/018495.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls495/019495.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls495/020495.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls500/000500.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls500/001500.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls500/002500.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls500/003500.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls500/004500.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls500/005500.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls500/006500.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls500/007500.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls500/008500.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls500/009500.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls500/010500.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls500/011500.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls500/012500.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls500/013500.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls500/014500.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls500/015500.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls500/016500.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls500/017500.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls500/018500.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls500/019500.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls500/020500.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls658/000658.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls658/001658.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls658/002658.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls658/003658.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls658/004658.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls658/005658.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls658/006658.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls658/007658.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls658/008658.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls658/009658.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls658/010658.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls658/011658.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls658/012658.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls658/013658.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls658/014658.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls658/015658.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls658/016658.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls658/017658.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls658/018658.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls658/019658.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls658/020658.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls661/000661.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls661/001661.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls661/002661.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls661/003661.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls661/004661.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls661/005661.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls661/006661.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls661/007661.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls661/008661.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls661/009661.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls661/010661.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls661/011661.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls661/012661.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls661/013661.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls661/014661.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls661/015661.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls661/016661.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls661/017661.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls661/018661.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls661/019661.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls661/020661.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls718/000718.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls718/001718.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls718/002718.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls718/003718.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls718/004718.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls718/005718.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls718/006718.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls718/007718.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls718/008718.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls718/009718.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls718/010718.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls718/011718.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls718/012718.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls718/013718.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls718/014718.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls718/015718.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls718/016718.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls718/017718.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls718/018718.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls718/019718.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls718/020718.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls724/000724.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls724/001724.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls724/002724.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls724/003724.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls724/004724.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls724/005724.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls724/006724.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls724/007724.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls724/008724.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls724/009724.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls724/010724.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls724/011724.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls724/012724.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls724/013724.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls724/014724.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls724/015724.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls724/016724.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls724/017724.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls724/018724.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls724/019724.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls724/020724.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls725/000725.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls725/001725.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls725/002725.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls725/003725.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls725/004725.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls725/005725.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls725/006725.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls725/007725.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls725/008725.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls725/009725.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls725/010725.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls725/011725.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls725/012725.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls725/013725.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls725/014725.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls725/015725.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls725/016725.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls725/017725.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls725/018725.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls725/019725.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls725/020725.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls757/000757.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls757/001757.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls757/002757.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls757/003757.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls757/004757.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls757/005757.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls757/006757.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls757/007757.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls757/008757.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls757/009757.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls757/010757.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls757/011757.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls757/012757.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls757/013757.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls757/014757.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls757/015757.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls757/016757.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls757/017757.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls757/018757.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls757/019757.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls757/020757.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls779/000779.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls779/001779.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls779/002779.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls779/003779.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls779/004779.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls779/005779.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls779/006779.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls779/007779.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls779/008779.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls779/009779.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls779/010779.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls779/011779.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls779/012779.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls779/013779.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls779/014779.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls779/015779.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls779/016779.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls779/017779.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls779/018779.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls779/019779.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls779/020779.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls780/000780.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls780/001780.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls780/002780.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls780/003780.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls780/004780.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls780/005780.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls780/006780.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls780/007780.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls780/008780.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls780/009780.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls780/010780.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls780/011780.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls780/012780.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls780/013780.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls780/014780.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls780/015780.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls780/016780.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls780/017780.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls780/018780.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls780/019780.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls780/020780.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls829/000829.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls829/001829.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls829/002829.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls829/003829.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls829/004829.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls829/005829.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls829/006829.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls829/007829.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls829/008829.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls829/009829.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls829/010829.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls829/011829.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls829/012829.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls829/013829.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls829/014829.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls829/015829.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls829/016829.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls829/017829.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls829/018829.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls829/019829.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls829/020829.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls853/000853.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls853/001853.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls853/002853.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls853/003853.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls853/004853.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls853/005853.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls853/006853.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls853/007853.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls853/008853.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls853/009853.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls853/010853.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls853/011853.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls853/012853.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls853/013853.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls853/014853.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls853/015853.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls853/016853.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls853/017853.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls853/018853.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls853/019853.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls853/020853.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls873/000873.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls873/001873.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls873/002873.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls873/003873.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls873/004873.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls873/005873.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls873/006873.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls873/007873.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls873/008873.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls873/009873.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls873/010873.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls873/011873.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls873/012873.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls873/013873.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls873/014873.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls873/015873.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls873/016873.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls873/017873.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls873/018873.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls873/019873.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls873/020873.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls900/000900.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls900/001900.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls900/002900.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls900/003900.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls900/004900.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls900/005900.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls900/006900.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls900/007900.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls900/008900.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls900/009900.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls900/010900.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls900/011900.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls900/012900.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls900/013900.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls900/014900.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls900/015900.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls900/016900.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls900/017900.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls900/018900.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls900/019900.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls900/020900.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls911/000911.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls911/001911.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls911/002911.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls911/003911.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls911/004911.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls911/005911.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls911/006911.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls911/007911.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls911/008911.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls911/009911.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls911/010911.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls911/011911.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls911/012911.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls911/013911.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls911/014911.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls911/015911.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls911/016911.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls911/017911.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls911/018911.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls911/019911.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls911/020911.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls913/000913.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls913/001913.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls913/002913.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls913/003913.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls913/004913.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls913/005913.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls913/006913.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls913/007913.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls913/008913.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls913/009913.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls913/010913.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls913/011913.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls913/012913.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls913/013913.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls913/014913.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls913/015913.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls913/016913.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls913/017913.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls913/018913.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls913/019913.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls913/020913.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls927/000927.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls927/001927.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls927/002927.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls927/003927.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls927/004927.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls927/005927.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls927/006927.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls927/007927.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls927/008927.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls927/009927.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls927/010927.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls927/011927.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls927/012927.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls927/013927.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls927/014927.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls927/015927.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls927/016927.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls927/017927.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls927/018927.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls927/019927.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls927/020927.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls930/000930.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls930/001930.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls930/002930.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls930/003930.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls930/004930.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls930/005930.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls930/006930.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls930/007930.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls930/008930.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls930/009930.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls930/010930.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls930/011930.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls930/012930.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls930/013930.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls930/014930.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls930/015930.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls930/016930.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls930/017930.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls930/018930.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls930/019930.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls930/020930.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls946/000946.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls946/001946.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls946/002946.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls946/003946.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls946/004946.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls946/005946.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls946/006946.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls946/007946.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls946/008946.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls946/009946.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls946/010946.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls946/011946.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls946/012946.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls946/013946.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls946/014946.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls946/015946.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls946/016946.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls946/017946.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls946/018946.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls946/019946.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls946/020946.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls947/000947.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls947/001947.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls947/002947.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls947/003947.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls947/004947.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls947/005947.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls947/006947.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls947/007947.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls947/008947.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls947/009947.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls947/010947.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls947/011947.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls947/012947.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls947/013947.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls947/014947.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls947/015947.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls947/016947.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls947/017947.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls947/018947.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls947/019947.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls947/020947.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls975/000975.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls975/001975.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls975/002975.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls975/003975.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls975/004975.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls975/005975.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls975/006975.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls975/007975.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls975/008975.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls975/009975.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls975/010975.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls975/011975.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls975/012975.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls975/013975.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls975/014975.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls975/015975.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls975/016975.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls975/017975.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls975/018975.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls975/019975.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls975/020975.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls989/000989.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls989/001989.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls989/002989.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls989/003989.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls989/004989.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls989/005989.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls989/006989.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls989/007989.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls989/008989.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls989/009989.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls989/010989.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls989/011989.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls989/012989.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls989/013989.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls989/014989.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls989/015989.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls989/016989.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls989/017989.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls989/018989.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls989/019989.jpg"
+      },
+      {
+         "usage" : "ignore",
+         "filename" : "samples256_cfg2.2_jpg/cls989/020989.jpg"
+      }
+   ],
+   "spec_version" : 1,
+   "texlive_version" : "2025",
+   "process" : {
+      "compiler" : "pdflatex"
+   }
+}

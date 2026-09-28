@@ -1,0 +1,53 @@
+\section{Introduction}
+\label{sec:intro}
+
+When diffusion generative models were first developed \cite{SohlDickstein2015,Song2019,Ho2020}, the core idea was supposed to be \mbox{\textit{denoising}}, \ie, \textit{predicting a clean image} from its corrupted version. 
+However, two significant milestones in the evolution of diffusion models turned out to deviate from the goal of directly predicting clean images. 
+First, predicting the noise itself (known as ``$\e$-prediction'') \cite{Ho2020} made a pivotal difference in generation quality and largely popularized these models. Later, diffusion models were connected to flow-based methods \cite{lipman2022flow,liu2022flow,albergo2023building} through predicting the flow velocity (``\mbox{$\v$-prediction}'' \cite{salimans2022progressive}), a quantity that combines clean data and noise.
+Today, diffusion models in practice commonly predict noise or a noised quantity (\eg, velocity).
+
+% ##################################################
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.8\linewidth]{figures/teaser-update}
+\vspace{-.5em}
+\caption{
+\textbf{The Manifold Assumption} \cite{Chapelle2006SemiSupervised}
+hypothesizes that natural images lie on a low-dimensional manifold within the high-dimensional pixel space.
+While a clean image $\x$ can be modeled as on-manifold, the noise $\e$ or flow velocity $\v$ (\eg, $\v = \x - \e$) is inherently off-manifold. Training a neural network to 
+predict a clean image (\ie, $\x$-prediction) is \textit{fundamentally different} from training it to predict noise or a noised quantity (\ie, $\e$/$\v$-prediction).
+}
+\label{fig:teaser}
+\vspace{-1em}
+\end{figure}
+% ##################################################
+
+Extensive studies \cite{salimans2022progressive,Karras2022edm,hoogeboom2023simple,esser2024scaling} have shown that predicting the clean image (``\mbox{$\x$-prediction}" \cite{salimans2022progressive}) is closely related to $\e$- and $\v$-prediction, provided that the \textit{weighting} of the prediction loss is reformulated accordingly (detailed in \cref{sec:analysis}).
+Owing to this relation, less attention has been paid to what the network should directly predict, implicitly assuming that the network is capable of performing the assigned task.
+
+However, the roles of clean images and a noised quantity (including the noise itself) are \textit{not} equal.
+In machine learning, it has long been hypothesized \cite{Chapelle2006SemiSupervised,carlsson2009topology} that
+\textit{``(high-dimensional) data lie (roughly) on a low-dimensional manifold''} (\cite[p.6]{Chapelle2006SemiSupervised}).
+Under this manifold assumption, while clean data can be modeled as lying on a low-dimensional manifold, a noised quantity is inherently distributed across the full high-dimensional space \cite{vincent2010stacked} (see \cref{fig:teaser}). \textit{Predicting clean data is fundamentally different from predicting noise or a noised quantity.}
+
+Consider a scenario where a low-dimensional manifold is embedded in a high-dimensional observation space.
+Predicting noise in this high-dimensional space requires \textit{high capacity}: the network needs to preserve all information about the noise.
+In contrast, a \textit{limited-capacity} network can still predict the clean data, as it only needs to retain the low-dimensional information while filtering out the noise.
+
+When a low-dimensional space (\eg, image latent \cite{Rombach2022}) is used, 
+the difficulty of predicting noise is alleviated, yet at the same time is \textit{hidden} rather than solved.
+When it comes to pixel or other high-dimensional spaces, existing diffusion models can still struggle to address the \textit{curse of dimensionality} \cite{Chapelle2006SemiSupervised}.
+The heavy reliance on a pre-trained latent space  prevents diffusion models from being self-contained.
+
+In pursuit of a self-contained principle, there has been strong focus on advancing diffusion modeling in the pixel space \cite{chen2023importance,hoogeboom2023simple,hoogeboom2024simpler,chen2025pixelflow,wang2025pixnerd}. 
+In general, these methods explicitly or implicitly avoid the information bottleneck in the networks, \eg, by using dense convolutions or smaller patches, increasing channels, or adding long skip connections. 
+We suggest that these designs may stem from the demand to predict high-dimensional noised quantities.
+
+In this paper, we return to first principles and let the neural network \textit{directly} predict the clean image. By doing so, we show that a \textit{plain} Vision Transformer (ViT) \cite{Dosovitskiy2021}, operating on large image patches consisting of raw pixels, can  be effective for diffusion modeling.
+Our approach is \textit{self-contained} and does not rely on any pre-training or auxiliary loss --- \textit{no latent tokenizer \cite{Rombach2022}, no adversarial loss \cite{goodfellow2014generative,Rombach2022}, no perceptual loss \cite{zhang2018unreasonable,Rombach2022} (thus no pre-trained classifier \cite{simonyan2014very}), and no representation alignment \cite{repa} (thus no self-supervised pre-training \cite{oquab2023dinov2})}. 
+Conceptually, our model is nothing more than ``Just image Transformers'', or \textbf{JiT}, as we call it, applied to diffusion.
+
+We conduct experiments on the ImageNet dataset \cite{deng2009imagenet} at resolutions of 256 and 512, using JiT models with patch sizes 16 and 32 respectively. 
+Even though the patches are very high-dimensional (hundreds or thousands), our models using $\x$-prediction can easily produce strong results, where $\e$- and $\v$-prediction fail catastrophically.  Further analysis shows that it is \mbox{unnecessary} for the network width to match or exceed the patch dimension; in fact, and surprisingly, a \textit{bottleneck} design can even be beneficial, echoing observations from classical manifold learning.
+
+Our effort marks a step toward a self-contained ``Diffusion\,+\,Transformer'' philosophy \cite{Peebles2023} on native data. Beyond computer vision, this philosophy is highly desirable in other domains involving natural data (\eg, proteins, molecules, or weather), where a tokenizer can be difficult to design. By minimizing domain-specific designs, we hope that the general ``Diffusion\,+\,Transformer'' paradigm originated from computer vision will find broader applicability.

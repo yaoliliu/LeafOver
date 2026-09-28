@@ -31,6 +31,14 @@ class ProjectSettingsTest(unittest.TestCase):
             "A nested title with a break")
         self.assertEqual(self.server.extract_title(r"\title{unfinished"), "")
 
+    def test_outline_follows_included_files_and_opens_their_sources(self):
+        (self.root / "intro.tex").write_text("\\section{Introduction}\n\\input{methods}\n")
+        (self.root / "methods.tex").write_text("\\subsection{Method}\n\\input{intro}\n")
+        (self.root / "main.tex").write_text("\\title{Nested paper}\n\\input{intro}\n")
+        outline = self.server.project_metadata()["outline"]
+        self.assertEqual([(item["title"], item["file"], item["line"]) for item in outline],
+                         [("Introduction", "intro.tex", 1), ("Method", "methods.tex", 1)])
+
     def test_custom_title_survives_reload_without_modifying_tex(self):
         self.server.save_project_settings({"main_file": "main.tex", "title": "My workspace"})
         self.server._project_settings["title"] = ""

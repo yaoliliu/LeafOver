@@ -1,0 +1,209 @@
+
+\definecolor{xcol}{RGB}{255,240,210}    % lighter apricot
+\definecolor{epscol}{RGB}{210,230,255}  % lighter blue
+\definecolor{vcol}{RGB}{210,245,210}    % lighter green
+
+\newcommand{\mathhl}[2]{
+  \tikz[baseline=(X.base)] \node[fill=#1, rounded corners=1pt, inner sep=1pt] (X)
+  {$\displaystyle #2$};
+}
+
+% convenience wrappers
+\newcommand{\hlx}[1]{\mathhl{xcol}{#1}}
+\newcommand{\hleps}[1]{\mathhl{epscol}{#1}}
+\newcommand{\hlv}[1]{\mathhl{vcol}{#1}}
+
+\begin{table*}[t]
+\vspace{-1em}
+\centering
+{
+\tablestyle{2.5pt}{1.2}
+\small
+\begin{tabular}{l l | x{90} | x{90} | x{90} } 
+& & \textbf{(a) $\x$-pred } & \textbf{(b) $\e$-pred} & \textbf{(c) $\v$-pred} \\
+ & & \makebox[5em]{ $\hlx{\x_\theta}:=\net_\theta(\z_t, t)$} & \makebox[5em]{$\hleps{\e_\theta}:=\net_\theta(\z_t, t)$} & \makebox[5em]{$\hlv{\v_\theta}:=\net_\theta(\z_t, t)$} \\
+\shline
+\textbf{~(1)~$\x$-loss:} & $\mathbb{E} \|\x_\theta - \x \|^2$ &
+$\hlx{\x_\theta}$ &
+$\x_\theta=(\bm{z}_t{-}(1{-}t)\hleps{\e_\theta}) / t$
+&
+$\x_\theta= (1{-}t)\hlv{\v_\theta}{+} \bm{z}_t$ \\
+\midline
+\textbf{~(2)~$\e$-loss:} &  $\mathbb{E}\|\hspace{1pt}\e_\theta\hspace{0.5pt} - \hspace{0.75pt}\e\hspace{1pt} \|^2$ &
+$\e_\theta=(\bm{z}_t{-} t\hlx{\x_\theta}) / (1 - t)$
+&
+$\hleps{\e_\theta}$ &
+$\e_\theta=\bm{z}_t{-} t\hlv{\v_\theta}$ \\
+\midline
+\textbf{~(3)~$\v$-loss:} & $\mathbb{E}\|\hspace{0.5pt}\v_\theta\hspace{0.25pt} - \hspace{0.25pt}\v\hspace{0.5pt} \|^2$ &
+$\v_\theta= (\hlx{\x_\theta}{-}\bm{z}_t) / (1 - t)$
+&
+$\v_\theta= ( \bm{z}_t{-} \hleps{\e_\theta} ) / t$ 
+&
+$\hlv{\v_\theta}$ \\
+\end{tabular}
+}
+\vspace{-.75em}
+\caption{
+\textbf{All possible combinations} of defining the loss and network prediction in $\x$, $\v$, or $\e$ spaces. The direct network outputs are highlighted in colors. For any off-diagonal entry where the network output space differs from the loss space, a transformation on the network output is applied.
+}
+\label{tab:xev}
+\vspace{-.75em}
+\end{table*}
+
+\section{On Prediction Outputs of Diffusion Models}
+\label{sec:analysis}
+
+Diffusion models can be formulated in the space of $\x$, $\e$, or $\v$. The choice of the space determines not only where the loss is defined, but also what the network predicts.
+Importantly, \textit{the loss space and the network output space need not be the same}. This choice can make critical differences.
+
+\subsection{Background: Diffusion and Flows}
+
+Diffusion models can be formulated from the perspective of ODEs \cite{chen2018neural,Song2021,lipman2022flow, song2020denoising}. We begin our formulation with the flow-based paradigm \cite{lipman2022flow,liu2022flow,albergo2023building}, \ie, in the $\v$-space, as a simpler starting point, and then discuss other spaces.
+
+Consider a data distribution $\x \sim p_\text{data}(\x)$ and a noise distribution $\e \sim p_\text{noise}(\e)$ (\eg, $\e\sim\mathcal{N}(0,\mathbf{I})$). During training, a noisy sample $\z_t$ is an interpolation: $\z_t\,=\,a_t\,\x\,+\,b_t\,\e$,
+where $a_t$ and $b_t$ are pre-defined noise schedules at time $t \in [0, 1]$. In this paper, we use a linear schedule \cite{lipman2022flow,liu2022flow,albergo2023building}\footnotemark: $a_t = t$ and $b_t = 1 - t$. This gives:
+\begin{equation}
+\z_t = t \, \x + (1 - t)\, \e \label{eq:z},
+\end{equation}
+which leads to $\z_t\sim p_\text{data}$ when $t{=}1$.
+We use the logit-normal distribution over $t$ \cite{esser2024scaling}, \ie, $\text{logit}(t) \sim \mathcal{N}(\mu,\sigma^2)$.
+
+\footnotetext{Our analysis in this paper is applicable to other schedules.}
+
+A flow velocity $\v$ is defined as the time-derivative of $\z$, that is, $\v_t = \z_t' = a'_t \x + b'_t \e$. Given \cref{eq:z}, we have:
+\begin{equation}
+\v = \x - \e.
+\label{eq:v}
+\end{equation}
+The flow-based methods \cite{lipman2022flow,liu2022flow,albergo2023building} minimize a loss function defined as:
+\begin{equation}
+\mathcal{L} = \mathbb{E}_{t,\x,\e} \|  \v_\theta(\z_t, t) - \v \|^2,
+\label{eq:loss_v}
+\end{equation}
+where $\v_\theta$ is a function parameterized by $\theta$. While $\v_\theta$ is often the \textit{direct} output of a network $\v_\theta\,=\,\net_\theta(\z_t, t)$ \cite{lipman2022flow,liu2022flow,albergo2023building}, it can also be a transform of it, as we will elaborate.
+
+Given the function $\v_\theta$, sampling is done by solving an ordinary differential equation (ODE) for $\z$ \cite{lipman2022flow,liu2022flow,albergo2023building}:
+\begin{equation}
+{{d\z_t} / {d t}} = \v_\theta(\z_t, t),
+\label{eq:ode}
+\end{equation}
+starting from $\z_0 \sim p_\text{noise}$ and ending at $t=1$. In practice, this ODE can be approximately solved using numerical solvers. By default, we use a 50-step Heun.
+
+
+\subsection{Prediction Space and Loss Space}
+
+\paragraph{Prediction Space.}
+The network's direct output can be defined in any space: $\v$, $\x$, or $\e$. Next, we discuss the resulting transformation. Note that in the context of this paper, we refer to it as ``$\x$, $\e$, $\v$-\textbf{prediction}'', \textit{only} when the network $\net_\theta$'s \textit{direct} output is strictly $\x$, $\e$, $\v$, respectively.
+
+Given three unknowns ($\x$, $\e$, $\v$) and one network output, we require two additional constraints to determine all three unknowns. The two constraints are given by \cref{eq:z} and (\ref{eq:v}).
+\textit{For example}, when we let the direct network output $\net_\theta$ be $\x$, we solve the following set of equations:
+\vspace{-3pt}
+\begin{equation}
+\left\{
+\begin{aligned}
+\x_\theta &= \net_\theta \\
+\z_t &= t \, \x_\theta + (1 - t)\, \e_\theta \\
+\v_\theta &= \x_\theta - \e_\theta
+\end{aligned}
+\right.
+\label{eq:set_x}
+\vspace{-3pt}
+\end{equation}
+Here, the notations $\x_\theta$, $\e_\theta$, and $\v_\theta$ suggest that they are all predictions dependent on $\theta$. Solving this equation set gives:
+$\e_\theta = (\z_t - t  \x_\theta) / (1 - t)$ and $\v_\theta = (\x_\theta - \z_t) / (1 - t)$, that is, both $\e_\theta$ and $\v_\theta$ can be computed from $\z_t$ and the network $\x_\theta$.
+These are summarized in \cref{tab:xev} in column \textbf{(a)}.
+
+Similarly, when we let the direct network output $\net_\theta$
+be $\e$ or $\v$, we obtain the other sets of equations
+(by replacing the first one in \cref{eq:set_x}). The transformations are summarized in \cref{tab:xev} in the columns of \textbf{(b)}, \textbf{(c)} for $\e$-, $\v$-prediction.
+This shows that when one quantity in $\{\x, \e, \v \}$ is predicted, the other two can be inferred. The derivations in many prior works (\eg, \cite{salimans2022progressive,esser2024scaling}) are special cases covered in \cref{tab:xev}.
+
+\paragraph{Loss Space.}
+While the loss is often defined in one reference space (\eg, $\v$-loss in \cref{eq:loss_v}), 
+conceptually, one can define it in any space. 
+It has been shown \cite{salimans2022progressive,esser2024scaling} that with a given reparameterization from one prediction space to another, the loss is effectively reweighted.
+
+\textit{For example}, consider the combination of $\x$\textbf{-prediction} and $\v$\textbf{-loss} in \cref{tab:xev}\textbf{(3)(a)}. We have
+$\v_\theta = (\x_\theta - \z_t)/(1 - t)$
+as the prediction and
+$\v = (\x - \z_t) / (1-t)$
+as the target. The $\v$-loss in \cref{eq:loss_v} becomes: 
+$
+\mathcal{L} = \mathbb{E} \|  \v_\theta(\z_t, t) - \v \|^2 = \mathbb{E} \frac{1}{(1-t)^2} \| \x_\theta(\z_t, t) - \x \|^2,
+$
+which is a \textit{reweighted} form of the $\x$-loss. A transformation like this one can be done for any prediction space and any loss space listed in \cref{tab:xev}. 
+
+Put together, consider the three \textit{unweighted} losses defined in $\{\x, \e, \v \}$, and the three forms of the network direct output, there are \textit{nine possible combinations} (\cref{tab:xev}).
+Each combination constitutes a valid formulation, and \textit{no} two among the nine cases are mathematically equivalent.
+
+\paragraph{Generator Space.}
+Regardless of the combination used, to perform generation at inference-time,
+we can always transform the network output to the $\v$-space (\cref{tab:xev}, row (3)) and solve the ODE in \cref{eq:ode} for sampling. As such, all nine combinations are legitimate generators.
+
+\begin{figure}[t]
+\vspace{-1em}
+\centering
+\tablestyle{1.5pt}{1.7}
+\begin{tabular}{@{}>{\centering\arraybackslash}m{0.10\linewidth}
+                >{\centering\arraybackslash}m{0.21\linewidth}
+                >{\centering\arraybackslash}m{0.21\linewidth}
+                >{\centering\arraybackslash}m{0.21\linewidth}
+                >{\centering\arraybackslash}m{0.21\linewidth}@{}}
+& {ground-truth} &
+  \textbf{$\x$-pred} &
+  \textbf{$\e$-pred} &
+  \textbf{$\v$-pred} \\[3pt]
+
+\textbf{\scriptsize $D{=}2$} &
+\includegraphics[width=\linewidth]{figures/toy/gt_HD2.png} &
+\includegraphics[width=\linewidth]{figures/toy/gen_HD2_x.png} &
+\includegraphics[width=\linewidth]{figures/toy/gen_HD2_eps.png} &
+\includegraphics[width=\linewidth]{figures/toy/gen_HD2_v.png} \\[8pt]
+
+\textbf{\scriptsize $D{=}8$} &
+\includegraphics[width=\linewidth]{figures/toy/gt_HD8.png} &
+\includegraphics[width=\linewidth]{figures/toy/gen_HD8_x.png} &
+\includegraphics[width=\linewidth]{figures/toy/gen_HD8_eps.png} &
+\includegraphics[width=\linewidth]{figures/toy/gen_HD8_v.png} \\[8pt]
+
+\textbf{\scriptsize $D{=}16$ } &
+\includegraphics[width=\linewidth]{figures/toy/gt_HD16.png} &
+\includegraphics[width=\linewidth]{figures/toy/gen_HD16_x.png} &
+\includegraphics[width=\linewidth]{figures/toy/gen_HD16_eps.png} &
+\includegraphics[width=\linewidth]{figures/toy/gen_HD16_v.png} \\[8pt]
+
+\textbf{\scriptsize $D{=}512$} &
+\includegraphics[width=\linewidth]{figures/toy/gt_HD512.png} &
+\includegraphics[width=\linewidth]{figures/toy/gen_HD512_x.png} &
+\includegraphics[width=\linewidth]{figures/toy/gen_HD512_eps.png} &
+\includegraphics[width=\linewidth]{figures/toy/gen_HD512_v.png} \\
+\end{tabular}
+\vspace{-1em}
+\caption{
+\textbf{Toy Experiment}: $d$-dimensional ($d=2$) underlying data is ``{buried}'' in a $D$-dimensional space, by a fixed, random, column-orthogonal projection matrix.
+In the $D$-dim space, we train a simple generative model ({5-layer ReLU MLP with 256-dim hidden units}). The projection matrix is {unknown} to the model, and we only use it for visualizing the output.
+In this toy experiment, \textit{with the observed dimension $D$ increasing, only \textbf{$\x$-prediction} can produce reasonable results.
+}
+}
+\vspace{-1em}
+\label{fig:toy}
+\end{figure}
+
+\subsection{Toy Experiment}
+
+According to the manifold assumption \cite{Chapelle2006SemiSupervised}, the data $\x$ tends to lie in a low-dimensional manifold 
+(\cref{fig:teaser}), while noise $\e$ and velocity $\v$ are off-manifold. Letting a network directly predict the clean data $\x$ should be more tractable. We verify this assumption in a toy experiment in this section.
+
+We consider the toy case of $d$-dimensional underlying data ``buried'' in an observed $D$-dimensional space ($d < D$). We synthesize this scenario using a projection matrix $P \in \mathbb{R}^{D \times d}$ that is column-orthogonal, \ie, $P^{\top} P = I_{d \times d}$. This matrix $P$ is randomly created and fixed. The observed data is $\x = P \hat{\x} \in \mathbb{R}^{D}$, where the underlying data is $\hat{\x} \in \mathbb{R}^{d}$. The matrix $P$ is unknown to the model, and as such, it is a \mbox{$D$-dimensional} generation problem for the model. 
+
+We train a {5-layer ReLU MLP with 256-dim hidden units} as the generator and visualize the results in \cref{fig:toy}. 
+We obtain these visualizations by projecting the $D$-dim generated samples back to $d$-dim using $P$. We investigate the cases of $D \in \{2, 8, 16, 512\}$ for $d=2$.
+We study $\x$, $\e$, or $\v$-prediction, all using the $\v$-loss, \ie, \cref{tab:xev}\textbf{(3)(a-c)}.
+
+
+\cref{fig:toy} shows that {\textit{only {\textbf{$\x$-prediction}} can produce reasonable results when $D$ increases}}. For $\e$-/$\v$-prediction, the models struggle at $D{=}16$, and fail catastrophically when $D{=}512$, where the \mbox{256-dim} MLP is under-complete.
+
+Notably, {\textit{{\textbf{$\x$-prediction}} can work well even when the model is {under-complete}}}. Here, the 256-dim MLP inevitably discards information in the $D{=}512$-dim space. However, since the true data is in a low-dimensional $d$-dim space, $\x$-prediction can still perform well, as the ideal output is implicitly $d$-dim. We draw similar observations in the case of real data on ImageNet, as we show next.
+
+

@@ -13,6 +13,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     project = args.project.expanduser().resolve()
     if not project.is_dir() or not any(project.glob("*.tex")):
-        parser.error("Project must contain TeX sources. Fetch the example with: python scripts/fetch_jit.py")
+        parser.error("Project must contain a TeX source file")
     os.environ.update(LEAFOVER_PROJECT=str(project), PAPER_PREVIEW_PORT=str(args.port), PAPER_PREVIEW_HOST=args.host)
     runpy.run_path(str(Path(__file__).resolve().parent / "tools" / "preview_server.py"), run_name="__main__")

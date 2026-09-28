@@ -1136,11 +1136,12 @@ async function loadProject() {
     const data = await response.json();
     projectData = data;
     mainSource = data.settings?.main_file || 'main.tex';
+    $('#terminal-toggle').hidden = !data.terminal_enabled;
     refreshCitationIndex(data.files);
     $('#document-title').textContent = data.title;
     document.title = `${data.title} · LeafOver`;
     $('#outline').innerHTML = data.outline.map((item) => `
-      <button class="outline-item level-${item.level}" data-line="${item.line}">
+      <button class="outline-item level-${item.level}" data-file="${escapeHtml(item.file || mainSource)}" data-line="${item.line}">
         <span class="outline-number">${item.number}</span><span class="outline-title" title="${escapeHtml(item.title)}">${escapeHtml(item.title)}</span>
       </button>`).join('');
     renderSourceTree(data.files);
@@ -1148,7 +1149,7 @@ async function loadProject() {
     renderFigureTree(data.figures);
     $$('.outline-item').forEach((button) => button.addEventListener('click', () => {
       workspace.classList.remove('source-hidden');
-      loadSource(mainSource, Number(button.dataset.line));
+      loadSource(button.dataset.file || mainSource, Number(button.dataset.line));
     }));
     $$('.file-row').forEach((button) => button.addEventListener('click', () => {
       workspace.classList.remove('source-hidden');
@@ -1901,7 +1902,7 @@ function quickOpenCandidates(query) {
   if (query.startsWith('@')) {
     const term = query.slice(1).trim().toLocaleLowerCase();
     return projectData.outline.filter((item) => !term || item.title.toLocaleLowerCase().includes(term)).map((item) => ({
-      kind: 'outline', name: `${item.number ? `${item.number} ` : ''}${item.title}`, detail: `${mainSource}:${item.line}`, line: item.line,
+      kind: 'outline', name: `${item.number ? `${item.number} ` : ''}${item.title}`, detail: `${item.file || mainSource}:${item.line}`, file: item.file || mainSource, line: item.line,
     }));
   }
   if (query.startsWith(':')) {
@@ -1936,7 +1937,7 @@ async function openQuickItem(index = quickOpenIndex) {
   workspace.classList.remove('source-hidden');
   if (item.kind === 'source') await loadSource(item.file.name);
   else if (item.kind === 'figure') await openFigure(item.figure.name, item.figure.type, item.figure.size, item.figure.revision);
-  else if (item.kind === 'outline') await loadSource(mainSource, item.line);
+  else if (item.kind === 'outline') await loadSource(item.file || mainSource, item.line);
   else if (item.kind === 'line') await loadSource(sourceMode === 'source' ? currentSource : mainSource, item.line);
 }
 
@@ -2378,6 +2379,7 @@ document.addEventListener('keydown', (event) => {
   if ($('#project-settings').open) return;
   const commandKey = event.ctrlKey || event.metaKey;
   if ((event.ctrlKey || event.metaKey) && event.key === '`') {
+    if ($('#terminal-toggle').hidden) return;
     event.preventDefault();
     if ($('#terminal-drawer').classList.contains('open')) closeTerminalDrawer();
     else openTerminal();

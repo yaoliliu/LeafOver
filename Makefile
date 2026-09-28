@@ -1,11 +1,11 @@
 preview:
-	python3 run.py
+	./install.sh
 
-fetch-example:
-	python3 scripts/fetch_jit.py
+install:
+	./install.sh --install-only
 
 test:
-	python3 -m unittest discover -s tests -p 'test_preview*.py'
+	python3 -m unittest discover -s tests -p 'test_*.py'
 	node tests/check_settings_latency.js
 
-.PHONY: preview fetch-example test
+.PHONY: preview install test

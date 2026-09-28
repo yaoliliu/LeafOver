@@ -1,0 +1,70 @@
+\definecolor{codeblue}{rgb}{0.25,0.5,0.5}
+\definecolor{codekw}{rgb}{0.85, 0.18, 0.50}
+
+\definecolor{codesign}{RGB}{0, 0, 255}
+\definecolor{codefunc}{rgb}{0.85, 0.18, 0.50}
+
+
+
+\lstdefinelanguage{PythonFuncColor}{
+  language=Python,
+  keywordstyle=\color{blue}\bfseries,
+  commentstyle=\color{codeblue},
+  stringstyle=\color{orange},
+  showstringspaces=false,
+  basicstyle=\ttfamily\small,
+  literate=
+    {*}{{\color{codesign}* }}{1}
+    {-}{{\color{codesign}- }}{1}
+    {+}{{\color{codesign}+ }}{1}
+    {/}{{\color{codesign}/ }}{1}
+    {dataloader}{{\color{codefunc}dataloader}}{1}
+    {sample_t}{{\color{codefunc}sample\_t}}{1}
+    {randn}{{\color{codefunc}randn}}{1}
+    {randn_like}{{\color{codefunc}randn\_like}}{1}
+    {jvp}{{\color{codefunc}jvp}}{1}
+    {stopgrad}{{\color{codefunc}stopgrad}}{1}
+    {l2_loss}{{\color{codefunc}l2\_loss}}{1}
+    {net_fn}{{\color{codefunc}net}}{1}
+}
+
+\lstset{
+  language=PythonFuncColor,
+  backgroundcolor=\color{white},
+  basicstyle=\fontsize{8pt}{8.4pt}\ttfamily\selectfont,
+  columns=fullflexible,
+  breaklines=true,
+  captionpos=b,
+}
+
+\begin{algorithm}[t]
+\caption{Training step}
+\label{alg:code_train}
+\begin{lstlisting}
+# net(z, t): JiT network
+# x: training batch
+
+t = sample_t()
+e = randn_like(x)
+
+z = t * x + (1 - t) * e
+v = (x - z) / (1 - t)
+
+x_pred = net_fn(z, t)
+v_pred = (x_pred - z) / (1 - t)
+
+loss = l2_loss(v - v_pred)        
+\end{lstlisting}
+\end{algorithm}
+\begin{algorithm}[t]
+\caption{Sampling step (Euler)}
+\label{alg:code_sample}
+\begin{lstlisting}
+# z: current samples at t
+
+x_pred = net_fn(z, t)
+v_pred = (x_pred - z) / (1 - t)
+
+z_next = z + (t_next - t) * v_pred
+\end{lstlisting}
+\end{algorithm}

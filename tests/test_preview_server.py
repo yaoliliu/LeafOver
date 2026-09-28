@@ -214,6 +214,13 @@ SyncTeX result end
         tables = self.root / "tables"
         tables.mkdir()
         (tables / "results.tex").write_text("table\n", encoding="utf-8")
+        configs = self.root / "configs"
+        configs.mkdir()
+        (configs / "cvpr.sty").write_text("% template\n", encoding="utf-8")
+        samples = self.root / "selected_images"
+        samples.mkdir()
+        (samples / "result.jpg").write_bytes(b"jpg")
+        (self.root / ".leafover.json").write_text("{}\n", encoding="utf-8")
 
         with zipfile.ZipFile(io.BytesIO(preview_server.latex_source_archive())) as archive:
             names = set(archive.namelist())
@@ -224,6 +231,9 @@ SyncTeX result end
         self.assertIn("Makefile", names)
         self.assertIn("figures/plot.png", names)
         self.assertIn("tables/results.tex", names)
+        self.assertIn("configs/cvpr.sty", names)
+        self.assertIn("selected_images/result.jpg", names)
+        self.assertIn(".leafover.json", names)
         self.assertNotIn("main.pdf", names)
         self.assertNotIn("core-browser", names)
 

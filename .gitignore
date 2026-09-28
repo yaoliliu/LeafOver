@@ -13,3 +13,6 @@ __pycache__/
 examples/jit/main.pdf
 examples/jit/*.zip
 .venv/
+
+# Keep separately downloaded arXiv archives out of the demo repository.
+arXiv-*.tar.gz

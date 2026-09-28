@@ -1,0 +1,329 @@
+\section{Implementation Details}
+Our implementation closely follows the public codebases of DiT \cite{Peebles2023} and SiT \cite{ma2024sit}.
+Our configurations are summarized in \cref{tab:config}.
+We describe the details as follows.
+
+\paragraph{Time distribution.} Following \cite{esser2024scaling}, during training, we adopt the logit-normal distribution over $t$ \cite{esser2024scaling}: $\text{logit}(t) \sim \mathcal{N}(\mu,\sigma^2)$.
+Specifically, we sample $s\sim \mathcal{N}(\mu,\sigma^2)$ and let $t{=}\text{sigmoid}(s)$. The hyper-parameter $\mu$ determines the noise level (see \cref{tab:mu}), and by default we set $\mu$ = --0.8 on ImageNet at resolution 256 (or 512, 1024), and fix $\sigma$ as 0.8.
+
+\paragraph{ImageNet 512${\times}$512 and 1024${\times}$1024.} We adopt \textbf{JiT/32} (\ie, a patch size of 32) on ImageNet 512${\times}$512. The model leads to a sequence of 256 = 16$\times$16 patches, the same as JiT/16 on ImageNet 256${\times}$256. As such, JiT/32 only differs from JiT/16 in the input/output patch dimension, increasing from 768-d to 3072-d per patch; all other computations and costs are exactly the same.
+
+To reuse the exact same recipe from ImageNet 256${\times}$256, for 512${\times}$512 images we rescale the magnitude of the noise $\e$ by 2$\times$: that is, $\e \sim \mathcal{N}(0, 2^2 \mathbf{I})$. This simple modification approximately maintains the signal-to-noise ratio (SNR) between the 256${\times}$256 and 512${\times}$512 resolutions \cite{hoogeboom2023simple,chen2023importance,hoogeboom2024simpler}.
+No other changes to the ImageNet 256${\times}$256 configuration are required or applied.
+
+For ImageNet 1024${\times}$1024, we use the model JiT/64 and scale the noise $\e$ by 4$\times$. No other change is needed.
+
+\paragraph{In-context class conditioning.} Standard DiT \cite{Peebles2023} performs class conditioning through adaLN-Zero.
+In \cref{tab:jat}, we further explore in-context class-conditioning.
+
+Specifically, following ViT \cite{Dosovitskiy2021}, one can prepend a class token to the sequence of patches. This is referred to as ``in-context conditioning'' in DiT \cite{Peebles2023}. 
+Note that we use in-context conditioning jointly with the default adaLN-Zero conditioning, unlike DiT.
+In addition, following MAR \cite{li2024autoregressive}, we further prepend multiple such tokens to the sequence. These tokens are repeated instances of the same class token, with different positional embeddings added. 
+We prepend 32 such tokens.
+Moreover, rather than prepending these tokens to the Transformer's input, we find that prepending them at later blocks can be beneficial (see ``in-context start block'' in \cref{tab:config}). 
+\cref{tab:jat} shows that our implementation of in-context conditioning improves FID by $\app$1.2.
+
+\begin{table}[t]
+\centering
+\resizebox{1.0\width}{!}{
+\tablestyle{4pt}{1.02}
+\begin{tabular}{l | x{24}x{24}x{24}x{24}}
+ & \textbf{JiT-B} & \textbf{JiT-L} & \textbf{JiT-H} & \textbf{JiT-G} \\
+\shline
+\rowcolor[gray]{0.9}\multicolumn{5}{l}{\textbf{architecture}} \\
+depth & 12 & 24 & 32 & 40 \\
+hidden dim & 768 & 1024 & 1280 & 1664 \\
+heads & 12 & 16 & 16 & 16 \\
+image size & \multicolumn{4}{c}{256 (other settings: 512, or 1024)} \\
+patch size & \multicolumn{4}{c}{\texttt{image\_size} / 16} \\
+bottleneck & \multicolumn{4}{c}{128 (B/L), 256 (H/G)} \\
+dropout & \multicolumn{4}{c}{{0 (B/L), {0.2} (H/G)}} \\
+in-context class tokens & \multicolumn{4}{c}{32 (if used)} \\
+in-context start block & 4 & 8 & 10 & 10 \\
+\midline
+\rowcolor[gray]{0.9}\multicolumn{5}{l}{\textbf{training}} \\
+epochs & \multicolumn{4}{c}{{200 (ablation), 600}} \\
+warmup epochs \cite{Goyal2017} & \multicolumn{4}{c}{5} \\
+optimizer & \multicolumn{4}{c}{Adam \cite{adam2014method}, $\beta_1, \beta_2=0.9, 0.95$} \\
+batch size & \multicolumn{4}{c}{1024} \\
+learning rate & \multicolumn{4}{c}{2e-4} \\ 
+learning rate schedule & \multicolumn{4}{c}{constant} \\
+weight decay & \multicolumn{4}{c}{0} \\ 
+ema decay & \multicolumn{4}{c}{\{0.9996, 0.9998, 0.9999\}} \\
+time sampler & \multicolumn{4}{c}{$\text{logit}(t){\sim}\mathcal{N}(\mu, \sigma^2)$, $\mu$ = --0.8, $\sigma$ = 0.8 } \\
+noise scale & \multicolumn{4}{c}{{1.0 $\times$ \texttt{image\_size} / 256}} \\
+clip of $(1-t)$ in division & \multicolumn{4}{c}{0.05} \\
+class token drop (for CFG) & \multicolumn{4}{c}{0.1} \\
+\midline
+\rowcolor[gray]{0.9}\multicolumn{5}{l}{\textbf{sampling}} \\
+ODE solver & \multicolumn{4}{c}{Heun \cite{heun1900neue}} \\
+ODE steps & \multicolumn{4}{c}{50} \\
+time steps & \multicolumn{4}{c}{linear in [0.0, 1.0]} \\
+CFG scale sweep range \cite{ho2022classifier} & \multicolumn{4}{c}{[1.0, 4.0]}  \\
+CFG interval \cite{kynkaanniemi2024applying} & \multicolumn{4}{c}{{[0.1, 1] (if used)}} \\
+\end{tabular}
+}
+\vspace{-.5em}
+\caption{\textbf{Configurations of experiments.}}
+\vspace{-.5em}
+\label{tab:config}
+\end{table}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.8\linewidth]{figures/cfg}
+\vspace{-.7em}
+\caption{The influence of CFG, without and with CFG interval (for JiT-L/16 on ImageNet 256$\times$256, 600 epochs).
+}
+\label{fig:cfg}
+\end{figure}
+
+\paragraph{Dropout and early stop.} We apply dropout \cite{srivastava2014dropout} in JiT-H and G to mitigate the risk of overfitting.
+Specifically, we apply dropout to the middle half of the Transformer blocks.
+For Transformer blocks with dropout, we apply it to both the attention block and the MLP block.
+
+As the G-size models still tend to overfit under our current dropout setting, we apply early stopping when the monitored FID begins to degrade. This occurs at around 320 epochs for both JiT-G/16 and JiT-G/32.
+
+\paragraph{EMA and CFG.} Our study covers a wide range of configurations, including variations in loss and prediction spaces, model sizes, and architectural components.
+The optimal values of the CFG scale \cite{ho2022classifier} and EMA (exponential moving average) decay vary from case to case, and fixing them may lead to incomplete or misleading observations. Since maintaining these hyperparameter configurations is relatively inexpensive, we strive to adopt the optimal values.
+
+Specifically, for the CFG scale $\omega$ \cite{ho2022classifier}, we determine the optimal value by searching over a range of candidate scales at inference time, as is common practice in existing work. For EMA decays, we maintain multiple copies of the moving-averaged parameters during training, which introduces a negligible computational overhead. To avoid memory overhead, different EMA copies can be stored on separate devices (\eg, GPUs). As such, both the CFG scale and EMA decay are essentially inference-time decisions.
+
+Our CFG scale candidates range from 1.0 to 4.0 with a step size of 0.1. 
+The influence of CFG is shown in \cref{fig:cfg} for a JiT-L/16 model.
+Our EMA decay candidates are 0.9996, 0.9998, and 0.9999, evaluated with a batch size of 1024. 
+For each model (including any one in the ablation), we search for the optimal setting using 8K samples and then apply it to evaluate 50K samples.
+
+\paragraph{Evaluation.} Following common pratice, we evaluate the FID \cite{heusel2017gans} against the ImageNet training set. We evaluate FID on 50K generated images, with 50 samples for each of the 1000 ImageNet classes. We evaluate the Inception Score (IS) \cite{salimans2016improved} on the same 50K images.
+
+
+\section{Additional Experiments}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.8\linewidth]{figures/loss}
+\tablestyle{.5pt}{1.0}
+\begin{tabular}{@{}>{\centering\arraybackslash}m{0.22\linewidth}
+                >{\centering\arraybackslash}m{0.15\linewidth}
+                >{\centering\arraybackslash}m{0.15\linewidth}
+                >{\centering\arraybackslash}m{0.15\linewidth}
+                >{\centering\arraybackslash}m{0.15\linewidth}
+                >{\centering\arraybackslash}m{0.15\linewidth}@{}}
+&
+\scriptsize{$t=0.1$} &
+\scriptsize{$t=0.2$} &
+\scriptsize{$t=0.3$} &
+\scriptsize{$t=0.4$} &
+\scriptsize{$t=0.5$}
+\\
+\scriptsize{noisy image} &
+\includegraphics[width=1.0\linewidth]{figures/denoise/x-pred/inputs_001.png} &
+\includegraphics[width=1.0\linewidth]{figures/denoise/x-pred/inputs_002.png} &
+\includegraphics[width=1.0\linewidth]{figures/denoise/x-pred/inputs_003.png} &
+\includegraphics[width=1.0\linewidth]{figures/denoise/x-pred/inputs_004.png} &
+\includegraphics[width=1.0\linewidth]{figures/denoise/x-pred/inputs_005.png}
+\\
+{\scriptsize{denoised image from
+\textbf{$\x$-pred}}} &
+\includegraphics[width=1.0\linewidth]{figures/denoise/x-pred/outputs_001.png} &
+\includegraphics[width=1.0\linewidth]{figures/denoise/x-pred/outputs_002.png} &
+\includegraphics[width=1.0\linewidth]{figures/denoise/x-pred/outputs_003.png} &
+\includegraphics[width=1.0\linewidth]{figures/denoise/x-pred/outputs_004.png} &
+\includegraphics[width=1.0\linewidth]{figures/denoise/x-pred/outputs_005.png}
+\\
+{\scriptsize{denoised image from
+\textbf{$\v$-pred}}} &
+\includegraphics[width=1.0\linewidth]{figures/denoise/v-pred/outputs_001.png} &
+\includegraphics[width=1.0\linewidth]{figures/denoise/v-pred/outputs_002.png} &
+\includegraphics[width=1.0\linewidth]{figures/denoise/v-pred/outputs_003.png} &
+\includegraphics[width=1.0\linewidth]{figures/denoise/v-pred/outputs_004.png} &
+\includegraphics[width=1.0\linewidth]{figures/denoise/v-pred/outputs_005.png} 
+\end{tabular}
+\vspace{-.7em}
+\caption{\textbf{(Top)}: \textbf{Training loss} of $\x$- and $\v$-prediction, using the same loss space of $\v$-loss (\cref{tab:3x3s}(a), third row). We plot the loss averaged per pixel per channel.
+\textbf{(Bottom)}: \textbf{Denoised images} from $\x$- and $\v$-prediction, where $\v$-prediction's denoised output is visualized according to \cref{tab:xev}(c)(1). The denoised image from $\v$-prediction has noticeable artifacts, as reflected by the higher loss.
+}
+\label{fig:loss_curves}
+\end{figure}
+
+\subsection{Training Loss and Denoised Images}
+
+In \cref{tab:3x3s}(a), the failure of $\e$-/$\v$-prediction is caused by the inherent incapability of predicting a high-dimensional output from a limited-capacity network. This failure can be seen from the training loss curves.
+
+In \cref{fig:loss_curves}\,(top), we compare the training loss curves under the same $\v$-loss, defined as $\mathcal{L}=\mathbb{E} \| \v_\theta(\z_t, t) - \v \|^2$, using $\v$-prediction (\ie, $\v_\theta=\net_\theta$) versus $\x$-prediction (\ie, $\v_\theta=(\net_\theta - \z_t)/(1-t)$). Since the loss is computed in the same space and only the parameterization differs, comparing the loss values is legitimate.
+
+\cref{fig:loss_curves}\,(top) shows that $\v$-prediction yields substantially higher loss values (about 25\%) than $\x$-prediction, even though $\v$-prediction appears to be the ``native'' parameterization for the $\v$-loss. This comparison indicates that the task of $\x$-prediction is inherently \textit{easier}, as the data lie on a low-dimensional manifold. We also observe that $\e$-prediction (not shown here) has about $3\times$ higher loss and is unstable, which may explain its failure in \cref{tab:3x3s}(a).
+
+\cref{fig:loss_curves}\,(bottom) compares the \textit{denoised} images corresponding to the two training curves. For $\x$-prediction, the denoised image is simply $\x_\theta=\net_\theta$; for $\v$-prediction, the denoised image is $\x_\theta{=}(1{-}t){\net_\theta}{+} \bm{z}_t$ with $\v_\theta{=}\net_\theta$ (see \cref{tab:xev}(c)(1)). The \textit{higher} loss of $\v$-prediction in \cref{fig:loss_curves}\,(top) can be reflected by its noticeable \textit{artifacts} in \cref{fig:loss_curves}\,(bottom).
+
+Note that the artifact in \cref{fig:loss_curves}\,(bottom) is that of a \textit{single} denoising step. In the generation process, this error can accumulate in the multi-step ODE solver, which leads to the catastrophic failure in \cref{tab:3x3s}(a).
+
+\subsection{Pre-conditioner}
+
+In EDM \cite{Karras2022edm}, an extra ``pre-conditioner'' is applied to wrap the direct output of the network. Using the notation of our paper, the pre-conditioner formulation can be written as:
+$\x_\theta(\z_t, t) = c_\text{skip} \cdot \z_t + c_\text{out}\cdot \net_\theta(\z_t, t)$,
+where $c_\text{skip}$ and $c_\text{out}$ are pre-defined coefficients.
+This equation suggests that \textit{unless} $c_\text{skip}\equiv0$, the network output in a pre-conditioner must \textit{not} perform $\x$-prediction. And according to the manifold assumption, this formulation should not remedy the issue we consider, as we examine next.
+
+\paragraph{Formulation of pre-conditioners.}
+Given the definition of pre-conditioner, we can rewrite the ``pre-conditioned $\x$-prediction'' as:
+\begin{equation}
+\left\{
+\begin{aligned}
+\x_\theta &= c_\text{skip} \cdot \z_t + c_\text{out}\cdot \net_\theta \\
+\e_\theta &= (\z_t - t  \x_\theta) / (1 - t)  \\
+\v_\theta &= (\x_\theta - \z_t) / (1 - t)
+\end{aligned}
+\right.
+\end{equation}
+Accordingly, the objective in \cref{eq:objective} ($\v$-loss) is written as:
+\begin{gather}
+\mathcal{L} = \mathbb{E}_{t,\x,\e} \Big\|  \v_\theta(\z_t, t) - \v \Big\|^2,
+ \\
+\text{where:}\quad \v_\theta(\z_t, t) = (\x_\theta(\z_t, t)-\bm{z}_t) / (1-t) \nonumber \\
+\text{and}
+\quad \x_\theta(\z_t, t) = c_\text{skip} \cdot \z_t + c_\text{out}\cdot \net_\theta(\z_t, t). \nonumber
+\end{gather}
+Comparing with \cref{eq:objective}, the only difference is in how we compute $\x_\theta$ from the network.
+
+\begin{table}[t]
+\centering
+\tablestyle{2.5pt}{1.2}
+\begin{tabular}{x{36} | x{56} | x{56} |  x{56} } 
+&  & \multicolumn{2}{c}{\textbf{pre-conditioned} predictions} \\
+& \textbf{$\x$-pred}  & EDM-style & linear \\
+\cline{2-4}
+ & $c_\text{skip}=0$
+ & $c_\text{skip}{=}\frac{1}{t}\frac{\sigma_\text{data}^2}{\sigma_\text{data}^2 + \sigma_t^2}$
+ & $c_\text{skip}=t$\\
+ & $c_\text{out}=1$
+ & $c_\text{out}{=}\frac{\sigma_\text{data}\sigma_t}{\sqrt{\sigma_\text{data}^2 + \sigma_t^2}}$
+ & $c_\text{out}=1-t$\\
+\shline
+$\x$\textbf{-loss} & \cellcolor{good} {10.14} & \cellcolor{bad} 28.94  & \cellcolor{bad} 39.50 \\
+\hline
+$\eps$\textbf{-loss} & \cellcolor{good} {10.45} & \cellcolor{bad} 72.05  & \cellcolor{bad}  67.56 \\
+\hline
+$\v$\textbf{-loss} & \cellcolor{good} \hspace{2pt} {8.62} & \cellcolor{bad} 35.49 & \cellcolor{bad} 46.25 \end{tabular}
+\vspace{.0em}
+\caption{\textbf{Comparisons with pre-conditioners} (FID-50K, ImageNet 256, JiT-B/16). The settings are the same as \cref{tab:3x3s} (a).
+}
+\label{tab:precond}
+\end{table}
+
+As EDM \cite{Karras2022edm} uses a variance-exploding schedule (that is, $\z_t{=}\x{+}\sigma_t\e$)  and we use a (roughly) variance-preserving version (that is, $\z_t{=}t\x{+}(1{-}t)\e$), a fully equivalent conversion is impossible. 
+To have a pre-conditioner in our case, we rewrite our version as $
+\frac{1}{t} \z_t = \x + \frac{1 - t}{t}\e
+$. As such, we set $\sigma_t = \frac{1-t}{t}$, which is the noise added to unscaled images, similar to EDM's.
+With this, we can rewrite the coefficients defined by EDM \cite{Karras2022edm} as:
+$c_\text{skip}=\frac{1}{t} \frac{\sigma_\text{data}^2}{\sigma_\text{data}^2 + \sigma_t^2}$
+and $c_\text{out}=\frac{\sigma_\text{data}\sigma_t}{\sqrt{\sigma_\text{data}^2 + \sigma_t^2}}$
+where $\sigma_\text{data}$ is the data standard deviation set as 0.5 \cite{Karras2022edm}. We choose $c_\text{in}= t$ ($=\frac{1}{\sigma_t+1}$), so that the direct input to the network (\ie, $c_\text{in}\cdot\frac{1}{t}z_t$) is still $z_t$.
+It can be shown that \textit{only} when
+$t \rightarrow 0$, we have: $\sigma_t{\rightarrow}+ \infty$, $c_\text{skip}{\rightarrow}0$, $c_\text{out}{\rightarrow}1$,
+which approaches $\x$-prediction.
+We also consider a simpler \textit{linear} pre-conditioner:
+$c_\text{skip}=t$ and $c_\text{out}=1 - t$,
+which also performs $\x$-prediction \textit{only} when $t = 0$.
+
+\paragraph{Results of pre-conditioners.}
+\cref{tab:precond} shows that the pre-conditioned versions all fail catastrophically, suggesting that deviating from $\x$-prediction is not desired in high-dimensional spaces. Interestingly, the pre-conditioned versions are much better than $\e$-/$\v$-prediction in \cref{tab:3x3s}(a). We hypothesize that this is because they are more similar to $\x$-prediction when $t{\rightarrow}0$, which alleviates this issue.
+
+\subsection{Exploration: Classification Loss}
+
+Our paper focuses on a minimalist design, and we intentionally do \textit{not} use any extra loss. However, we note that latent-based methods \cite{Rombach2022} typically rely on tokenizers trained with \textit{adversarial} and \textit{perceptual} losses, and thus their generation process is not purely driven by diffusion. Next, we discuss a simple extension on our pixel-based models with an additional classification loss.
+
+\begin{table}[t]
+\centering
+\tablestyle{6pt}{1.1}
+\begin{tabular}{c | x{36} | x{36} }
+ FID-50K & \textbf{JiT-B/16} & \textbf{JiT-L/16} \\
+\shline
+$\v$-loss only & 4.37 & 2.79 \\
+w/ cls loss & \textbf{4.14} & \textbf{2.50}
+\end{tabular}
+\vspace{-.5em}
+\caption{\textbf{Exploration: additional classification loss}. We do \textbf{\textit{not}} use this loss in any other experiments.
+Settings: ImageNet 256$\times$256, 200-ep, with CFG interval.
+}
+\vspace{-1em}
+\label{tab:cls}
+\end{table}
+
+Formally, we attach a classifier head after a specific Transformer block (the 4th in JiT-B and the 8th in JiT-L). The classifier consists of global average pooling followed by a linear layer, and a cross-entropy loss is applied for the 1000-class ImageNet classification task.
+This classification loss $\mathcal{L}_\text{cls}$ is scaled by a weight $\lambda$ (\eg, $100$) and added to the $\ell_2$-based (\ie, element-wise sum of squared errors) regression loss. To prevent label leakage, we disable class conditioning for all layers before the classifier head. We note that this modification remains minimal and does not rely on any pre-trained classifier, unlike the perceptual loss \cite{Zhang2018}.
+This minor modification leads to a decent improvement, as shown in \cref{tab:cls}. This exploration suggests further potential for combining our simple method with additional loss terms, which we leave for future work.
+
+Despite the improvement, we do \textit{\textbf{not}} use this or any additional loss in the other experiments presented in this paper.
+
+\subsection{Cross-resolution Generation}
+
+A model trained at one resolution can be applied to another by simply downsampling or upsampling the generated images. We refer to this as \textit{cross-resolution} generation. In our setup, JiT/16 at 256 and JiT/32 at 512 have comparable parameters and compute, making their cross-resolution comparison meaningful. The results are in \cref{tab:cross}
+\begin{table}[h]
+\vspace{-.5em}
+\centering
+\tablestyle{2pt}{1.1}
+\begin{tabular}{l | c }
+  & FID@256 \\
+\shline
+\textbf{JiT-G/16}@256 &  1.82 \\
+\textbf{JiT-G/32}@512, $\downarrow$256 & \cellcolor[gray]{.9}{1.84} \\
+\end{tabular}
+\hspace{1em}
+\tablestyle{2pt}{1.1}
+\begin{tabular}{l | c }
+  & FID@512 \\
+\shline
+\textbf{JiT-G/16}@256, $\uparrow$512 & \cellcolor[gray]{.9}{{2.45}} \\
+\textbf{JiT-G/32}@512 &  1.78 \\
+\end{tabular}
+
+
+\vspace{-.5em}
+\caption{\textbf{Cross-resolution Generation} (noted in gray), using \mbox{JiT-G/16} trained at resolution 256 and JiT-G/32 trained at 512, followed by upsampling ($\uparrow$) or downsampling ($\downarrow$). All entries have similar parameters and flops (see \cref{tab:in256-sys} and \ref{tab:in512-sys}).
+}
+\label{tab:cross}
+\vspace{-.5em}
+\end{table}
+
+\textit{Downsampling} the images generated by the 512 model to 256 resolution yields a decent FID@256 of 1.84. 
+This result remains competitive when compared with the 256-resolution expert (FID@256 of 1.82), while maintaining a similar computational cost and gaining the additional ability to generate at 512 resolution.
+
+On the other hand, \textit{upsampling} the images generated by the 256 model to 512 resolution results in a noticeably worse FID@512 of 2.45, compared with the 512-resolution expert's FID@512 of 1.78.
+This degradation is caused by the loss of higher-frequency details due to upsampling.
+
+\subsection{Additional Metrics}
+
+For completeness, we report precision and recall \cite{Kynkaanniemi2019} on ImageNet 256$\times$256 in \cref{tab:prec-recall}, compared with the commonly used baselines of DiT and SiT, and the latest RAE:
+
+\begin{table}[h]
+\vspace{-.5em}
+\tablestyle{6pt}{1.05}
+\begin{tabular}{l | c | c | c c }
+ & FID$\downarrow$ & IS$\uparrow$ & Prec$\uparrow$ & Rec$\uparrow$ \\
+\shline
+DiT-XL/2 \cite{Peebles2023} & 2.27 & 278.2 & 0.83 & 0.57 \\
+SiT-XL/2 \cite{ma2024sit} & 2.06 & 277.5 & 0.82 & 0.59 \\
+RAE \cite{zheng2025diffusion}, DiT$^{\text{DH}}$-XL/2 & 1.13 & 262.6 & 0.78 & 0.67 \\
+\hline
+JiT-B/16 & 3.66 & 275.1 & 0.82 & 0.50 \\
+JiT-L/16 & 2.36 & 298.5 & 0.80 & 0.59 \\
+JiT-H/16 & 1.86 & 303.4 & 0.78 & 0.62 \\
+JiT-G/16 & 1.82 & 292.6 & 0.79 & 0.62 \\
+\end{tabular}
+\vspace{-.5em}
+\caption{Precision and recall on ImageNet 256$\times$256.}
+\label{tab:prec-recall}
+\vspace{-.5em}
+\end{table}
+
+\section{Qualitative Results}
+
+In \cref{fig:results1} to \ref{fig:results4}, we provide additional \textit{uncurated} examples on ImageNet 256$\times$256.
+
+
+\newpage
+
+\vspace{1em}
+\paragraph{Acknowledgements.} 
+We thank Google TPU Research Cloud (TRC) for granting us access to TPUs, and the MIT ORCD Seed Fund Grants for supporting GPU resources.

@@ -53,7 +53,7 @@ COMPILE_CMD = ["latexmk", "-xelatex", "-synctex=1", "-interaction=nonstopmode", 
 ENV = dict(os.environ)
 SOURCE_SUFFIXES = {".tex", ".bib", ".bbl", ".sty", ".cls", ".bst", ".md", ".txt", ".json", ".csv", ".yaml", ".yml"}
 COMPILE_SUFFIXES = {".tex", ".bib", ".bbl", ".sty", ".cls", ".bst"}
-SOURCE_DIRS = ("tables", "sections", "sec", "text", "research", "notes")
+SOURCE_DIRS = ("tables", "sections", "sec", "text", "research", "notes", "configs")
 FIG_SUFFIXES = {".pdf", ".png", ".jpg", ".jpeg"}
 SOURCE_FILES = ("main.tex", "references.bib")
 MAX_SOURCE_BYTES = 2 * 1024 * 1024
@@ -143,12 +143,22 @@ def served_pdf_bytes():
 
 
 def latex_source_archive():
-    root_suffixes = {".tex", ".bib", ".sty", ".cls", ".bst"}
-    paths = [path for path in ROOT.iterdir() if path.is_file() and (path.suffix.lower() in root_suffixes or path.name == "Makefile")]
-    for directory_name in ("figures", "tables"):
-        directory = ROOT / directory_name
-        if directory.is_dir():
-            paths.extend(path for path in directory.rglob("*") if path.is_file() and not path.is_symlink())
+    source_suffixes = SOURCE_SUFFIXES | FIG_SUFFIXES | {".eps", ".svg", ".dat", ".tikz", ".def", ".cfg"}
+    excluded_dirs = {".git", "__pycache__", "outputs", "artifacts", "build", "dist", "node_modules"}
+    paths = []
+    for parent, folders, names in os.walk(ROOT, followlinks=False):
+        folders[:] = [name for name in folders if name not in excluded_dirs and not name.startswith(".")
+                     and not (Path(parent) / name).is_symlink()]
+        for name in names:
+            path = Path(parent) / name
+            relative = path.relative_to(ROOT)
+            if path.is_symlink() or not path.is_file() or name.startswith(".") and name != ".leafover.json":
+                continue
+            if relative == Path("main.pdf") or name.startswith("core-"):
+                continue
+            if path.suffix.lower() not in source_suffixes and name != "Makefile":
+                continue
+            paths.append(path)
     buffer = io.BytesIO()
     with zipfile.ZipFile(buffer, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=6) as archive:
         for path in sorted(paths):
@@ -679,31 +689,54 @@ def project_metadata():
     section_no = 0
     subsection_no = 0
     in_appendix = False
-    for line_no, line in enumerate(tex.splitlines(), 1):
-        if re.match(r"\s*\\appendix\b", line):
-            in_appendix = True
-            section_no = 0
-            subsection_no = 0
-            continue
-        match = re.match(r"\s*\\(section|subsection|subsubsection)(\*)?\{(.+?)\}", line)
-        if not match:
-            continue
-        kind, starred, heading = match.groups()
-        if kind == "section":
-            if not starred:
-                section_no += 1
+    def visit_outline(source_name, source_text, stack):
+        nonlocal section_no, subsection_no, in_appendix
+        if len(stack) > 12:
+            return
+        for line_no, line in enumerate(source_text.splitlines(), 1):
+            # Keep source and line of each heading so clicks reach the actual file.
+            line = re.sub(r"(?<!\\)%.*$", "", line)
+            if re.match(r"\s*\\appendix\b", line):
+                in_appendix = True
+                section_no = 0
                 subsection_no = 0
-            number = "" if starred else (chr(64 + section_no) if in_appendix and section_no <= 26 else str(section_no))
-            level = 1
-        elif kind == "subsection":
-            subsection_no += 1
-            prefix = chr(64 + section_no) if in_appendix and section_no <= 26 else str(section_no)
-            number = f"{prefix}.{subsection_no}"
-            level = 2
-        else:
-            number = ""
-            level = 3
-        outline.append({"title": _clean_tex(heading), "number": number, "level": level, "line": line_no})
+                continue
+            included = re.match(r"\s*\\(?:input|include)\{([^{}]+)\}", line)
+            if included:
+                candidate = Path(included.group(1))
+                if not candidate.suffix:
+                    candidate = candidate.with_suffix(".tex")
+                included_path = (ROOT / source_name).parent / candidate
+                resolved = included_path.resolve()
+                if (resolved == ROOT or ROOT not in resolved.parents or included_path.is_symlink()
+                        or not resolved.is_file() or resolved.stat().st_size > MAX_SOURCE_BYTES):
+                    continue
+                relative = resolved.relative_to(ROOT).as_posix()
+                if relative not in stack:
+                    visit_outline(relative, resolved.read_text(encoding="utf-8", errors="replace"), (*stack, relative))
+                continue
+            match = re.match(r"\s*\\(section|subsection|subsubsection)(\*)?\{(.+?)\}", line)
+            if not match:
+                continue
+            kind, starred, heading = match.groups()
+            if kind == "section":
+                if not starred:
+                    section_no += 1
+                    subsection_no = 0
+                number = "" if starred else (chr(64 + section_no) if in_appendix and section_no <= 26 else str(section_no))
+                level = 1
+            elif kind == "subsection":
+                subsection_no += 1
+                prefix = chr(64 + section_no) if in_appendix and section_no <= 26 else str(section_no)
+                number = f"{prefix}.{subsection_no}"
+                level = 2
+            else:
+                number = ""
+                level = 3
+            outline.append({"title": _clean_tex(heading), "number": number, "level": level,
+                            "file": source_name, "line": line_no})
+
+    visit_outline(settings["main_file"], tex, (settings["main_file"],))
 
     files = []
     for name, (path, file_stat) in discover_source_files().items():
@@ -729,6 +762,7 @@ def project_metadata():
         "title": title,
         "detected_title": detected_title,
         "settings": settings,
+        "terminal_enabled": TERMINAL_ENABLED,
         "outline": outline,
         "files": files,
         "figures": figures,
@@ -792,10 +826,12 @@ def start_compile():
 def watcher():
     sources = scan_sources()
     compilation_sources = compile_inputs(sources)
-    refresh_pdf_snapshot()
+    has_pdf = refresh_pdf_snapshot()
     with _lock:
         _g["pdf"] = mtime(PDF_PATH)
         _g["project"] = time.time_ns()
+    if not has_pdf:
+        start_compile()
     last_change = None
     while True:
         time.sleep(0.4)

@@ -1,0 +1,133 @@
+\renewcommand{\hhs}{\hspace{-0.001em}}
+\renewcommand{\vvs}{\vspace{-.1em}}
+
+
+\newcommand{\tilewidth}{0.14\linewidth}
+
+\newcommand{\imgcaptiontext}{
+\textit{Uncurated} samples on ImageNet 256$\times$256 using JiT-G/16 conditioned on the specified classes. Unlike the common practice of visualizing with a higher CFG, here we show images using the CFG value (2.2) that achieves the reported FID of 1.82.}
+
+\newcommand{\sampledir}{samples256_cfg2.2_jpg}
+
+\newcommand{\addclass}[2]{
+\begin{minipage}[t]{0.49\linewidth}
+\centering
+\includegraphics[width=\tilewidth]{\sampledir/cls#1/000#1.jpg}\hhs
+\includegraphics[width=\tilewidth]{\sampledir/cls#1/001#1.jpg}\hhs
+\includegraphics[width=\tilewidth]{\sampledir/cls#1/002#1.jpg}\hhs
+\includegraphics[width=\tilewidth]{\sampledir/cls#1/003#1.jpg}\hhs
+\includegraphics[width=\tilewidth]{\sampledir/cls#1/004#1.jpg}\hhs
+\includegraphics[width=\tilewidth]{\sampledir/cls#1/005#1.jpg}\hhs
+\includegraphics[width=\tilewidth]{\sampledir/cls#1/006#1.jpg}\vvs
+\\
+\includegraphics[width=\tilewidth]{\sampledir/cls#1/007#1.jpg}\hhs
+\includegraphics[width=\tilewidth]{\sampledir/cls#1/008#1.jpg}\hhs
+\includegraphics[width=\tilewidth]{\sampledir/cls#1/009#1.jpg}\hhs
+\includegraphics[width=\tilewidth]{\sampledir/cls#1/010#1.jpg}\hhs
+\includegraphics[width=\tilewidth]{\sampledir/cls#1/011#1.jpg}\hhs
+\includegraphics[width=\tilewidth]{\sampledir/cls#1/012#1.jpg}\hhs
+\includegraphics[width=\tilewidth]{\sampledir/cls#1/013#1.jpg}\vvs
+\\
+\includegraphics[width=\tilewidth]{\sampledir/cls#1/014#1.jpg}\hhs
+\includegraphics[width=\tilewidth]{\sampledir/cls#1/015#1.jpg}\hhs
+\includegraphics[width=\tilewidth]{\sampledir/cls#1/016#1.jpg}\hhs
+\includegraphics[width=\tilewidth]{\sampledir/cls#1/017#1.jpg}\hhs
+\includegraphics[width=\tilewidth]{\sampledir/cls#1/018#1.jpg}\hhs
+\includegraphics[width=\tilewidth]{\sampledir/cls#1/019#1.jpg}\hhs
+\includegraphics[width=\tilewidth]{\sampledir/cls#1/020#1.jpg}\vvs
+\\
+{\scriptsize {class #1}: #2}
+\vspace{.5em}
+\end{minipage}
+}
+
+
+\begin{figure*}[t]
+\centering
+\addclass{012}{house finch, linnet, Carpodacus mexicanus}
+\addclass{014}{indigo bunting, indigo finch, indigo bird, Passerina cyanea
+}
+\\
+\addclass{042}{agama}
+\addclass{081}{ptarmigan}
+\\
+\addclass{107}{jellyfish}
+\addclass{108}{sea anemone, anemone}
+\\
+\addclass{110}{flatworm, platyhelminth}
+\addclass{117}{chambered nautilus, pearly nautilus, nautilus}
+\\
+\addclass{130}{flamingo}
+\addclass{279}{Arctic fox, white fox, Alopex lagopus}
+\\
+\caption{\imgcaptiontext}
+\label{fig:results1}
+\vspace{-1em}
+\end{figure*}
+
+
+\begin{figure*}[t]
+\centering
+\addclass{288}{leopard, Panthera pardus}
+\addclass{309}{bee}
+\\
+\addclass{349}{bighorn, bighorn sheep, cimarron, Rocky Mountain bighorn}
+\addclass{397}{puffer, pufferfish, blowfish, globefish}
+\\
+\addclass{425}{barn}
+\addclass{448}{birdhouse}
+\\
+\addclass{453}{bookcase}
+\addclass{458}{brass, memorial tablet, plaque}
+\\
+\addclass{495}{china cabinet, china closet}
+\addclass{500}{cliff dwelling}
+\\
+\caption{\imgcaptiontext}
+\label{fig:results2}
+\vspace{-1em}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\addclass{658}{mitten}
+\addclass{661}{Model T}
+\\
+\addclass{718}{pier}
+\addclass{724}{pirate, pirate ship}
+\\
+\addclass{725}{pitcher, ewer}
+\addclass{757}{recreational vehicle, RV, R.V.}
+\\
+\addclass{779}{school bus}
+\addclass{780}{schooner}
+\\
+\addclass{829}{streetcar, tram, tramcar, trolley, trolley car}
+\addclass{853}{thatch, thatched roof}
+\\
+\caption{\imgcaptiontext}
+\label{fig:results3}
+\vspace{-1em}
+\end{figure*}
+
+\begin{figure*}[t]
+\centering
+\addclass{873}{triumphal arch}
+\addclass{900}{water tower}
+\\
+\addclass{911}{wool, woolen, woollen}
+\addclass{913}{wreck}
+\\
+\addclass{927}{trifle}
+\addclass{930}{French loaf}
+\\
+\addclass{946}{cardoon}
+\addclass{947}{mushroom}
+\\
+\addclass{975}{lakeside, lakeshore}
+\addclass{989}{hip, rose hip, rosehip}
+\\
+\caption{\imgcaptiontext}
+\label{fig:results4}
+\vspace{-1em}
+\end{figure*}

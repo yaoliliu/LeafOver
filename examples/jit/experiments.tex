@@ -1,0 +1,228 @@
+\section{Comparisons}
+
+\begin{table}[t]
+\vspace{-10pt}
+\tablestyle{8pt}{1.05}
+\begin{tabular}{l|c|c}
+ & \textbf{JiT-B/16} & \textbf{JiT-L/16} \\
+\shline
+{Baseline {(SwiGLU, RMSNorm)}} & 7.48 (6.32) & - \\
+\hline
++ RoPE, qk-norm & 6.69 (5.44) & - \\  + {in-context class tokens} & 5.49 (\textbf{4.37}) & 3.39 (\textbf{2.79}) \\
+\end{tabular}
+\vspace{-.5em}
+\caption{\textbf{``Just Advanced'' Transformers}
+with \textit{general-purpose} designs.
+All are \textbf{JiT/16} for ImageNet 256$\times$256, with bottleneck patch embedding (128-d, \cref{fig:bottleneck}), evaluated by FID-50K. 
+Settings: 200 epochs, with CFG (and with CFG interval \cite{kynkaanniemi2024applying} in brackets).
+}
+\label{tab:jat}
+\end{table}
+
+\begin{table}[t]
+\centering
+\tablestyle{2pt}{1.1}
+\begin{tabular}{c | x{32} | ccc | cc | c }
+resolution & model & len & patch dim & hiddens & params & Gflops & FID \\
+\shline
+256$\times$256 & JiT-B/{16} & 256 & 768 & 768 & 131 & 25 & 4.37 \\
+512$\times$512 & JiT-B/{32} & 256 & 3072 & 768 & 133 & 26 & 4.64 \\
+\textbf{1024$\times$1024} & JiT-B/\textbf{64} & 256 & 12288 & 768 & 141 & 30 & 4.82 \\ 
+\end{tabular}
+\vspace{-.5em}
+\caption{\textbf{ImageNet 1024$\times$1024 with JiT-B/64}.
+All entries have roughly the same number of parameters and compute.
+Settings: if not specified here, the same as \cref{tab:jat} (all are with CFG interval).
+}
+\label{tab:in1024}
+\end{table}
+
+\paragraph{High-resolution generation on pixels.} 
+In \cref{tab:in1024}, we further report our \textit{base}-size model (JiT-B) on ImageNet at resolutions {512} and even {1024}.
+We use patch sizes \textit{proportional} to image sizes, and therefore the sequence length at different resolutions remains the same.
+The per-patch dimension can be as high as 3072 or 12288, and \textit{none} of the common models would have sufficient hidden units.
+
+\newcommand{\deemph}[1]{\textcolor{black!30}{#1}}
+
+\begin{table}[t]
+\centering
+\tablestyle{2pt}{1.1}
+\begin{tabular}{c | x{32}x{32} }
+\textbf{256$\times$256} & \deemph{200-ep} & 600-ep \\
+\shline
+{JiT-B/\textbf{16}} & \deemph{4.37} & 3.66 \\
+{JiT-L/\textbf{16}} & \deemph{2.79} & 2.36 \\
+{JiT-H/\textbf{16}} & \deemph{2.29} & 1.86   \\
+{JiT-G/\textbf{16}} & \deemph{2.15} & {\textbf{1.82}}   \\
+\end{tabular}
+\hspace{1em}
+\tablestyle{2pt}{1.1}
+\begin{tabular}{c | x{32}x{32} }
+\textbf{512$\times$512} & \deemph{200-ep} & 600-ep \\
+\shline
+{JiT-B/\textbf{32}}  & \deemph{4.64} & 4.02 \\
+{JiT-L/\textbf{32}} & \deemph{3.06} & 2.53 \\
+ {JiT-H/\textbf{32}} & \deemph{2.51} & {1.94} \\
+{JiT-G/\textbf{32}} & \deemph{2.11} & \textbf{1.78}   \\
+\end{tabular}
+\vspace{-.5em}
+\caption{\textbf{Scalability on ImageNet 256$\times$256 and 512$\times$512}, evaluated by FID-50K.
+All models have the \textit{same} sequence length of 16$\times$16, and thus the models at 512 resolution have nearly the same compute as their 256 counterparts.
+Settings: the same as \cref{tab:in1024}.
+}
+\label{tab:scale}
+\vspace{-.8em}
+\end{table}
+
+
+
+\cref{tab:in1024} shows that our models perform decently across resolutions. All models have similar numbers of parameters and computational cost, which only differ in the input/output patch embeddings. Our method does not suffer from the curse of observed dimensionalities.
+
+\paragraph{Scalability.} A core goal of \textit{decoupling} the Transformer design with the task is to leverage the potential for scalability.
+\cref{tab:scale} provides results on ImageNet 256 and 512 with four model sizes (note that at resolution 512, none of these models have more hidden units than the patch dimension). The model sizes and flops are shown in \cref{tab:in256-sys} and \ref{tab:in512-sys}: our model at resolution 256 has similar cost as its counterpart at 512. Our approach benefits from scaling.
+
+Interestingly, the FID difference between resolution 256 and 512 becomes smaller with larger models. For JiT-G, the FID at 512 resolution is even lower. For very large models on ImageNet, FID performance largely depends on overfitting, and denoising at 512 resolution poses a more challenging task, making it less susceptible to overfitting. 
+
+\paragraph{Reference results from previous works.} As a reference, we compare with previous results in \cref{tab:in256-sys} and \ref{tab:in512-sys}. We mark the \textit{pre-training} components involved for each method.
+Compared with other pixel-based methods, ours is purely driven by \textit{plain}, general-purpose Transformers. Our models are \textit{compute-friendly} and avoid the \textit{quadratic} scaling of expense with doubled resolution  (see flops in \cref{tab:in512-sys}).
+
+Our approach does not use extra losses or pre-training, which may lead to further gains (an example is in appendix). These directions are left for future work.
+
+
+\newcommand{\viswidth}{0.195\linewidth}
+\begin{figure}[t]
+\vspace{0.75em}
+\centering
+\includegraphics[width=\viswidth]{selected_images/021947.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/012006.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/003315.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/032547.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/029936.png}\vvs
+\\
+\includegraphics[width=\viswidth]{selected_images/006270.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/017324.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/048538.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/017145.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/024599.png}\vvs
+\\
+\includegraphics[width=\viswidth]{selected_images/032092.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/028289.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/036549.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/040393.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/046967.png}\vvs
+\\
+\includegraphics[width=\viswidth]{selected_images/022950.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/018511.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/042108.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/004966.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/046905.png}\vvs
+\\
+\includegraphics[width=\viswidth]{selected_images/034540.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/027985.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/007815.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/019109.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/012563.png}\vvs
+\\
+\includegraphics[width=\viswidth]{selected_images/047928.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/040013.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/012937.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/011003.png}\hhs
+\includegraphics[width=\viswidth]{selected_images/035301.png}\vvs
+\caption{\textbf{Qualitative Results.} Selected examples on ImageNet 512$\times$512 using JiT-H/32. More uncurated results are in appendix.
+}
+\label{fig:results}
+\end{figure}
+
+
+
+\newcommand\headspace{\hspace{.2em}}
+\newcommand\shrink[1]{{\fontsize{6pt}{7.2pt}\selectfont{#1}}}
+
+\begin{table}[t]
+\tablestyle{1pt}{1.1}
+\scriptsize
+\begin{tabular}{l | c c c | c c | c | c}
+ & \multicolumn{3}{c|}{\textbf{pre-training}} & & & & \\
+\textbf{ImgNet 256$\times$256} & token & perc. & self-sup. &
+ \multirow[t]{2}{*}{\scriptsize\shortstack{\textbf{params}}} &
+ \multirow[t]{2}{*}{\scriptsize\shortstack{\textbf{Gflops}}} &
+ {\textbf{FID}$\downarrow$} & {\textbf{IS}$\uparrow$} \\
+\shline
+\rowcolor[gray]{0.9} \multicolumn{8}{l}{\textit{Latent-space Diffusion}}  \\
+\headspace DiT-XL/2 \cite{Peebles2023} & \shrink{SD-VAE} & \shrink{VGG} & - & 675+49M & 119 & 2.27 & 278.2 \\
+\headspace SiT-XL/2 \cite{ma2024sit} & \shrink{SD-VAE} & \shrink{VGG} & - & 675+49M & 119 & 2.06 & 277.5 \\
+\headspace REPA \cite{repa}, SiT-XL/2  & \shrink{SD-VAE} & \shrink{VGG} & \shrink{DINOv2} & 675+49M & 119 & 1.42 & 305.7 \\
+\headspace 
+\shrink{LightningDiT-XL/2} \cite{yao2025reconstruction} & \shrink{VA-VAE} & \shrink{VGG} & \shrink{DINOv2} & 675+49M & 119 & 1.35 & 295.3 \\
+\headspace DDT-XL/2 \cite{wang2025ddt} & \shrink{SD-VAE} & \shrink{VGG} & \shrink{DINOv2} & 675+49M & 119 & 1.26 & 310.6  \\
+\headspace RAE \cite{zheng2025diffusion}, DiT$^{\text{DH}}$-XL/2 & \shrink{RAE} & \shrink{VGG} & \shrink{DINOv2} & \hspace{0pt} 839+415M & 146 & \textbf{1.13} & 262.6 \\
+\midline
+\rowcolor[gray]{0.9} \multicolumn{8}{l}{\textit{\textbf{Pixel}-space (non-diffusion)}}  \\
+\headspace JetFormer \cite{tschannen2024jetformer} & - & - & - & 2.8B & - & 6.64 & - \\
+\headspace FractalMAR-H \cite{li2025fractal} & - & - & - & 848M & - & 6.15 & 348.9 \\
+\midline
+\rowcolor[gray]{0.9} \multicolumn{8}{l}{\textit{\textbf{Pixel}-space Diffusion}}  \\
+\headspace ADM-G \cite{dhariwal2021diffusion} & - & - & - & 554M & 1120 & 4.59 & 186.7 \\
+\headspace RIN \cite{jabri2022scalable} & - & - & - & 410M & 334 & 3.42 & 182.0 \\
+\headspace SiD \cite{hoogeboom2023simple} , UViT/2  & - & - & - & 2B & 555 & 2.44 & 256.3 \\
+\headspace VDM++, UViT/2 & - & - & - & 2B & 555 & 2.12 &  267.7 \\
+\headspace SiD2 \cite{hoogeboom2024simpler}, UViT/2 & - & - & - & N/A & 137 & 1.73 & - \\
+\headspace SiD2 \cite{hoogeboom2024simpler}, UViT/1 & - & - & - & N/A & 653 & \textbf{1.38} & - \\
+\headspace PixelFlow \cite{chen2025pixelflow}, XL/4 & - & - & - & 677M & 2909 & 1.98 & 282.1 \\
+\headspace PixNerd \cite{wang2025pixnerd}, XL/16 & - & - &  \shrink{DINOv2} & 700M & 134 & 2.15 & 297 \\
+\cline{1-8}
+\headspace \textbf{JiT-B/16} & - & - & - & 131M & 25 & 3.66 & 275.1 \\
+\headspace \textbf{JiT-L/16} & - & - & - & 459M & 88 & 2.36 & 298.5 \\
+\headspace \textbf{JiT-H/16} & - & - & - & 953M & 182 & 1.86 & 303.4 \\
+\headspace \textbf{JiT-G/16} & - & - & - & 2B & 383 & 1.82 & 292.6
+\\
+\end{tabular}
+\vspace{-.2em}
+\caption{
+\textbf{Reference results on ImageNet 256$\times$256.} 
+FID \cite{heusel2017gans} and IS \cite{salimans2016improved} of 50K samples are evaluated. The ``pre-training'' columns list the external models required to obtain the results (note that the perceptual loss \cite{zhang2018unreasonable} uses a pre-trained VGG classifier \cite{simonyan2014very}).
+The parameters include the generator and tokenizer decoder (used at inference-time), but exclude other pre-trained components.
+The Giga-flops are measured for a single forward pass (not counting the tokenizer) and are roughly proportional to the computational cost of an iteration during both training and inference (for the multi-scale method \cite{chen2025pixelflow}, we measure the finest level).
+\label{tab:in256-sys}
+\vspace{2em}
+}
+
+\tablestyle{1pt}{1.1}
+\scriptsize
+\begin{tabular}{l | c c c | c c | c | c}
+ & \multicolumn{3}{c|}{\textbf{pre-training}} & & & & \\
+\textbf{ImgNet 512$\times$512} & token & perc. & self-sup. &
+ \multirow[t]{2}{*}{\scriptsize\shortstack{\textbf{params}}} &
+ \multirow[t]{2}{*}{\scriptsize\shortstack{\textbf{Gflops}}} &
+ {\textbf{FID}$\downarrow$} & {\textbf{IS}$\uparrow$} \\
+\shline
+\rowcolor[gray]{0.9} \multicolumn{8}{l}{\textit{Latent-space Diffusion}}  \\
+\headspace DiT-XL/2 \cite{Peebles2023} & \shrink{SD-VAE} & \shrink{VGG} & - & 675+49M & 525 & 3.04 & 240.8 \\
+\headspace SiT-XL/2 \cite{ma2024sit} & \shrink{SD-VAE} & \shrink{VGG} & - & 675+49M & 525 & 2.62 & 252.2 \\
+\headspace REPA \cite{repa}, SiT-XL/2  & \shrink{SD-VAE} & \shrink{VGG} & \shrink{DINOv2} & 675+49M & 525 & 2.08 & 274.6 \\
+\headspace DDT-XL/2 \cite{wang2025ddt} & \shrink{SD-VAE} & \shrink{VGG} & \shrink{DINOv2} & 675+49M & 525 & 1.28 & 305.1 \\
+\headspace RAE \cite{zheng2025diffusion}, DiT$^{\text{DH}}$-XL/2 & \shrink{RAE} & \shrink{VGG} & \shrink{DINOv2} & \hspace{0pt} 839+415M & 642 & \textbf{1.13} & 259.6 \\
+\midline
+\rowcolor[gray]{0.9} \multicolumn{8}{l}{\textit{\textbf{Pixel}-space Diffusion}}  \\
+\headspace ADM-G \cite{dhariwal2021diffusion} & - & - & - & 559M & 1983 & 7.72 & 172.7 \\
+\headspace RIN \cite{jabri2022scalable} & - & - & - & 320M & 415 & 3.95 & 216.0 \\
+\headspace SiD \cite{hoogeboom2023simple} , UViT/4  & - & - & - & 2B & 555 & 3.02 & 248.7 \\
+\headspace VDM++, UViT/4 & - & - & - & 2B & 555 & 2.65 & 278.1\\
+\headspace SiD2 \cite{hoogeboom2024simpler}, UViT/4 & - & - & - & N/A & 137 & 2.19 & - \\
+\headspace SiD2 \cite{hoogeboom2024simpler}, UViT/2 & - & - & - & N/A & 653 & \textbf{1.48} & - \\
+\headspace PixNerd \cite{wang2025pixnerd}, XL/16 & - & - &  \shrink{DINOv2} & 700 M & 583 & 2.84 & 245.6 \\
+\cline{1-8}
+\headspace \textbf{JiT-B/32} & - & - & - & 133M & 26 & 4.02 & 271.0 \\
+\headspace \textbf{JiT-L/32} & - & - & - & 462M & 89 & 2.53 & 299.9 \\
+\headspace \textbf{JiT-H/32} & - & - & - & 956M & 183 & 1.94 & 309.1 \\
+\headspace \textbf{JiT-G/32} & - & - & - & 2B & 384 & 1.78 & 306.8
+\end{tabular}
+\vspace{-.2em}
+\caption{
+\textbf{Reference results on ImageNet 512$\times$512.} JiT has an \textit{aggressive} patch size and can use \textit{small} compute to achieve strong results. Notations are similar to \cref{tab:in256-sys}.
+}
+\label{tab:in512-sys}
+\vspace{-.5em}
+\end{table}
+
+

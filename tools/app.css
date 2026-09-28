@@ -99,6 +99,7 @@ button { color: inherit; }
 .topbar-actions #download-source, .topbar-actions a.icon-button[download], .topbar-actions a.icon-button[download]:visited { color: var(--accent-ink); }
 .topbar-actions #download-source:hover, .topbar-actions a.icon-button[download]:hover { background: var(--accent-soft); border-color: var(--accent); }
 .terminal-button { gap: 7px; padding: 0 10px; color: var(--muted); font: 650 11px/1 ui-monospace, SFMono-Regular, Menlo, monospace; }
+.terminal-button[hidden] { display: none; }
 .terminal-button span:first-child { color: var(--accent-ink); }
 .compile-button { gap: 8px; padding: 0 12px; background: var(--accent); border-color: transparent; color: var(--accent-contrast, white); font-size: 12px; font-weight: 650; }
 .compile-button:hover { background: var(--accent-hover); }

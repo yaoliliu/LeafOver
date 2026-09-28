@@ -1,0 +1,12 @@
+{
+  "paper": "Back to Basics: Let Denoising Generative Models Denoise",
+  "authors": [
+    "Tianhong Li",
+    "Kaiming He"
+  ],
+  "arxiv_id": "2511.13720v2",
+  "source_url": "https://arxiv.org/src/2511.13720v2",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "archive_sha256": "3b4c247eff113a301d10d3a04d33adfa43283893c25a57ee232cd2e57c5bf5c6",
+  "changes": "main.tex: fix xcolor option order and remove unused physics/siunitx imports. Added CTAN algorithms float style with its license, LeafOver settings, and provenance."
+}

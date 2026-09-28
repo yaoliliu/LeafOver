@@ -6,27 +6,27 @@ are bundled, with no frontend build or CDN required.
 
 ## Run
 
-Requirements: Python 3.10+, Linux or macOS, and a TeX distribution with `latexmk`
-and at least one of XeLaTeX, pdfLaTeX or LuaLaTeX.
+Requirements: Python 3.10+ and Debian/Ubuntu or macOS. The installer adds the TeX
+packages needed by the bundled paper if they are missing; this may require sudo
+on Linux or [Homebrew](https://brew.sh/) on macOS.
 
 ```bash
-python3 scripts/fetch_jit.py
-python3 run.py
+./install.sh
 ```
 
 Open http://127.0.0.1:8877/. Use the gear to select the main file, compiler and title.
 Missing compilers can be installed from the settings dialog on supported systems;
 see [compiler management](tools/LEAFOVER.md).
+After installation, `python3 run.py` starts the app directly. Use `./install.sh --check`
+to inspect dependencies without installing, or `./install.sh --install-only` to
+install without starting the app. Server options such as `--port 8878` pass through
+to the launcher.
 
-The example is the original TeX source of [JiT — Back to Basics: Let Denoising
+The bundled example is the TeX source of [JiT — Back to Basics: Let Denoising
 Generative Models Denoise](https://arxiv.org/abs/2511.13720v2) by Tianhong Li and
-Kaiming He. It is imported into `examples/jit/` from the pinned arXiv v2 source.
-If arXiv blocks your network, download its [source archive](https://arxiv.org/src/2511.13720v2)
-elsewhere and import it with:
-
-```bash
-python3 scripts/fetch_jit.py --archive /path/to/arxiv-source.tar.gz
-```
+Kaiming He, imported from the pinned arXiv v2 source into `examples/jit/`.
+It includes small TeX compatibility changes recorded in `examples/jit/SOURCE.json`.
+The original download archive is not needed to run or build the example.
 
 To open your own project or use a different port:
 
@@ -34,7 +34,7 @@ To open your own project or use a different port:
 python3 run.py /path/to/latex-project --port 8878
 ```
 
-Choose **Recompile** for the first PDF. Later source changes automatically compile.
+The first PDF builds automatically. Later source changes also compile automatically.
 The default bind address is localhost. The app edits files and can run terminal
 commands; keep it local, or place it behind authenticated access. Remote binding
 disables the terminal unless explicitly enabled through the existing
@@ -53,9 +53,9 @@ disables the terminal unless explicitly enabled through the existing
 
 ```text
 run.py                 Launcher; accepts any local paper directory
+install.sh             Checks dependencies, installs missing TeX tools and starts the app
 tools/                Server, interface and bundled browser libraries
 tests/                Backend and interaction regression checks
-scripts/fetch_jit.py   Original arXiv source downloader/importer
 examples/jit/         JiT example project, separate from application code
 ```
 
